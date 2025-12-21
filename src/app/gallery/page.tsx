@@ -64,7 +64,7 @@ export default function GalleryPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <FlipBook pages={galleryPages} title="Visual Resume" />
+          <FlipBook pages={galleryPages} />
         </motion.div>
       </div>
     </div>

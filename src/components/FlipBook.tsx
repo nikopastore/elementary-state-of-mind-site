@@ -10,144 +10,271 @@ interface FlipBookProps {
   title?: string;
 }
 
-export default function FlipBook({ pages, title = 'Visual Resume' }: FlipBookProps) {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [direction, setDirection] = useState(0);
+export default function FlipBook({ pages }: FlipBookProps) {
+  // Current spread index (0 = cover, 1 = pages 1-2, 2 = pages 3-4, etc.)
+  const [currentSpread, setCurrentSpread] = useState(0);
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection, setFlipDirection] = useState<'next' | 'prev'>('next');
 
-  const paginate = (newDirection: number) => {
-    const newPage = currentPage + newDirection;
-    if (newPage >= 0 && newPage < pages.length) {
-      setDirection(newDirection);
-      setCurrentPage(newPage);
+  // Calculate total spreads (cover + page pairs + back cover)
+  const totalSpreads = Math.ceil((pages.length - 1) / 2) + 1;
+
+  const goToNextSpread = () => {
+    if (currentSpread < totalSpreads - 1 && !isFlipping) {
+      setFlipDirection('next');
+      setIsFlipping(true);
+      setTimeout(() => {
+        setCurrentSpread(prev => prev + 1);
+        setIsFlipping(false);
+      }, 600);
     }
   };
 
-  const variants = {
-    enter: (direction: number) => ({
-      rotateY: direction > 0 ? 90 : -90,
-      opacity: 0,
-      scale: 0.9,
-    }),
-    center: {
-      rotateY: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut' as const,
-      },
-    },
-    exit: (direction: number) => ({
-      rotateY: direction < 0 ? 90 : -90,
-      opacity: 0,
-      scale: 0.9,
-      transition: {
-        duration: 0.5,
-        ease: 'easeIn' as const,
-      },
-    }),
+  const goToPrevSpread = () => {
+    if (currentSpread > 0 && !isFlipping) {
+      setFlipDirection('prev');
+      setIsFlipping(true);
+      setTimeout(() => {
+        setCurrentSpread(prev => prev - 1);
+        setIsFlipping(false);
+      }, 600);
+    }
   };
 
+  // Get pages for current spread
+  const getSpreadPages = () => {
+    if (currentSpread === 0) {
+      // Cover - show first page as cover
+      return { left: null, right: pages[0], isCover: true };
+    }
+
+    const leftIndex = (currentSpread - 1) * 2 + 1;
+    const rightIndex = leftIndex + 1;
+
+    return {
+      left: pages[leftIndex] || null,
+      right: pages[rightIndex] || null,
+      isCover: false,
+    };
+  };
+
+  const { left, right, isCover } = getSpreadPages();
+
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      {/* Book title */}
-      {title && (
-        <h2 className="text-2xl md:text-3xl font-heading text-center text-purple mb-6">
-          {title}
-        </h2>
-      )}
+    <div className="w-full max-w-6xl mx-auto px-4">
+      {/* 3D Book Container */}
+      <div
+        className="relative mx-auto"
+        style={{ perspective: '2500px' }}
+      >
+        {/* Book wrapper */}
+        <div
+          className="relative mx-auto"
+          style={{
+            transformStyle: 'preserve-3d',
+            width: isCover ? '400px' : '800px',
+            maxWidth: '100%',
+            transition: 'width 0.6s ease-in-out',
+          }}
+        >
+          {/* Book Shadow */}
+          <div
+            className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-black/20 blur-xl rounded-full"
+            style={{
+              width: isCover ? '350px' : '700px',
+              height: '30px',
+              transition: 'width 0.6s ease-in-out',
+            }}
+          />
 
-      {/* Book container */}
-      <div className="relative" style={{ perspective: '2000px' }}>
-        {/* Book wrapper with shadow */}
-        <div className="relative bg-gradient-to-br from-purple/10 to-dustyRose/10 rounded-lg p-4 md:p-8 shadow-xl">
-          {/* Page display area */}
-          <div className="relative aspect-[3/4] w-full max-w-2xl mx-auto overflow-hidden rounded-lg shadow-2xl bg-white">
-            <AnimatePresence initial={false} custom={direction} mode="wait">
+          {/* The Book */}
+          <div
+            className={`relative bg-gradient-to-r from-purple to-dustyRose rounded-r-lg shadow-2xl transition-all duration-500 ${
+              isCover ? 'rounded-l-lg' : 'rounded-l-none'
+            }`}
+            style={{
+              transformStyle: 'preserve-3d',
+              minHeight: '500px',
+              aspectRatio: isCover ? '3/4' : '6/4',
+            }}
+          >
+            {/* Book Spine */}
+            {!isCover && (
+              <div
+                className="absolute left-1/2 top-0 bottom-0 w-4 -translate-x-1/2 bg-gradient-to-r from-black/30 via-black/10 to-black/30 z-20"
+                style={{ boxShadow: 'inset 0 0 10px rgba(0,0,0,0.3)' }}
+              />
+            )}
+
+            {/* Cover View */}
+            {isCover && (
               <motion.div
-                key={currentPage}
-                custom={direction}
-                variants={variants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="absolute inset-0"
-                style={{ transformStyle: 'preserve-3d' }}
+                initial={{ rotateY: -20 }}
+                animate={{ rotateY: isFlipping && flipDirection === 'next' ? -180 : 0 }}
+                transition={{ duration: 0.6, ease: 'easeInOut' as const }}
+                className="absolute inset-0 rounded-lg overflow-hidden cursor-pointer"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transformOrigin: 'right center',
+                  backfaceVisibility: 'hidden',
+                }}
+                onClick={goToNextSpread}
               >
-                <Image
-                  src={pages[currentPage]}
-                  alt={`Page ${currentPage + 1}`}
-                  fill
-                  className="object-contain"
-                  priority
-                />
+                {/* Cover image */}
+                <div className="relative w-full h-full bg-white">
+                  <Image
+                    src={right!}
+                    alt="Book Cover"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                {/* Cover edge effect */}
+                <div className="absolute right-0 top-0 bottom-0 w-3 bg-gradient-to-l from-black/20 to-transparent" />
+                {/* Click hint */}
+                <div className="absolute bottom-4 right-4 bg-white/90 px-4 py-2 rounded-full text-sm font-medium text-purple shadow-lg">
+                  Click to open
+                </div>
               </motion.div>
-            </AnimatePresence>
+            )}
 
-            {/* Page curl effect overlay */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent" />
-              <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-r from-black/10 to-transparent" />
-            </div>
+            {/* Open Book View - Two Page Spread */}
+            {!isCover && (
+              <div className="relative w-full h-full flex">
+                {/* Left Page */}
+                <div
+                  className="relative w-1/2 h-full bg-white overflow-hidden"
+                  style={{
+                    boxShadow: 'inset -5px 0 15px rgba(0,0,0,0.1)',
+                    borderTopLeftRadius: '4px',
+                    borderBottomLeftRadius: '4px',
+                  }}
+                >
+                  {left ? (
+                    <Image
+                      src={left}
+                      alt={`Page ${(currentSpread - 1) * 2 + 1}`}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-gray">
+                      <span className="text-lg">End of book</span>
+                    </div>
+                  )}
+                  {/* Page curl shadow */}
+                  <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/5 to-transparent" />
+                </div>
+
+                {/* Right Page */}
+                <div
+                  className="relative w-1/2 h-full bg-white overflow-hidden"
+                  style={{
+                    boxShadow: 'inset 5px 0 15px rgba(0,0,0,0.1)',
+                    borderTopRightRadius: '4px',
+                    borderBottomRightRadius: '4px',
+                  }}
+                >
+                  {right ? (
+                    <Image
+                      src={right}
+                      alt={`Page ${(currentSpread - 1) * 2 + 2}`}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-gray">
+                      <span className="text-lg">End of book</span>
+                    </div>
+                  )}
+                  {/* Page curl shadow */}
+                  <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent" />
+                </div>
+
+                {/* Page flip animation overlay */}
+                <AnimatePresence>
+                  {isFlipping && (
+                    <motion.div
+                      initial={{
+                        rotateY: flipDirection === 'next' ? 0 : -180,
+                      }}
+                      animate={{
+                        rotateY: flipDirection === 'next' ? -180 : 0,
+                      }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.6, ease: 'easeInOut' as const }}
+                      className="absolute top-0 bottom-0 w-1/2 bg-white z-30 overflow-hidden"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        transformOrigin: flipDirection === 'next' ? 'left center' : 'right center',
+                        left: flipDirection === 'next' ? '50%' : '0',
+                        boxShadow: '0 0 20px rgba(0,0,0,0.3)',
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-black/10" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Navigation Controls */}
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            onClick={goToPrevSpread}
+            disabled={currentSpread === 0 || isFlipping}
+            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+              currentSpread === 0 || isFlipping
+                ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
+                : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            {currentSpread === 1 ? 'Close Book' : 'Previous'}
+          </button>
+
+          {/* Page indicator */}
+          <div className="flex items-center gap-2 px-4">
+            {Array.from({ length: totalSpreads }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  if (!isFlipping && i !== currentSpread) {
+                    setFlipDirection(i > currentSpread ? 'next' : 'prev');
+                    setCurrentSpread(i);
+                  }
+                }}
+                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                  i === currentSpread
+                    ? 'bg-purple scale-125'
+                    : 'bg-lavenderGray hover:bg-dustyRose'
+                }`}
+              />
+            ))}
           </div>
 
-          {/* Navigation arrows */}
           <button
-            onClick={() => paginate(-1)}
-            disabled={currentPage === 0}
-            className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all ${
-              currentPage === 0
-                ? 'bg-gray/20 text-gray/40 cursor-not-allowed'
-                : 'bg-white shadow-lg text-purple hover:bg-purple hover:text-white hover:scale-110'
+            onClick={goToNextSpread}
+            disabled={currentSpread === totalSpreads - 1 || isFlipping}
+            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+              currentSpread === totalSpreads - 1 || isFlipping
+                ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
+                : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
             }`}
-            aria-label="Previous page"
           >
-            <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
-          </button>
-
-          <button
-            onClick={() => paginate(1)}
-            disabled={currentPage === pages.length - 1}
-            className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all ${
-              currentPage === pages.length - 1
-                ? 'bg-gray/20 text-gray/40 cursor-not-allowed'
-                : 'bg-white shadow-lg text-purple hover:bg-purple hover:text-white hover:scale-110'
-            }`}
-            aria-label="Next page"
-          >
-            <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+            {currentSpread === 0 ? 'Open Book' : 'Next'}
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Page indicator */}
-        <div className="flex items-center justify-center gap-2 mt-6">
-          {pages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setDirection(index > currentPage ? 1 : -1);
-                setCurrentPage(index);
-              }}
-              className={`w-3 h-3 rounded-full transition-all ${
-                index === currentPage
-                  ? 'bg-purple scale-125'
-                  : 'bg-lavenderGray hover:bg-dustyRose'
-              }`}
-              aria-label={`Go to page ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Page number */}
-        <p className="text-center text-gray mt-3 font-body">
-          Page {currentPage + 1} of {pages.length}
+        {/* Page info */}
+        <p className="text-center text-gray mt-4 font-body">
+          {isCover ? 'Cover' : `Pages ${(currentSpread - 1) * 2 + 1}-${Math.min((currentSpread - 1) * 2 + 2, pages.length - 1)} of ${pages.length - 1}`}
         </p>
       </div>
-
-      {/* Keyboard navigation hint */}
-      <p className="text-center text-gray/60 text-sm mt-4">
-        Use arrow keys or click to navigate
-      </p>
     </div>
   );
 }
