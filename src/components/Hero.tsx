@@ -64,18 +64,17 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0"
+          className="relative flex-shrink-0"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-purple/30 to-coral/30 rounded-full blur-2xl" />
-          <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-glow">
-            <Image
-              src="/profile.png"
-              alt="Elementary State of Mind"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple/30 to-coral/30 rounded-full blur-2xl scale-110" />
+          <Image
+            src="/profile.png"
+            alt="Elementary State of Mind"
+            width={384}
+            height={384}
+            className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-white shadow-glow"
+            priority
+          />
         </motion.div>
       </div>
 
