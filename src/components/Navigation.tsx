@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Apple, Menu, X } from 'lucide-react';
 
 const navLinks = [
@@ -19,7 +19,7 @@ const Navigation = () => {
     setIsOpen(!isOpen);
   };
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     hidden: {
       x: '100%',
       opacity: 0,
@@ -28,7 +28,7 @@ const Navigation = () => {
       x: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: 'spring' as const,
         stiffness: 300,
         damping: 30,
       },

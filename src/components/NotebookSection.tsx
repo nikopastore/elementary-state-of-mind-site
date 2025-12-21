@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 
 interface NotebookSectionProps {
   children: React.ReactNode;
@@ -15,13 +15,13 @@ const NotebookSection: React.FC<NotebookSectionProps> = ({ children, title }) =>
   const notebookPaperStyle: React.CSSProperties = {
     backgroundColor: '#fdfaef', // A warm, creamy white
     backgroundImage: `
-      repeating-linear-gradient(to bottom, 
-        transparent, 
-        transparent 1.45rem, 
-        #a5c4d4 1.45rem, 
+      repeating-linear-gradient(to bottom,
+        transparent,
+        transparent 1.45rem,
+        #a5c4d4 1.45rem,
         #a5c4d4 1.5rem),
-      linear-gradient(to right, 
-        #ff6347 2px, 
+      linear-gradient(to right,
+        #ff6347 2px,
         transparent 2px)
     `,
     backgroundSize: '100% 1.5rem, 100% 100%',
@@ -31,9 +31,9 @@ const NotebookSection: React.FC<NotebookSectionProps> = ({ children, title }) =>
     lineHeight: '1.5rem',
   };
 
-  const variants = {
+  const variants: Variants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' as const } },
   };
 
   return (
