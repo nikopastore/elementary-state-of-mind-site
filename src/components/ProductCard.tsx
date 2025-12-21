@@ -60,12 +60,12 @@ export default function ProductCard({
       className="bg-white rounded-3xl shadow-soft overflow-hidden w-full max-w-sm font-body hover:shadow-glow transition-shadow"
     >
       {/* Product image */}
-      <div className="relative h-48 w-full overflow-hidden">
+      <div className="relative h-52 w-full overflow-hidden bg-lavender/30">
         <Image
           src={image}
           alt={name}
           fill
-          className="object-cover"
+          className="object-contain p-2"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className={`absolute top-4 right-4 ${isProductFree ? 'bg-purple' : 'bg-dustyRose'} text-white text-lg font-bold px-4 py-2 rounded-full shadow-md`}>
