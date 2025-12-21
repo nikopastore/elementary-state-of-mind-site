@@ -7,31 +7,30 @@ import SocialBento from './SocialBento';
 
 const Hero = () => {
   return (
-    <section className="relative w-full bg-gradient-to-b from-lavender to-white py-16 lg:py-24 overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-10 left-10 w-32 h-32 bg-softPink/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-peach/30 rounded-full blur-2xl" />
+    <section className="relative w-full bg-gradient-to-b from-lavender to-white py-12 md:py-16 lg:py-20 overflow-hidden">
+      {/* Decorative elements - smaller on laptops */}
+      <div className="absolute top-10 left-10 w-24 md:w-32 h-24 md:h-32 bg-softPink/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-10 w-32 md:w-40 h-32 md:h-40 bg-purple/20 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/4 w-20 md:w-24 h-20 md:h-24 bg-peach/30 rounded-full blur-2xl" />
 
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 relative z-10">
         {/* Left Side: Welcome Text and CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-1/2 text-center lg:text-left"
+          className="w-full lg:w-3/5 text-center lg:text-left"
         >
-          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-6 leading-tight">
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-extrabold text-black mb-4 md:mb-6 leading-tight">
             Welcome to{' '}
             <span className="text-purple">Elementary</span>{' '}
             <span className="text-dustyRose">State of Mind</span>
           </h1>
-          <p className="font-body text-lg md:text-xl text-gray mb-8 max-w-lg mx-auto lg:mx-0">
-            {/* Placeholder bio intro - replace with your own */}
+          <p className="font-body text-base sm:text-lg md:text-xl text-gray mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0">
             A dedicated elementary teacher sharing resources, insights, and a passion
             for engaging education. Discover tools to inspire young minds!
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -39,7 +38,7 @@ const Hero = () => {
             >
               <Link
                 href="/shop"
-                className="inline-block bg-dustyRose text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300"
+                className="inline-block bg-dustyRose text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
               >
                 Shop Now
               </Link>
@@ -51,7 +50,7 @@ const Hero = () => {
             >
               <Link
                 href="/about"
-                className="inline-block bg-dustyRose text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300"
+                className="inline-block bg-dustyRose text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300 text-sm sm:text-base"
               >
                 Meet the Teacher
               </Link>
@@ -59,7 +58,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Right Side: Profile Photo */}
+        {/* Right Side: Profile Photo - scaled for laptops */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -70,9 +69,9 @@ const Hero = () => {
           <Image
             src="/profile.png"
             alt="Elementary State of Mind"
-            width={384}
-            height={384}
-            className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full object-cover border-4 border-white shadow-glow"
+            width={320}
+            height={320}
+            className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full object-cover border-4 border-white shadow-glow"
             priority
           />
         </motion.div>
@@ -83,7 +82,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="mt-16 container mx-auto px-4"
+        className="mt-10 md:mt-14 lg:mt-16 container mx-auto px-4"
       >
         <SocialBento />
       </motion.div>

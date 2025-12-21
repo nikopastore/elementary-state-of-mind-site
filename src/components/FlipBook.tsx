@@ -61,40 +61,40 @@ export default function FlipBook({ pages }: FlipBookProps) {
   const { left, right, isCover } = getSpreadPages();
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4">
+    <div className="w-full max-w-5xl mx-auto px-4">
       {/* 3D Book Container */}
       <div
         className="relative mx-auto"
         style={{ perspective: '2500px' }}
       >
-        {/* Book wrapper */}
+        {/* Book wrapper - responsive sizing for laptops */}
         <div
-          className="relative mx-auto"
+          className={`relative mx-auto transition-all duration-500 ${
+            isCover
+              ? 'w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px]'
+              : 'w-full max-w-[600px] md:max-w-[700px] lg:max-w-[800px]'
+          }`}
           style={{
             transformStyle: 'preserve-3d',
-            width: isCover ? '400px' : '800px',
-            maxWidth: '100%',
-            transition: 'width 0.6s ease-in-out',
           }}
         >
-          {/* Book Shadow */}
+          {/* Book Shadow - responsive */}
           <div
-            className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-black/20 blur-xl rounded-full"
-            style={{
-              width: isCover ? '350px' : '700px',
-              height: '30px',
-              transition: 'width 0.6s ease-in-out',
-            }}
+            className={`absolute -bottom-3 md:-bottom-4 left-1/2 -translate-x-1/2 bg-black/20 blur-xl rounded-full transition-all duration-500 ${
+              isCover
+                ? 'w-[240px] sm:w-[280px] md:w-[320px] lg:w-[350px]'
+                : 'w-[90%] max-w-[650px]'
+            }`}
+            style={{ height: '25px' }}
           />
 
-          {/* The Book */}
+          {/* The Book - responsive min-height */}
           <div
-            className={`relative bg-gradient-to-r from-purple to-dustyRose rounded-r-lg shadow-2xl transition-all duration-500 ${
+            className={`relative bg-gradient-to-r from-purple to-dustyRose rounded-r-lg shadow-2xl transition-all duration-500 min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] ${
               isCover ? 'rounded-l-lg' : 'rounded-l-none'
             }`}
             style={{
               transformStyle: 'preserve-3d',
-              minHeight: '500px',
               aspectRatio: isCover ? '3/4' : '6/4',
             }}
           >
@@ -221,23 +221,24 @@ export default function FlipBook({ pages }: FlipBookProps) {
           </div>
         </div>
 
-        {/* Navigation Controls */}
-        <div className="flex items-center justify-center gap-4 mt-8">
+        {/* Navigation Controls - responsive */}
+        <div className="flex items-center justify-center gap-2 sm:gap-4 mt-6 md:mt-8">
           <button
             onClick={goToPrevSpread}
             disabled={currentSpread === 0 || isFlipping}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+            aria-label="Previous page"
+            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-5 md:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
               currentSpread === 0 || isFlipping
                 ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
                 : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
             }`}
           >
-            <ChevronLeft className="w-5 h-5" />
-            {currentSpread === 1 ? 'Close Book' : 'Previous'}
+            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">{currentSpread === 1 ? 'Close Book' : 'Previous'}</span>
           </button>
 
           {/* Page indicator */}
-          <div className="flex items-center gap-2 px-4">
+          <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4">
             {Array.from({ length: totalSpreads }).map((_, i) => (
               <button
                 key={i}
@@ -247,7 +248,7 @@ export default function FlipBook({ pages }: FlipBookProps) {
                     setCurrentSpread(i);
                   }
                 }}
-                className={`w-2.5 h-2.5 rounded-full transition-all ${
+                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
                   i === currentSpread
                     ? 'bg-purple scale-125'
                     : 'bg-lavenderGray hover:bg-dustyRose'
@@ -259,14 +260,15 @@ export default function FlipBook({ pages }: FlipBookProps) {
           <button
             onClick={goToNextSpread}
             disabled={currentSpread === totalSpreads - 1 || isFlipping}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+            aria-label="Next page"
+            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-5 md:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
               currentSpread === totalSpreads - 1 || isFlipping
                 ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
                 : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
             }`}
           >
-            {currentSpread === 0 ? 'Open Book' : 'Next'}
-            <ChevronRight className="w-5 h-5" />
+            <span className="hidden sm:inline">{currentSpread === 0 ? 'Open Book' : 'Next'}</span>
+            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
 

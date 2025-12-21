@@ -82,27 +82,27 @@ export default function AboutPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen py-12 md:py-16"
+      className="min-h-screen py-10 md:py-12 lg:py-16"
     >
-      {/* Background decorations */}
+      {/* Background decorations - scaled for different screens */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-lavender via-white to-lavender/30" />
-        <div className="absolute top-20 right-10 w-72 h-72 bg-purple/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 left-10 w-96 h-96 bg-dustyRose/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 w-48 md:w-72 h-48 md:h-72 bg-purple/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 left-10 w-64 md:w-96 h-64 md:h-96 bg-dustyRose/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl lg:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-10"
+          className="text-center mb-8 md:mb-10"
         >
-          <h1 className="text-4xl md:text-5xl font-heading font-bold text-black mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-black mb-2 md:mb-3">
             Meet the Teacher
           </h1>
-          <p className="text-gray text-lg max-w-2xl mx-auto">
+          <p className="text-gray text-base md:text-lg max-w-2xl mx-auto">
             Passionate about empowering young learners through innovative teaching
           </p>
         </motion.div>
@@ -111,7 +111,7 @@ export default function AboutPage() {
         <TeacherBio />
 
         {/* Content Grid */}
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
+        <div className="mt-8 md:mt-10 lg:mt-12 grid gap-5 md:gap-6 lg:gap-8 md:grid-cols-2">
           {/* Education */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -225,11 +225,11 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-8"
+          className="mt-6 md:mt-8"
         >
-          <div className="bg-gradient-to-r from-purple to-dustyRose rounded-2xl p-8 text-white">
-            <h2 className="font-heading text-2xl md:text-3xl mb-4">Teaching Philosophy</h2>
-            <p className="text-white/90 leading-relaxed">
+          <div className="bg-gradient-to-r from-purple to-dustyRose rounded-xl md:rounded-2xl p-5 md:p-6 lg:p-8 text-white">
+            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4">Teaching Philosophy</h2>
+            <p className="text-white/90 leading-relaxed text-sm md:text-base">
               My teaching philosophy centers on creating a warm, inclusive environment where every
               child feels safe to take risks and grow. I believe in hands-on, engaging learning
               experiences that spark curiosity and foster a lifelong love of discovery. Through
