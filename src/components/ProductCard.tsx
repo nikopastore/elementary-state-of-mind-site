@@ -10,10 +10,12 @@ type ProductCardProps = {
   price: number; // in cents
   category: string;
   image: string;
-  tptUrl?: string;
+  tptUrl: string;
+  isFree?: boolean;
 };
 
-const formatPrice = (priceInCents: number) => {
+const formatPrice = (priceInCents: number, isFree?: boolean) => {
+  if (isFree || priceInCents === 0) return 'FREE';
   return `$${(priceInCents / 100).toFixed(2)}`;
 };
 
@@ -68,12 +70,16 @@ export default function ProductCard({
   price,
   category,
   tptUrl,
+  isFree,
 }: ProductCardProps) {
   const handleClick = () => {
     if (tptUrl) {
       window.open(tptUrl, '_blank', 'noopener,noreferrer');
     }
   };
+
+  const priceDisplay = formatPrice(price, isFree);
+  const isProductFree = isFree || price === 0;
 
   return (
     <motion.div
@@ -86,8 +92,8 @@ export default function ProductCard({
         <div className="text-purple/50">
           {getCategoryIcon(category)}
         </div>
-        <div className="absolute top-4 right-4 bg-dustyRose text-white text-lg font-bold px-4 py-2 rounded-full shadow-md">
-          {formatPrice(price)}
+        <div className={`absolute top-4 right-4 ${isProductFree ? 'bg-purple' : 'bg-dustyRose'} text-white text-lg font-bold px-4 py-2 rounded-full shadow-md`}>
+          {priceDisplay}
         </div>
       </div>
       <div className="p-6">
@@ -97,14 +103,14 @@ export default function ProductCard({
             {getCategoryLabel(category)}
           </span>
         </div>
-        <h3 className="text-xl font-heading font-bold text-black mb-2">{name}</h3>
+        <h3 className="text-xl font-heading font-bold text-black mb-2 line-clamp-2">{name}</h3>
         <p className="text-gray text-sm mb-6 line-clamp-2">{description}</p>
         <button
           onClick={handleClick}
-          className="w-full bg-dustyRose hover:bg-purple text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
+          className={`w-full ${isProductFree ? 'bg-purple hover:bg-dustyRose' : 'bg-dustyRose hover:bg-purple'} text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg`}
         >
           <ExternalLink className="h-5 w-5" />
-          <span>View on TPT</span>
+          <span>{isProductFree ? 'Get Free on TPT' : 'View on TPT'}</span>
         </button>
       </div>
     </motion.div>
