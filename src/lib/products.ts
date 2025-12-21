@@ -19,7 +19,7 @@ export const products: Product[] = [
     description: 'Everything you need to teach Space Case from engagement to evaluation — in ONE bundle. This ultimate Space Case bundle combines a high-engagement Mock Trial PBL with a ready-to-use novel assessment.',
     price: 1120,
     category: 'bundle',
-    image: '/placeholder-product.jpg',
+    image: '/products/space-case-complete.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-Complete-Novel-Study-PBL-15118510',
   },
   {
@@ -28,7 +28,7 @@ export const products: Product[] = [
     description: 'Turn your novel study into a courtroom drama your students will NEVER forget. This low-prep, high-engagement Mock Trial + PBL transforms Stuart Gibbs\' Space Case into an immersive courtroom experience.',
     price: 1200,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/space-case-mock-trial.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-Mock-Trial-15118462',
   },
   {
@@ -37,7 +37,7 @@ export const products: Product[] = [
     description: 'Brighten up your ELA block with engaging, hand-drawn anchor charts that make essential skills stick! This set includes 9 beautifully illustrated, student-friendly charts—perfect for interactive notebooks.',
     price: 500,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/ela-anchor-charts.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/ELA-Anchor-Chart-Printables-Hand-Drawn-Interactive-Notebook-14923275',
   },
   {
@@ -46,7 +46,7 @@ export const products: Product[] = [
     description: 'Make teaching opinion writing simple, structured, and engaging with this complete OREO (Opinion, Reason, Example/Explanation, Opinion restated) writing resource. Differentiated graphic organizers for Grades 3–6.',
     price: 500,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/oreo-opinion-writing.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/OREO-Opinion-Writing-14923127',
   },
   {
@@ -55,7 +55,7 @@ export const products: Product[] = [
     description: 'Turn your classroom into a high-energy music, film, and critical thinking hub with this engaging, standards-aligned resource designed for elementary learners (Grades 2–6).',
     price: 500,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/kpop-demonhunters.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Behind-the-Beat-KPop-DemonHunters-14864201',
   },
   {
@@ -64,7 +64,7 @@ export const products: Product[] = [
     description: 'Support your students with clear, visual, step-by-step fraction and decimal instruction using these hand-drawn 4-square math anchor charts and practice pages.',
     price: 400,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/math-notes-fractions.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/5th6th-Grade-4-Square-Math-Notes-Hand-Drawn-Fractions-Decimals-14923373',
   },
   {
@@ -73,7 +73,7 @@ export const products: Product[] = [
     description: 'Complete packet with writing prompts, sentence starters, rubric, and student packet including brain dump page, tree map graphic organizer, 5 paragraph essay outline, and lined paper.',
     price: 400,
     category: 'bundle',
-    image: '/placeholder-product.jpg',
+    image: '/products/informative-essay-packet.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Informative-5-Paragraph-Essay-Writing-Packet-12548089',
   },
   {
@@ -82,7 +82,7 @@ export const products: Product[] = [
     description: 'Complete packet with opinion essay writing prompts, sentence starters, rubric, and student packet including brain dump page, tree map graphic organizer, 5 paragraph essay outline, and lined paper.',
     price: 400,
     category: 'bundle',
-    image: '/placeholder-product.jpg',
+    image: '/products/opinion-essay-packet.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Opinion-5-Paragraph-Essay-Writing-Packet-12548373',
   },
   {
@@ -91,7 +91,7 @@ export const products: Product[] = [
     description: 'Step-by-step graphic organizers to help beginning and intermediate-grade writers. Includes narrative writing prompts, sentence starters, rubric, and student packet with various graphic organizers.',
     price: 400,
     category: 'bundle',
-    image: '/placeholder-product.jpg',
+    image: '/products/narrative-writing-packet.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Narrative-Writing-Packet-12544887',
   },
   {
@@ -100,7 +100,7 @@ export const products: Product[] = [
     description: 'Weekly 20-30-minute independent activity for students to practice reading and responding to informational text. Includes 10 articles about endangered species with reading comprehension questions.',
     price: 400,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/article-a-week.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Article-A-Week-Endangered-Species-12783324',
   },
   {
@@ -109,7 +109,7 @@ export const products: Product[] = [
     description: 'Complete packet with student-led conference guide, teacher guide with suggestions and prep materials, plus parent reflection and sign-in sheet.',
     price: 400,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/slc-guide.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Student-Led-Conference-SLC-Guide-12548739',
   },
   {
@@ -118,7 +118,7 @@ export const products: Product[] = [
     description: 'Bring warmth, gratitude, and community into your classroom with this meaningful activity—a meaningful way to celebrate friendship, reflection, and togetherness. Perfect for grades 3–8.',
     price: 200,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/friendsgiving.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Friendsgiving-Potluck-Gratitude-Toasts-14883372',
   },
   {
@@ -127,7 +127,7 @@ export const products: Product[] = [
     description: 'Check comprehension and critical thinking with this ready-to-print, standards-aligned assessment for Space Case by Stuart Gibbs. Perfect for Grades 5–6.',
     price: 200,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/space-case-test.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-by-Stuart-Gibbs-End-of-Book-Test-14883681',
   },
   {
@@ -136,7 +136,7 @@ export const products: Product[] = [
     description: '67 Word Stories + 6–7 Minute Math + Certificates. Make the 67th day of school a day your students won\'t forget with this fun, low-prep, high-engagement mini-bundle! Perfect for grades 5–7.',
     price: 67,
     category: 'bundle',
-    image: '/placeholder-product.jpg',
+    image: '/products/67th-day.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/67th-Day-of-School-Activities-14863736',
   },
   {
@@ -145,7 +145,7 @@ export const products: Product[] = [
     description: 'Graphic organizer for students to plan out their opinion writing. Tree map with space for opinion statement, reasons, and supporting details.',
     price: 100,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/opinion-tree-map.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Opinion-Essay-Tree-Map-Graphic-Organizer-12548363',
   },
   {
@@ -154,7 +154,7 @@ export const products: Product[] = [
     description: 'Helps students organize and sequence the events in their narrative writing. Includes spaces for characters, setting, problem, events, and solution.',
     price: 100,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/story-elements.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Story-Elements-Graphic-Organizer-12544994',
   },
   {
@@ -163,7 +163,7 @@ export const products: Product[] = [
     description: 'Graphic organizer for students to plan out their informative writing. Tree map with space for topic, main ideas, and supporting details.',
     price: 100,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/informative-tree-map.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Informative-Essay-Tree-Map-Graphic-Organizer-12548206',
   },
   {
@@ -172,7 +172,7 @@ export const products: Product[] = [
     description: 'Template for teachers to share strategies, best practices, or classroom management techniques during staff meetings, PLC time, or collaboration sessions.',
     price: 100,
     category: 'lesson-plan',
-    image: '/placeholder-product.jpg',
+    image: '/products/seven-minute-strategy.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Seven-Minute-Strategy-Share-Out-Tool-for-Staff-Meetings-PLC-or-Collab-13055750',
   },
   {
@@ -181,7 +181,7 @@ export const products: Product[] = [
     description: 'Printable posters designed for hanging in lieu of student work at the beginning of the year or anytime you need a placeholder for bulletin boards.',
     price: 100,
     category: 'decor',
-    image: '/placeholder-product.jpg',
+    image: '/products/student-work-posters.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Student-Work-Coming-Soon-Posters-5546460',
   },
   {
@@ -190,7 +190,7 @@ export const products: Product[] = [
     description: 'Helps students organize and sequence the events in their narrative writing using exposition, rising action, climax, falling action, and resolution.',
     price: 100,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/plot-diagram.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Plot-Diagram-Graphic-Organizer-12544974',
   },
   {
@@ -199,7 +199,7 @@ export const products: Product[] = [
     description: 'Plant-themed printable posters designed for hanging in lieu of student work at the beginning of the year or anytime you need a placeholder.',
     price: 100,
     category: 'decor',
-    image: '/placeholder-product.jpg',
+    image: '/products/plant-posters.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Student-Work-Coming-Soon-Plant-Posters-12544182',
   },
   {
@@ -208,7 +208,7 @@ export const products: Product[] = [
     description: 'FREE letter template - printable or digital. Students can write a letter to their teachers past, present, or future. Great end of year, beginning of year, or holiday activity.',
     price: 0,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/letter-to-teacher.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Letter-to-my-Teacher-5546447',
     isFree: true,
   },
@@ -218,7 +218,7 @@ export const products: Product[] = [
     description: 'FREE printable BINGO card and Google slideshow for students to set and track their 2025 goals. A fun, interactive way to start the new year!',
     price: 0,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/goal-setting-bingo.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/2025-Goal-Setting-BINGO-12778057',
     isFree: true,
   },
@@ -228,7 +228,7 @@ export const products: Product[] = [
     description: 'FREE space for students to jot down ideas and complete an initial brainstorm before writing their opinion essay.',
     price: 0,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/opinion-brain-dump.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Opinion-Essay-Brain-Dump-Graphic-Organizer-12548286',
     isFree: true,
   },
@@ -238,7 +238,7 @@ export const products: Product[] = [
     description: 'FREE space for students to jot down ideas and complete an initial brainstorm before writing their essay.',
     price: 0,
     category: 'worksheet',
-    image: '/placeholder-product.jpg',
+    image: '/products/essay-brain-dump.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Essay-Brain-Dump-Graphic-Organizer-12548189',
     isFree: true,
   },

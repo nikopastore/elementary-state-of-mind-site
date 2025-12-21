@@ -1,7 +1,8 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Tag, FileText, Palette, BookOpen, Package, ExternalLink } from 'lucide-react';
+import { Tag, ExternalLink } from 'lucide-react';
 
 type ProductCardProps = {
   id: string;
@@ -19,21 +20,6 @@ const formatPrice = (priceInCents: number, isFree?: boolean) => {
   return `$${(priceInCents / 100).toFixed(2)}`;
 };
 
-const getCategoryIcon = (category: string) => {
-  switch (category) {
-    case 'lesson-plan':
-      return <BookOpen className="w-10 h-10" />;
-    case 'worksheet':
-      return <FileText className="w-10 h-10" />;
-    case 'decor':
-      return <Palette className="w-10 h-10" />;
-    case 'bundle':
-      return <Package className="w-10 h-10" />;
-    default:
-      return <FileText className="w-10 h-10" />;
-  }
-};
-
 const getCategoryLabel = (category: string) => {
   switch (category) {
     case 'lesson-plan':
@@ -49,26 +35,12 @@ const getCategoryLabel = (category: string) => {
   }
 };
 
-const getCategoryColor = (category: string) => {
-  switch (category) {
-    case 'lesson-plan':
-      return 'from-purple/20 to-lightPurple';
-    case 'worksheet':
-      return 'from-dustyRose/20 to-softPink/30';
-    case 'decor':
-      return 'from-coral/20 to-peach';
-    case 'bundle':
-      return 'from-lavenderGray/30 to-lightPurple/50';
-    default:
-      return 'from-purple/20 to-lightPurple';
-  }
-};
-
 export default function ProductCard({
   name,
   description,
   price,
   category,
+  image,
   tptUrl,
   isFree,
 }: ProductCardProps) {
@@ -87,11 +59,15 @@ export default function ProductCard({
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       className="bg-white rounded-3xl shadow-soft overflow-hidden w-full max-w-sm font-body hover:shadow-glow transition-shadow"
     >
-      {/* Placeholder image area with category icon */}
-      <div className={`relative h-48 w-full bg-gradient-to-br ${getCategoryColor(category)} flex items-center justify-center`}>
-        <div className="text-purple/50">
-          {getCategoryIcon(category)}
-        </div>
+      {/* Product image */}
+      <div className="relative h-48 w-full overflow-hidden">
+        <Image
+          src={image}
+          alt={name}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
         <div className={`absolute top-4 right-4 ${isProductFree ? 'bg-purple' : 'bg-dustyRose'} text-white text-lg font-bold px-4 py-2 rounded-full shadow-md`}>
           {priceDisplay}
         </div>
