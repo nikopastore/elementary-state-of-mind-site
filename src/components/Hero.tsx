@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Link from 'next/link';
 import SocialBento from './SocialBento';
-import { User } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -59,26 +59,23 @@ const Hero = () => {
           </div>
         </motion.div>
 
-        {/* Right Side: Circular Photo Placeholder */}
+        {/* Right Side: Profile Photo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center bg-gradient-to-br from-lightPurple to-peach rounded-full shadow-glow flex-shrink-0 border-4 border-white"
+          className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0"
         >
-          {/* Replace with your photo */}
-          <div className="flex flex-col items-center text-purple/60">
-            <User className="w-16 h-16 mb-2" />
-            <span className="font-body text-sm">Photo Coming Soon</span>
+          <div className="absolute inset-0 bg-gradient-to-br from-purple/30 to-coral/30 rounded-full blur-2xl" />
+          <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-glow">
+            <Image
+              src="/profile.png"
+              alt="Elementary State of Mind"
+              fill
+              className="object-cover"
+              priority
+            />
           </div>
-          {/* Uncomment and update when you have a photo:
-          <Image
-            src="/your-photo.jpg"
-            alt="Teacher photo"
-            fill
-            className="rounded-full object-cover"
-          />
-          */}
         </motion.div>
       </div>
 
