@@ -50,7 +50,7 @@ const TeacherBio: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-lightPurple/50 text-purple rounded-full text-sm font-medium">
                   <MapPin className="w-4 h-4" />
-                  San Diego, CA
+                  Phoenix, AZ
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-peach/50 text-coral rounded-full text-sm font-medium">
                   <GraduationCap className="w-4 h-4" />
@@ -61,12 +61,12 @@ const TeacherBio: React.FC = () => {
 
             {/* Bio text */}
             <p className="mt-6 text-gray leading-relaxed text-lg">
-              Welcome to Elementary State of Mind! I&apos;m a passionate upper elementary teacher
-              currently pursuing my Doctorate in Educational Leadership at USC. With experience
-              teaching 4th-6th grade and a deep commitment to project-based learning and EdTech
-              integration, I create resources that make learning engaging and meaningful. My
-              classroom is a place where curiosity thrives, creativity flourishes, and every
-              student feels empowered to grow!
+              Welcome to Elementary State of Mind! I&apos;m a Transformational Teacher Leader at
+              ASU Preparatory Academy, currently pursuing my Doctorate in Educational Leadership
+              at USC. With experience teaching 4th-6th grade and a deep commitment to project-based
+              learning, instructional coaching, and EdTech integration, I create resources that make
+              learning engaging and meaningful. I&apos;m passionate about empowering both students
+              and teachers to grow!
             </p>
 
             {/* Expertise tags */}

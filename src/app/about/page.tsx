@@ -29,13 +29,23 @@ const education = [
 
 const experience = [
   {
+    title: 'Transformational Teacher Leader',
+    school: 'ASU Preparatory Academy - South Phoenix',
+    location: 'Phoenix, AZ',
+    period: 'July 2025 – Present',
+    highlights: [
+      'Leading instructional coaching and professional development initiatives',
+      'Supporting teacher growth through data-informed feedback and collaborative planning',
+    ],
+  },
+  {
     title: '5th & 6th Grade Teacher',
     school: 'Innovations Academy',
     location: 'San Diego, CA',
-    period: 'July 2022 – Present',
+    period: 'July 2022 – June 2025',
     highlights: [
-      'Design and facilitate interdisciplinary, project-based learning experiences',
-      'Support students through authentic assessments and student-led demonstrations of learning',
+      'Designed and facilitated interdisciplinary, project-based learning experiences',
+      'Supported students through authentic assessments and student-led demonstrations of learning',
     ],
   },
   {
