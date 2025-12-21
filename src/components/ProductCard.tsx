@@ -107,7 +107,7 @@ export default function ProductCard({
         <div className="text-purple/50">
           {getCategoryIcon(category)}
         </div>
-        <div className="absolute top-4 right-4 bg-coral text-white text-lg font-bold px-4 py-2 rounded-full shadow-md">
+        <div className="absolute top-4 right-4 bg-dustyRose text-white text-lg font-bold px-4 py-2 rounded-full shadow-md">
           {formatPrice(price)}
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function ProductCard({
         <button
           onClick={handleCheckout}
           disabled={isLoading}
-          className="w-full bg-coral hover:bg-dustyRose text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+          className="w-full bg-dustyRose hover:bg-purple text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
         >
           {isLoading ? (
             <>

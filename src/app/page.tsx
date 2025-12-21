@@ -56,7 +56,7 @@ export default function Home() {
           >
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 bg-coral text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-dustyRose text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow transition-all hover:scale-105"
             >
               View All Products
               <ArrowRight className="w-5 h-5" />

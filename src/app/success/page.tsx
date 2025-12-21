@@ -39,7 +39,7 @@ function SuccessContent() {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="w-full bg-coral text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-md hover:shadow-glow transition-all"
+            className="w-full bg-dustyRose text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 shadow-md hover:shadow-glow transition-all"
           >
             <Download className="w-5 h-5" />
             Download Your Files
