@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
 
       {/* Featured Products Section */}
-      <section className="py-16 px-4 bg-warmWhite">
+      <section className="py-16 px-4 bg-white">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -25,10 +25,10 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="font-heading text-4xl font-bold text-charcoal mb-4">
+            <h2 className="font-heading text-4xl font-bold text-black mb-4">
               Featured Resources
             </h2>
-            <p className="font-body text-charcoal/70 max-w-2xl mx-auto">
+            <p className="font-body text-gray max-w-2xl mx-auto">
               Handpicked digital resources to make your classroom shine
             </p>
           </motion.div>
@@ -56,7 +56,7 @@ export default function Home() {
           >
             <Link
               href="/shop"
-              className="inline-flex items-center gap-2 bg-terracotta text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 bg-coral text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow transition-all hover:scale-105"
             >
               View All Products
               <ArrowRight className="w-5 h-5" />

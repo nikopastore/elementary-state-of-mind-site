@@ -9,19 +9,19 @@ const socials = [
     platform: 'Instagram',
     icon: <Instagram className="h-8 w-8 text-white" />,
     href: '#',
-    className: 'bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500',
+    className: 'bg-gradient-to-br from-dustyRose to-coral',
   },
   {
     platform: 'TikTok',
     icon: <Music2 className="h-8 w-8 text-white" />,
     href: '#',
-    className: 'bg-gray-900',
+    className: 'bg-gradient-to-br from-purple to-dustyRose',
   },
   {
     platform: 'Pinterest',
     icon: <PinIcon className="h-8 w-8 text-white" />,
     href: '#',
-    className: 'bg-red-600',
+    className: 'bg-gradient-to-br from-coral to-dustyRose',
   },
 ];
 
@@ -54,14 +54,14 @@ const SocialBento = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-3 gap-4 p-4"
+      className="grid grid-cols-3 gap-4 p-4 max-w-md mx-auto"
     >
       {socials.map((social) => (
         <motion.a
           key={social.platform}
           href={social.href}
           variants={itemVariants}
-          className={`relative flex flex-col items-center justify-center p-6 sm:p-8 rounded-3xl shadow-lg transition-transform hover:scale-105 aspect-square ${social.className}`}
+          className={`relative flex flex-col items-center justify-center p-6 sm:p-8 rounded-3xl shadow-soft transition-all hover:scale-105 hover:shadow-glow aspect-square ${social.className}`}
           target="_blank"
           rel="noopener noreferrer"
         >

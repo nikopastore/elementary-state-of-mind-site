@@ -10,8 +10,8 @@ const TeacherBio: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
         {/* Image Placeholder Column */}
         <div className="flex justify-center md:justify-start">
-          <div className="w-48 h-48 rounded-full bg-sage/20 flex items-center justify-center border-4 border-sage/30">
-            <User className="w-16 h-16 text-sage/50" />
+          <div className="w-48 h-48 rounded-full bg-gradient-to-br from-lightPurple to-peach flex items-center justify-center border-4 border-white shadow-soft">
+            <User className="w-16 h-16 text-purple/50" />
             {/* Replace this div with your photo:
             <Image
               src="/your-photo.jpg"
@@ -25,11 +25,11 @@ const TeacherBio: React.FC = () => {
 
         {/* Bio Column */}
         <div className="md:col-span-2">
-          <h3 className="font-heading text-3xl text-charcoal mb-2">
+          <h3 className="font-heading text-3xl text-purple mb-2">
             {/* Replace with your name */}
             Your Name Here
           </h3>
-          <p className="font-body text-base text-charcoal/80 leading-relaxed">
+          <p className="font-body text-base text-black/80 leading-relaxed">
             {/* Replace with your bio */}
             Welcome to Elementary State of Mind! I&apos;m a passionate elementary teacher dedicated
             to creating engaging, meaningful learning experiences for young minds. My classroom is

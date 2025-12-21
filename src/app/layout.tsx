@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${fraunces.variable} ${quicksand.variable}`}>
-      <body className="antialiased bg-cream font-body text-charcoal min-h-screen flex flex-col">
+      <body className="antialiased bg-lavender font-body text-black min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-grow">
           {children}

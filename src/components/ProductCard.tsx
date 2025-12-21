@@ -20,15 +20,15 @@ const formatPrice = (priceInCents: number) => {
 const getCategoryIcon = (category: string) => {
   switch (category) {
     case 'lesson-plan':
-      return <BookOpen className="w-8 h-8" />;
+      return <BookOpen className="w-10 h-10" />;
     case 'worksheet':
-      return <FileText className="w-8 h-8" />;
+      return <FileText className="w-10 h-10" />;
     case 'decor':
-      return <Palette className="w-8 h-8" />;
+      return <Palette className="w-10 h-10" />;
     case 'bundle':
-      return <Package className="w-8 h-8" />;
+      return <Package className="w-10 h-10" />;
     default:
-      return <FileText className="w-8 h-8" />;
+      return <FileText className="w-10 h-10" />;
   }
 };
 
@@ -44,6 +44,21 @@ const getCategoryLabel = (category: string) => {
       return 'Bundle';
     default:
       return category;
+  }
+};
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case 'lesson-plan':
+      return 'from-purple/20 to-lightPurple';
+    case 'worksheet':
+      return 'from-dustyRose/20 to-softPink/30';
+    case 'decor':
+      return 'from-coral/20 to-peach';
+    case 'bundle':
+      return 'from-lavenderGray/30 to-lightPurple/50';
+    default:
+      return 'from-purple/20 to-lightPurple';
   }
 };
 
@@ -83,32 +98,32 @@ export default function ProductCard({
 
   return (
     <motion.div
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.03, y: -5 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-      className="bg-warmWhite rounded-3xl shadow-lg overflow-hidden w-full max-w-sm font-body"
+      className="bg-white rounded-3xl shadow-soft overflow-hidden w-full max-w-sm font-body hover:shadow-glow transition-shadow"
     >
       {/* Placeholder image area with category icon */}
-      <div className="relative h-48 w-full bg-gradient-to-br from-sage/20 to-cream flex items-center justify-center">
-        <div className="text-sage/60">
+      <div className={`relative h-48 w-full bg-gradient-to-br ${getCategoryColor(category)} flex items-center justify-center`}>
+        <div className="text-purple/50">
           {getCategoryIcon(category)}
         </div>
-        <div className="absolute top-4 right-4 bg-terracotta text-white text-lg font-bold px-4 py-2 rounded-full shadow-md">
+        <div className="absolute top-4 right-4 bg-coral text-white text-lg font-bold px-4 py-2 rounded-full shadow-md">
           {formatPrice(price)}
         </div>
       </div>
       <div className="p-6">
         <div className="flex items-center mb-3">
-          <Tag className="h-4 w-4 text-sage mr-2" />
-          <span className="bg-sage/20 text-sage text-sm font-semibold px-3 py-1 rounded-full">
+          <Tag className="h-4 w-4 text-purple mr-2" />
+          <span className="bg-lightPurple text-purple text-sm font-semibold px-3 py-1 rounded-full">
             {getCategoryLabel(category)}
           </span>
         </div>
-        <h3 className="text-xl font-heading font-bold text-charcoal mb-2">{name}</h3>
-        <p className="text-charcoal/70 text-sm mb-6 line-clamp-2">{description}</p>
+        <h3 className="text-xl font-heading font-bold text-black mb-2">{name}</h3>
+        <p className="text-gray text-sm mb-6 line-clamp-2">{description}</p>
         <button
           onClick={handleCheckout}
           disabled={isLoading}
-          className="w-full bg-terracotta hover:bg-terracotta/90 text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+          className="w-full bg-coral hover:bg-dustyRose text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
         >
           {isLoading ? (
             <>

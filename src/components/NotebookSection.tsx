@@ -13,21 +13,21 @@ const NotebookSection: React.FC<NotebookSectionProps> = ({ children, title }) =>
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const notebookPaperStyle: React.CSSProperties = {
-    backgroundColor: '#fdfaef', // A warm, creamy white
+    backgroundColor: '#ffffff',
     backgroundImage: `
       repeating-linear-gradient(to bottom,
         transparent,
         transparent 1.45rem,
-        #a5c4d4 1.45rem,
-        #a5c4d4 1.5rem),
+        #dccbeb 1.45rem,
+        #dccbeb 1.5rem),
       linear-gradient(to right,
-        #ff6347 2px,
+        #e1889f 2px,
         transparent 2px)
     `,
     backgroundSize: '100% 1.5rem, 100% 100%',
-    backgroundPosition: '0 0.5rem, 2.5rem 0', // Adjust vertical line position
+    backgroundPosition: '0 0.5rem, 2.5rem 0',
     backgroundRepeat: 'repeat-y, no-repeat',
-    padding: '2rem 1.5rem 2rem 3.5rem', // Top, Right, Bottom, Left padding to clear margin line
+    padding: '2rem 1.5rem 2rem 3.5rem',
     lineHeight: '1.5rem',
   };
 
@@ -42,13 +42,13 @@ const NotebookSection: React.FC<NotebookSectionProps> = ({ children, title }) =>
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
       variants={variants}
-      className="w-full max-w-4xl mx-auto my-12 rounded-lg shadow-lg overflow-hidden"
+      className="w-full max-w-4xl mx-auto my-12 rounded-3xl shadow-soft overflow-hidden border border-lavenderGray/30"
       style={notebookPaperStyle}
     >
-      <h2 className="font-heading text-4xl mb-6 pb-2 border-b border-gray-300">
+      <h2 className="font-heading text-3xl md:text-4xl mb-6 pb-2 border-b border-lavenderGray text-purple">
         {title}
       </h2>
-      <div className="font-body text-gray-800">
+      <div className="font-body text-black/80">
         {children}
       </div>
     </motion.section>

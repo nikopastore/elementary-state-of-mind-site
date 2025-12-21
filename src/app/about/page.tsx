@@ -11,10 +11,10 @@ export default function AboutPage() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-cream min-h-screen py-16"
+      className="bg-gradient-to-b from-lavender to-white min-h-screen py-16"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl md:text-5xl font-heading font-bold text-center text-charcoal mb-12">
+        <h1 className="text-4xl md:text-5xl font-heading font-bold text-center text-black mb-12">
           Meet the Teacher
         </h1>
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
 
         <div className="mt-16 space-y-12">
           <NotebookSection title="Teaching Philosophy">
-            <p className="text-lg text-charcoal/80 leading-relaxed">
+            <p className="text-lg text-black/80 leading-relaxed">
               {/* Replace with your teaching philosophy */}
               My teaching philosophy centers on creating a warm, inclusive environment where every
               child feels safe to take risks and grow. I believe in hands-on, engaging learning
@@ -32,7 +32,7 @@ export default function AboutPage() {
           </NotebookSection>
 
           <NotebookSection title="Education & Experience">
-            <ul className="list-disc list-inside text-lg text-charcoal/80 leading-relaxed space-y-2">
+            <ul className="list-disc list-inside text-lg text-black/80 leading-relaxed space-y-2">
               {/* Replace with your actual education and experience */}
               <li>Bachelor&apos;s Degree in Elementary Education</li>
               <li>Years of classroom teaching experience</li>

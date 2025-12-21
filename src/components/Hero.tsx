@@ -1,13 +1,19 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import SocialBento from "./SocialBento"; // Assuming SocialBento is in the same directory
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import SocialBento from './SocialBento';
+import { User } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section className="relative w-full bg-cream py-16 lg:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12">
+    <section className="relative w-full bg-gradient-to-b from-lavender to-white py-16 lg:py-24 overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-softPink/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple/20 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-peach/30 rounded-full blur-2xl" />
+
+      <div className="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
         {/* Left Side: Welcome Text and CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -15,12 +21,15 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="w-full lg:w-1/2 text-center lg:text-left"
         >
-          <h1 className="font-heading text-5xl md:text-6xl font-extrabold text-charcoal mb-4 leading-tight">
-            Welcome to Elementary State of Mind
+          <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-extrabold text-black mb-6 leading-tight">
+            Welcome to{' '}
+            <span className="text-purple">Elementary</span>{' '}
+            <span className="text-dustyRose">State of Mind</span>
           </h1>
-          <p className="font-body text-xl text-charcoal-light mb-8 max-w-lg mx-auto lg:mx-0">
-            {/* Subheading placeholder for bio intro */}
-            A dedicated elementary teacher sharing resources, insights, and a passion for engaging education. Discover tools to inspire young minds!
+          <p className="font-body text-lg md:text-xl text-gray mb-8 max-w-lg mx-auto lg:mx-0">
+            {/* Placeholder bio intro - replace with your own */}
+            A dedicated elementary teacher sharing resources, insights, and a passion
+            for engaging education. Discover tools to inspire young minds!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <motion.div
@@ -30,7 +39,7 @@ const Hero = () => {
             >
               <Link
                 href="/shop"
-                className="inline-block bg-terracotta text-cream font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-terracotta-dark transition-colors duration-300"
+                className="inline-block bg-coral text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow hover:scale-105 transition-all duration-300"
               >
                 Shop Now
               </Link>
@@ -42,7 +51,7 @@ const Hero = () => {
             >
               <Link
                 href="/about"
-                className="inline-block bg-charcoal text-cream font-semibold px-8 py-3 rounded-full shadow-lg hover:bg-charcoal-light transition-colors duration-300"
+                className="inline-block bg-purple text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow hover:scale-105 transition-all duration-300"
               >
                 Meet the Teacher
               </Link>
@@ -55,11 +64,21 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center bg-sage/30 rounded-full shadow-xl flex-shrink-0"
+          className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex items-center justify-center bg-gradient-to-br from-lightPurple to-peach rounded-full shadow-glow flex-shrink-0 border-4 border-white"
         >
-          <span className="font-body text-charcoal text-lg md:text-xl font-medium">
-            Photo Coming Soon
-          </span>
+          {/* Replace with your photo */}
+          <div className="flex flex-col items-center text-purple/60">
+            <User className="w-16 h-16 mb-2" />
+            <span className="font-body text-sm">Photo Coming Soon</span>
+          </div>
+          {/* Uncomment and update when you have a photo:
+          <Image
+            src="/your-photo.jpg"
+            alt="Teacher photo"
+            fill
+            className="rounded-full object-cover"
+          />
+          */}
         </motion.div>
       </div>
 
