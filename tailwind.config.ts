@@ -29,7 +29,7 @@ const config: Config = {
         white: '#ffffff',         // Card backgrounds, light text
       },
       fontFamily: {
-        heading: ['var(--font-fraunces)', 'serif'],
+        heading: ['var(--font-heading)', 'serif'],
         body: ['var(--font-quicksand)', 'sans-serif'],
       },
       borderRadius: {

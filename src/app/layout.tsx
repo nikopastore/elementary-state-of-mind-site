@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Fraunces, Quicksand } from "next/font/google";
+import { DM_Serif_Display, Quicksand } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const dmSerifDisplay = DM_Serif_Display({
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: "400",
 });
 
 const quicksand = Quicksand({
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${quicksand.variable}`}>
+    <html lang="en" className={`${dmSerifDisplay.variable} ${quicksand.variable}`}>
       <body className="antialiased bg-lavender font-body text-black min-h-screen flex flex-col">
         <Navigation />
         <main className="flex-grow">

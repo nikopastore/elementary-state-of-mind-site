@@ -39,7 +39,7 @@ const Hero = () => {
             >
               <Link
                 href="/shop"
-                className="inline-block bg-coral text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow hover:scale-105 transition-all duration-300"
+                className="inline-block bg-dustyRose text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300"
               >
                 Shop Now
               </Link>
@@ -51,7 +51,7 @@ const Hero = () => {
             >
               <Link
                 href="/about"
-                className="inline-block bg-purple text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:shadow-glow hover:scale-105 transition-all duration-300"
+                className="inline-block bg-dustyRose text-white font-semibold px-8 py-4 rounded-full shadow-lg hover:brightness-110 hover:scale-105 transition-all duration-300"
               >
                 Meet the Teacher
               </Link>
