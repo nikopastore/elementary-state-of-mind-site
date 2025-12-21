@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#9B7ED9"/>
+
+  <!-- Cute brain shape -->
+  <g fill="#fff">
+    <!-- Left hemisphere -->
+    <ellipse cx="11" cy="14" rx="6" ry="7"/>
+    <!-- Right hemisphere -->
+    <ellipse cx="21" cy="14" rx="6" ry="7"/>
+    <!-- Bottom bulge -->
+    <ellipse cx="16" cy="20" rx="8" ry="5"/>
+  </g>
+
+  <!-- Brain folds/wrinkles -->
+  <g fill="none" stroke="#9B7ED9" stroke-width="1.5" stroke-linecap="round">
+    <!-- Left side folds -->
+    <path d="M8 11 Q11 13 8 15"/>
+    <path d="M10 17 Q13 18 11 20"/>
+    <!-- Right side folds -->
+    <path d="M24 11 Q21 13 24 15"/>
+    <path d="M22 17 Q19 18 21 20"/>
+    <!-- Center line -->
+    <path d="M16 9 L16 22"/>
+  </g>
+
+  <!-- Cute blush marks -->
+  <ellipse cx="9" cy="18" rx="2" ry="1" fill="#E8A0BF" opacity="0.6"/>
+  <ellipse cx="23" cy="18" rx="2" ry="1" fill="#E8A0BF" opacity="0.6"/>
+
+  <!-- Sparkle/shine -->
+  <circle cx="9" cy="11" r="1.5" fill="#fff" opacity="0.8"/>
+</svg>
