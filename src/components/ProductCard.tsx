@@ -1,8 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Tag, Loader2, FileText, Palette, BookOpen, Package } from 'lucide-react';
+import { Tag, FileText, Palette, BookOpen, Package, ExternalLink } from 'lucide-react';
 
 type ProductCardProps = {
   id: string;
@@ -11,6 +10,7 @@ type ProductCardProps = {
   price: number; // in cents
   category: string;
   image: string;
+  tptUrl?: string;
 };
 
 const formatPrice = (priceInCents: number) => {
@@ -63,36 +63,15 @@ const getCategoryColor = (category: string) => {
 };
 
 export default function ProductCard({
-  id,
   name,
   description,
   price,
   category,
+  tptUrl,
 }: ProductCardProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleCheckout = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ productId: id }),
-      });
-
-      const data = await response.json();
-
-      if (data.url) {
-        window.location.href = data.url;
-      } else {
-        console.error('No checkout URL returned');
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.error('Checkout error:', error);
-      setIsLoading(false);
+  const handleClick = () => {
+    if (tptUrl) {
+      window.open(tptUrl, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -121,21 +100,11 @@ export default function ProductCard({
         <h3 className="text-xl font-heading font-bold text-black mb-2">{name}</h3>
         <p className="text-gray text-sm mb-6 line-clamp-2">{description}</p>
         <button
-          onClick={handleCheckout}
-          disabled={isLoading}
-          className="w-full bg-dustyRose hover:bg-purple text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-md hover:shadow-lg"
+          onClick={handleClick}
+          className="w-full bg-dustyRose hover:bg-purple text-white font-semibold py-3 rounded-2xl flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
         >
-          {isLoading ? (
-            <>
-              <Loader2 className="h-5 w-5 animate-spin" />
-              <span>Processing...</span>
-            </>
-          ) : (
-            <>
-              <Download className="h-5 w-5" />
-              <span>Buy Now</span>
-            </>
-          )}
+          <ExternalLink className="h-5 w-5" />
+          <span>View on TPT</span>
         </button>
       </div>
     </motion.div>

@@ -5,7 +5,11 @@ export type Product = {
   price: number; // Price in cents
   category: 'lesson-plan' | 'worksheet' | 'decor' | 'bundle';
   image: string; // Path to product image
+  tptUrl?: string; // Link to TPT product page
 };
+
+// TPT Store URL
+export const TPT_STORE_URL = 'https://www.teacherspayteachers.com/store/elementary-state-of-mind';
 
 export const products: Product[] = [
   {
@@ -15,6 +19,7 @@ export const products: Product[] = [
     price: 499,
     category: 'lesson-plan',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
   {
     id: 'prod-002',
@@ -23,6 +28,7 @@ export const products: Product[] = [
     price: 299,
     category: 'worksheet',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
   {
     id: 'prod-003',
@@ -31,6 +37,7 @@ export const products: Product[] = [
     price: 599,
     category: 'decor',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
   {
     id: 'prod-004',
@@ -39,6 +46,7 @@ export const products: Product[] = [
     price: 1299,
     category: 'bundle',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
   {
     id: 'prod-005',
@@ -47,6 +55,7 @@ export const products: Product[] = [
     price: 399,
     category: 'worksheet',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
   {
     id: 'prod-006',
@@ -55,5 +64,6 @@ export const products: Product[] = [
     price: 249,
     category: 'decor',
     image: '/placeholder-product.jpg',
+    tptUrl: TPT_STORE_URL,
   },
 ];
