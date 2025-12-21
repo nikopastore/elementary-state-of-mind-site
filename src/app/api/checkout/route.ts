@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripe } from '@/lib/stripe';
+import { getStripe } from '@/lib/stripe';
 import { products } from '@/lib/products';
 
 export async function POST(request: NextRequest) {
@@ -18,6 +18,9 @@ export async function POST(request: NextRequest) {
 
     // Get the base URL for redirects
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+    // Get Stripe instance
+    const stripe = getStripe();
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
