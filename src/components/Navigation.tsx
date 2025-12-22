@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import StringLights from './StringLights';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -45,7 +46,7 @@ const Navigation = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full">
-      <nav className="bg-white/90 backdrop-blur-md shadow-soft border-b border-lavenderGray/30">
+      <nav className="bg-white/90 backdrop-blur-md shadow-soft">
         <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
@@ -87,6 +88,11 @@ const Navigation = () => {
           </div>
         </div>
       </nav>
+
+      {/* String Lights */}
+      <div className="w-full -mt-2">
+        <StringLights />
+      </div>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
