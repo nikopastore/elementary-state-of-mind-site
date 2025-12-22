@@ -7,6 +7,38 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+// Note: Metadata is defined in root layout for homepage
+/*
+export const metadata: Metadata = {
+  title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+  description: "Beautiful, engaging digital resources for elementary teachers. Shop lesson plans, novel studies, anchor charts, and classroom decor on Teachers Pay Teachers.",
+  keywords: ["teacher resources", "elementary education", "digital downloads", "lesson plans", "classroom decor", "ELA resources", "teaching tools"],
+  openGraph: {
+    title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+    description: "Beautiful, engaging digital resources for elementary teachers. Shop lesson plans, novel studies, anchor charts, and classroom decor.",
+    type: "website",
+    url: "https://elementary-state-of-mind.com",
+    images: [
+      {
+        url: "https://elementary-state-of-mind.com/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Elementary State of Mind Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+    description: "Beautiful, engaging digital resources for elementary teachers.",
+    images: ["https://elementary-state-of-mind.com/logo.png"],
+  },
+  alternates: {
+    canonical: "https://elementary-state-of-mind.com",
+  },
+};
+*/
+
 export default function Home() {
   // Show first 3 products as featured
   const featuredProducts = products.slice(0, 3);

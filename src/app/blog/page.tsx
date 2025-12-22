@@ -1,6 +1,30 @@
+import { Metadata } from 'next';
 import { posts } from '@/lib/posts';
 import BlogCard from '@/components/BlogCard';
 import EmailSubscribe from '@/components/EmailSubscribe';
+
+export const metadata: Metadata = {
+  title: "Blog | Elementary State of Mind",
+  description: "Teaching tips, classroom stories, and educator insights for elementary teachers. Read about evidence-based practices, engagement strategies, and classroom management.",
+  keywords: ["teaching tips", "classroom management", "ELA instruction", "elementary education", "teaching blog", "educator resources"],
+  openGraph: {
+    title: "Blog | Elementary State of Mind",
+    description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
+    type: "website",
+    url: "https://elementary-state-of-mind.com/blog",
+    images: [
+      {
+        url: "https://elementary-state-of-mind.com/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Elementary State of Mind",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://elementary-state-of-mind.com/blog",
+  },
+};
 
 export default function BlogPage() {
   return (

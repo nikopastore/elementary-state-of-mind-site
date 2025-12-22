@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { posts } from '@/lib/posts';
@@ -163,6 +164,67 @@ export async function generateStaticParams() {
   }));
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = posts.find((p) => p.slug === slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found | Elementary State of Mind",
+      description: "The blog post you're looking for could not be found.",
+    };
+  }
+
+  const canonicalUrl = `https://elementary-state-of-mind.com/blog/${post.slug}`;
+
+  return {
+    title: `${post.title} | Elementary State of Mind Blog`,
+    description: post.excerpt,
+    keywords: [
+      "elementary education",
+      "teaching",
+      "classroom management",
+      "ELA instruction",
+      post.category,
+    ],
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: canonicalUrl,
+      publishedTime: post.date,
+      images: post.images && post.images.length > 0
+        ? [
+            {
+              url: `https://elementary-state-of-mind.com${post.images[0]}`,
+              width: 1200,
+              height: 630,
+              alt: post.title,
+            },
+          ]
+        : [
+            {
+              url: "https://elementary-state-of-mind.com/logo.png",
+              width: 1200,
+              height: 630,
+              alt: "Elementary State of Mind",
+            },
+          ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.images && post.images.length > 0
+        ? [`https://elementary-state-of-mind.com${post.images[0]}`]
+        : ["https://elementary-state-of-mind.com/logo.png"],
+    },
+    alternates: {
+      canonical: canonicalUrl,
+    },
+  };
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = posts.find((p) => p.slug === slug);
@@ -171,8 +233,38 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  // BlogPosting Schema for SEO
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.images && post.images.length > 0
+      ? `https://elementary-state-of-mind.com${post.images[0]}`
+      : "https://elementary-state-of-mind.com/logo.png",
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Person",
+      name: "Elementary State of Mind",
+      url: "https://elementary-state-of-mind.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Elementary State of Mind",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://elementary-state-of-mind.com/logo.png",
+      },
+    },
+  };
+
   return (
     <div className="bg-gradient-to-b from-lavender to-white min-h-screen py-10 md:py-14 lg:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           {/* Back link */}

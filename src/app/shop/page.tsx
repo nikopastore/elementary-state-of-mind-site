@@ -1,5 +1,35 @@
+import { Metadata } from 'next';
 import { products } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
+
+export const metadata: Metadata = {
+  title: "The Shop | Elementary State of Mind",
+  description: "Beautiful, engaging digital resources for your classroom. Shop lesson plans, novel studies, anchor charts, and classroom decor for elementary teachers.",
+  keywords: ["teacher resources", "digital downloads", "lesson plans", "novel studies", "anchor charts", "classroom decor", "teacherspayteachers"],
+  openGraph: {
+    title: "The Shop | Elementary State of Mind",
+    description: "Beautiful, engaging digital resources for your classroom.",
+    type: "website",
+    url: "https://elementary-state-of-mind.com/shop",
+    images: [
+      {
+        url: "https://elementary-state-of-mind.com/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Elementary State of Mind",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Shop | Elementary State of Mind",
+    description: "Beautiful, engaging digital resources for your classroom.",
+    images: ["https://elementary-state-of-mind.com/logo.png"],
+  },
+  alternates: {
+    canonical: "https://elementary-state-of-mind.com/shop",
+  },
+};
 
 export default function ShopPage() {
   const featuredProducts = products.filter((p) => p.featured);
