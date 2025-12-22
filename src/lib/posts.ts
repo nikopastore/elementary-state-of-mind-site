@@ -10,34 +10,68 @@ export type Post = {
 
 export const posts: Post[] = [
   {
-    slug: 'welcome-to-my-blog',
-    title: 'Welcome to My Blog!',
-    excerpt: 'I\'m so excited to share my teaching journey with you! Here you\'ll find classroom tips, resource recommendations, and stories from my elementary classroom.',
+    slug: 'what-is-an-elementary-state-of-mind',
+    title: 'What Is an Elementary State of Mind? (And Why It Matters More Than Ever)',
+    excerpt: 'Elementary State of Mind started as a mindset long before it became a website, a shop, or a brand. It was born in those moments when I looked around my classroom and thought, there has to be a way to teach deeply, meet standards, and still let kids be kids.',
     content: `
-# Welcome to My Blog!
+# What Is an Elementary State of Mind? (And Why It Matters More Than Ever)
 
-I'm so excited to finally launch this blog and share my teaching journey with you!
+Elementary State of Mind started as a mindset long before it became a website, a shop, or a brand. It was born in those moments when I looked around my classroom and thought, *there has to be a way to teach deeply, meet standards, and still let kids be kids.*
+
+An elementary state of mind isn't about doing less.
+It's about teaching **with intention, imagination, and heart**.
+
+## Why This Matters
+
+Today's classrooms are full of contradictions. We're asked to increase rigor, follow scripted programs, analyze data constantly — all while nurturing creativity, social-emotional growth, and joy.
+
+Teachers are burning out not because they don't care, but because they care *deeply*.
+
+Elementary State of Mind exists to bridge that gap.
+
+## What an Elementary State of Mind Means to Me
+
+At its core, ESOM is built on a few beliefs:
+
+- **Joy and rigor are not opposites**
+- **Play is a pathway to deep learning**
+- **Students deserve voice, choice, and creativity**
+- **Teachers deserve resources that trust their professionalism**
+- **Engagement is not extra — it's essential**
+
+An elementary state of mind honors how children actually learn — through curiosity, movement, discussion, storytelling, and meaningful work.
+
+## What This Looks Like in Real Classrooms
+
+It looks like students rereading a text not because they were told to, but because they *need* evidence to prove their case.
+
+It looks like anchor charts covered in kid language.
+
+It looks like productive noise, collaboration, and pride.
+
+## Why Elementary Teachers Need This Space
+
+So often, teaching resources are either:
+
+- Too rigid, or
+- Too fluffy
+
+Elementary State of Mind is where **evidence-based instruction meets imagination**.
+
+Everything here is:
+
+- Classroom-tested
+- Flexible
+- Designed to make learning stick *and* feel good
 
 ## What You'll Find Here
 
-This space is dedicated to all things elementary education. I'll be sharing:
+- Engaging ELA & PBL resources
+- Ideas rooted in best practice
+- Real classroom stories
+- Tools that support teacher sustainability
 
-- **Classroom Tips** - Strategies and ideas that have worked in my classroom
-- **Resource Spotlights** - Deep dives into my favorite teaching resources
-- **Personal Reflections** - Stories and lessons learned along the way
-- **Seasonal Ideas** - Activities and projects for different times of the year
-
-## Why I Started This Blog
-
-After years of teaching, I've accumulated so many ideas, lessons learned, and resources that I wanted to share with fellow educators. Whether you're a new teacher looking for guidance or a veteran seeking fresh ideas, I hope you'll find something helpful here.
-
-## Stay Connected
-
-Make sure to follow me on social media for daily updates and quick tips. I love connecting with other educators!
-
-Thank you for being here. I can't wait to share this journey with you!
-
-*Happy Teaching!*
+If you're a teacher who wants your classroom to feel alive again — you're in the right place.
     `.trim(),
     date: '2024-12-21',
     category: 'personal',
