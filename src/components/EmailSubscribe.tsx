@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { Mail, Send, Check, Loader2 } from 'lucide-react';
 
-// TODO: Replace with your Buttondown username after creating account at buttondown.com
 const BUTTONDOWN_USERNAME = 'elementarystateofmind';
 
 export default function EmailSubscribe() {
@@ -32,9 +31,18 @@ export default function EmailSubscribe() {
         setMessage('Thanks for subscribing! Check your email to confirm.');
         setEmail('');
       } else {
-        throw new Error('Subscription failed');
+        // Log error details for debugging
+        const errorText = await response.text();
+        console.error('Buttondown API Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          body: errorText,
+          url: `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`
+        });
+        throw new Error(`Subscription failed: ${response.status} ${response.statusText}`);
       }
-    } catch {
+    } catch (error) {
+      console.error('Subscription error:', error);
       setStatus('error');
       setMessage('Something went wrong. Please try again.');
     }

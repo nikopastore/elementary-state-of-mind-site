@@ -1,38 +1,10 @@
 'use client';
 
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import FlipBook from '@/components/FlipBook';
-
-const galleryPages = [
-  '/gallery/page-1.png',
-  '/gallery/page-2.png',
-  '/gallery/page-3.png',
-  '/gallery/page-4.png',
-  '/gallery/page-5.png',
-  '/gallery/page-6.png',
-  '/gallery/page-7.png',
-  '/gallery/page-8.png',
-];
+import { galleryPhotos } from '@/lib/galleryPhotos';
+import GalleryPhoto from '@/components/GalleryPhoto';
 
 export default function GalleryPage() {
-  // Add keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-        const buttons = document.querySelectorAll('button[aria-label*="page"]');
-        if (e.key === 'ArrowLeft') {
-          (buttons[0] as HTMLButtonElement)?.click();
-        } else {
-          (buttons[1] as HTMLButtonElement)?.click();
-        }
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   return (
     <div className="min-h-screen py-8 md:py-12 lg:py-16">
       {/* Background decorations - responsive sizing */}
@@ -48,24 +20,24 @@ export default function GalleryPage() {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6 md:mb-8 lg:mb-10"
+          className="text-center mb-8 md:mb-12"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-black mb-2 md:mb-3">
-            Gallery
+            Products in Action
           </h1>
           <p className="text-gray text-base md:text-lg max-w-2xl mx-auto">
-            Flip through my visual resume and teaching journey
+            See these resources come to life in real classrooms
           </p>
         </motion.div>
 
-        {/* FlipBook */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <FlipBook pages={galleryPages} />
-        </motion.div>
+        {/* Pinterest-style masonry grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6">
+          {galleryPhotos.map((photo, index) => (
+            <div key={photo.id} className="break-inside-avoid">
+              <GalleryPhoto photo={photo} index={index} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
