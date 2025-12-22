@@ -9,7 +9,7 @@ export default function ShopPage() {
   return (
     <div className="bg-gradient-to-b from-lavender to-white min-h-screen">
       {/* Banner Image */}
-      <div className="w-full relative h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden">
+      <div className="w-full relative h-24 sm:h-32 md:h-40 lg:h-48 overflow-hidden">
         <Image
           src="/shop-banner.webp"
           alt="Elementary State of Mind Shop"
