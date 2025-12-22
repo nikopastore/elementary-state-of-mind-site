@@ -3,7 +3,7 @@
 import TeacherBio from '@/components/TeacherBio';
 import ModernSection from '@/components/ModernSection';
 import { motion } from 'framer-motion';
-import { GraduationCap, Briefcase, Award, BookOpen, ExternalLink } from 'lucide-react';
+import { GraduationCap, Briefcase, Award, BookOpen } from 'lucide-react';
 
 const education = [
   {
@@ -207,15 +207,6 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="https://www.youtube.com/watch?v=8vMVr_R8yA4"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 mt-4 text-sm text-dustyRose hover:text-purple transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Watch Conference Presentation
-              </a>
             </ModernSection>
           </motion.div>
         </div>
