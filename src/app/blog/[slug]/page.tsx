@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { posts } from '@/lib/posts';
 import { Calendar, Tag, ArrowLeft } from 'lucide-react';
 
@@ -31,25 +32,72 @@ const formatDate = (dateString: string) => {
   });
 };
 
+// Parse inline formatting (bold, italic, links)
+function parseInline(text: string): React.ReactNode {
+  // Handle links [text](url)
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    if (match.index > lastIndex) {
+      parts.push(formatText(text.slice(lastIndex, match.index)));
+    }
+    parts.push(
+      <Link key={match.index} href={match[2]} className="text-purple hover:text-dustyRose underline transition-colors">
+        {match[1]}
+      </Link>
+    );
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(formatText(text.slice(lastIndex)));
+  }
+
+  return parts.length === 1 ? parts[0] : parts;
+}
+
+// Format bold and italic text
+function formatText(text: string): string {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1');
+}
+
 // Simple markdown-like content renderer
 function renderContent(content: string) {
   const lines = content.split('\n');
   const elements: React.ReactNode[] = [];
   let inList = false;
+  let inNumberedList = false;
   let listItems: string[] = [];
+  let numberedItems: string[] = [];
 
   const flushList = () => {
     if (listItems.length > 0) {
       elements.push(
         <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-2 mb-6 text-gray">
           {listItems.map((item, i) => (
-            <li key={i}>{item}</li>
+            <li key={i}>{parseInline(item)}</li>
           ))}
         </ul>
       );
       listItems = [];
     }
+    if (numberedItems.length > 0) {
+      elements.push(
+        <ol key={`olist-${elements.length}`} className="list-decimal list-inside space-y-2 mb-6 text-gray">
+          {numberedItems.map((item, i) => (
+            <li key={i}>{parseInline(item)}</li>
+          ))}
+        </ol>
+      );
+      numberedItems = [];
+    }
     inList = false;
+    inNumberedList = false;
   };
 
   lines.forEach((line, index) => {
@@ -76,12 +124,15 @@ function renderContent(content: string) {
           {trimmed.slice(4)}
         </h3>
       );
-    } else if (trimmed.startsWith('- **') || trimmed.startsWith('- ')) {
+    } else if (/^\d+\.\s/.test(trimmed)) {
+      // Numbered list item
+      flushList();
+      inNumberedList = true;
+      numberedItems.push(trimmed.replace(/^\d+\.\s/, ''));
+    } else if (trimmed.startsWith('- ')) {
+      if (inNumberedList) flushList();
       inList = true;
-      let item = trimmed.slice(2);
-      // Handle bold text
-      item = item.replace(/\*\*(.*?)\*\*/g, '$1');
-      listItems.push(item);
+      listItems.push(trimmed.slice(2));
     } else if (trimmed.startsWith('*') && trimmed.endsWith('*') && !trimmed.startsWith('**')) {
       flushList();
       elements.push(
@@ -95,7 +146,7 @@ function renderContent(content: string) {
       flushList();
       elements.push(
         <p key={index} className="text-gray text-base md:text-lg leading-relaxed mb-4">
-          {trimmed}
+          {parseInline(trimmed)}
         </p>
       );
     }
@@ -154,6 +205,27 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Post content */}
           <article className="bg-white rounded-2xl md:rounded-3xl shadow-soft p-6 sm:p-8 md:p-10">
             {renderContent(post.content)}
+
+            {/* Image Gallery */}
+            {post.images && post.images.length > 0 && (
+              <div className="mt-10 pt-8 border-t border-gray/20">
+                <h3 className="text-xl md:text-2xl font-heading font-bold text-black mb-6">
+                  From the Classroom
+                </h3>
+                <div className="grid grid-cols-2 gap-4">
+                  {post.images.map((img, index) => (
+                    <div key={index} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
+                      <Image
+                        src={img}
+                        alt={`Classroom photo ${index + 1}`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </article>
         </div>
       </div>

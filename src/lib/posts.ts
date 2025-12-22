@@ -5,10 +5,106 @@ export type Post = {
   content: string;
   date: string;
   image?: string;
+  images?: string[];
   category: 'classroom' | 'tips' | 'resources' | 'personal';
 };
 
 export const posts: Post[] = [
+  {
+    slug: 'turning-novel-study-into-mock-trial',
+    title: 'Turning a Novel Study Into a Mock Trial: Teaching Reading, Evidence, and Critical Thinking Through Play',
+    excerpt: 'Real readers reread. They argue. They defend ideas with evidence. That\'s precisely what a mock trial allows students to do. Learn how to transform your next novel study into an engaging courtroom experience.',
+    content: `
+# Turning a Novel Study Into a Mock Trial: Teaching Reading, Evidence, and Critical Thinking Through Play
+
+## The Problem With Traditional Novel Studies
+
+So many novel studies focus on:
+
+- Worksheets
+- Isolated comprehension questions
+- One-and-done discussions
+
+But real readers reread.
+They argue.
+They defend ideas with evidence.
+
+That's precisely what a mock trial allows students to do.
+
+## Why Mock Trials Work for ELA
+
+Mock trials naturally embed:
+
+- Close reading
+- Evidence collection
+- Argument writing
+- Speaking & listening
+- Collaboration
+
+Students aren't just answering questions — they're *using the text for a purpose*.
+
+## How We Did It
+
+After reading *Space Case*, students:
+
+1. Identified suspects
+2. Tracked textual evidence
+3. Took on roles (lawyers, witnesses, judge, jury)
+4. Prepared arguments using direct quotes
+5. Presented and defended their claims
+
+## The Evidence-Based Practices Behind the Fun
+
+While it felt like play, the learning was intentional:
+
+- Explicit modeling of citing evidence
+- Repeated rereading of complex passages
+- Academic discussion and oral rehearsal
+- Authentic assessment
+
+Engagement wasn't a distraction — it was the vehicle.
+
+## What I Noticed as a Teacher
+
+- Reluctant readers participated
+- Students *wanted* to reread
+- Discussions were deeper
+- Evidence mattered
+
+The classroom energy was focused, joyful, and purposeful.
+
+## Why Engagement Changes Everything
+
+When students care about the outcome, they care about the text.
+When learning feels meaningful, rigor rises naturally.
+
+That's the power of teaching through play.
+
+## Teacher Takeaway
+
+If you're looking for ways to:
+
+- Increase reading stamina
+- Deepen comprehension
+- Make evidence meaningful
+
+Consider turning your next novel study into an experience.
+
+## Want to Try It?
+
+After teachers kept asking for our materials, I created the **Space Case Mock Trial** resource so others could bring this experience into their classrooms.
+
+[View the Space Case Mock Trial Resource](/shop) | [Browse All Resources](/shop)
+    `.trim(),
+    date: '2025-12-22',
+    category: 'classroom',
+    images: [
+      '/blog/mock-trial-1.jpg',
+      '/blog/mock-trial-2.jpg',
+      '/blog/mock-trial-3.jpg',
+      '/blog/mock-trial-4.jpg',
+    ],
+  },
   {
     slug: 'what-is-an-elementary-state-of-mind',
     title: 'What Is an Elementary State of Mind? (And Why It Matters More Than Ever)',
