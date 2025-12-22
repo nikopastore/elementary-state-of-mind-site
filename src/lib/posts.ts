@@ -73,7 +73,7 @@ Everything here is:
 
 If you're a teacher who wants your classroom to feel alive again — you're in the right place.
     `.trim(),
-    date: '2024-12-21',
+    date: '2025-12-21',
     category: 'personal',
   },
 ];
