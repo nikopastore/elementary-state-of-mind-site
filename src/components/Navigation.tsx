@@ -89,8 +89,8 @@ const Navigation = () => {
         </div>
       </nav>
 
-      {/* String Lights */}
-      <div className="w-full -mt-2">
+      {/* String Lights hanging from nav */}
+      <div className="w-full">
         <StringLights />
       </div>
 
