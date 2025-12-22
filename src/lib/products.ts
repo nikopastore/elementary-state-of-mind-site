@@ -34,6 +34,15 @@ export const products: Product[] = [
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-Mock-Trial-15118462',
   },
   {
+    id: 'any-text-debate',
+    name: 'Any Text Debate Prep Tool',
+    description: 'Develop evidence-based reasoning skills through structured debate preparation. Supports CER, OREO, and RACES frameworks with teacher guide, prep pages, and both printable and digital formats. Perfect for grades 3–8.',
+    price: 400,
+    category: 'lesson-plan',
+    image: '/products/any-text-debate.jpg',
+    tptUrl: 'https://www.teacherspayteachers.com/Product/Any-Text-Debate-Prep-Tool-15122470',
+  },
+  {
     id: 'ela-anchor-charts',
     name: 'ELA Anchor Chart Printables (Hand-Drawn)',
     description: 'Brighten up your ELA block with engaging, hand-drawn anchor charts that make essential skills stick! This set includes 9 beautifully illustrated, student-friendly charts—perfect for interactive notebooks.',
