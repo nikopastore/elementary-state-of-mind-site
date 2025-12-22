@@ -12,7 +12,7 @@ const StringLights = () => {
   }));
 
   return (
-    <div className="w-full overflow-hidden" style={{ height: '50px' }}>
+    <div className="w-full overflow-visible" style={{ height: '65px' }}>
       <div className="relative w-full h-full flex items-start justify-between px-2">
         {/* The wire/string - draws in from left */}
         <motion.svg
@@ -69,24 +69,24 @@ const StringLights = () => {
 
               {/* Bulb with glow */}
               <div className="relative">
-                {/* Large outer glow - very visible */}
+                {/* Large outer glow */}
                 <motion.div
                   className="absolute rounded-full"
                   style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '36px',
+                    height: '36px',
                     backgroundColor: light.color,
-                    top: '-10px',
-                    left: '-12px',
-                    filter: 'blur(12px)',
+                    top: '-8px',
+                    left: '-10px',
+                    filter: 'blur(10px)',
                   }}
                   initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0.1, 0.9, 0.1],
-                    scale: [0.6, 1.3, 0.6],
+                    opacity: [0.1, 0.6, 0.1],
+                    scale: [0.7, 1.2, 0.7],
                   }}
                   transition={{
-                    duration: 1.8,
+                    duration: 3,
                     delay: light.loadDelay + 0.4 + light.glowDelay,
                     repeat: Infinity,
                     ease: 'easeInOut',
@@ -99,16 +99,16 @@ const StringLights = () => {
                   style={{
                     width: '20px',
                     height: '24px',
-                    background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,200,0.6) 40%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,220,0.4) 40%, transparent 70%)',
                     top: '-2px',
                     left: '-2px',
                   }}
                   initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0, 1, 0],
+                    opacity: [0, 0.8, 0],
                   }}
                   transition={{
-                    duration: 1.8,
+                    duration: 3,
                     delay: light.loadDelay + 0.4 + light.glowDelay,
                     repeat: Infinity,
                     ease: 'easeInOut',
@@ -122,23 +122,23 @@ const StringLights = () => {
                     width: '16px',
                     height: '20px',
                     borderRadius: '50% 50% 50% 50% / 40% 40% 60% 60%',
-                    boxShadow: `0 0 8px 2px ${light.color}`,
+                    boxShadow: `0 0 6px 2px ${light.color}`,
                   }}
                   initial={{
                     backgroundColor: light.color,
-                    opacity: 0.4,
+                    opacity: 0.5,
                   }}
                   animate={{
-                    backgroundColor: [light.color, '#fffef0', light.color],
-                    opacity: [0.4, 1, 0.4],
+                    backgroundColor: [light.color, '#fff8e8', light.color],
+                    opacity: [0.5, 1, 0.5],
                     boxShadow: [
                       `0 0 4px 1px ${light.color}`,
-                      `0 0 20px 8px ${light.color}`,
+                      `0 0 12px 5px ${light.color}`,
                       `0 0 4px 1px ${light.color}`,
                     ],
                   }}
                   transition={{
-                    duration: 1.8,
+                    duration: 3,
                     delay: light.loadDelay + 0.4 + light.glowDelay,
                     repeat: Infinity,
                     ease: 'easeInOut',
@@ -148,16 +148,16 @@ const StringLights = () => {
                   <motion.div
                     className="absolute rounded-full bg-white"
                     style={{
-                      width: '6px',
-                      height: '7px',
+                      width: '5px',
+                      height: '6px',
                       top: '3px',
                       left: '3px',
                     }}
                     animate={{
-                      opacity: [0.3, 1, 0.3],
+                      opacity: [0.4, 0.9, 0.4],
                     }}
                     transition={{
-                      duration: 1.8,
+                      duration: 2,
                       delay: light.loadDelay + 0.4 + light.glowDelay,
                       repeat: Infinity,
                       ease: 'easeInOut',
