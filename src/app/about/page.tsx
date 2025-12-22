@@ -220,13 +220,11 @@ export default function AboutPage() {
         >
           <div className="bg-gradient-to-r from-purple to-dustyRose rounded-xl md:rounded-2xl p-5 md:p-6 lg:p-8 text-white">
             <h2 className="font-heading text-xl sm:text-2xl md:text-3xl mb-3 md:mb-4">Teaching Philosophy</h2>
+            <p className="text-white/90 leading-relaxed text-sm md:text-base mb-4">
+              My teaching philosophy is rooted in the belief that meaningful learning happens when students feel safe, curious, and genuinely engaged. I design learning experiences that blend structure with creativity, allowing students to explore big ideas through hands-on, inquiry-driven work. Through project-based learning, authentic assessments, and intentional reflection, students build both academic skills and confidence in their own thinking.
+            </p>
             <p className="text-white/90 leading-relaxed text-sm md:text-base">
-              My teaching philosophy centers on creating a warm, inclusive environment where every
-              child feels safe to take risks and grow. I believe in hands-on, engaging learning
-              experiences that spark curiosity and foster a lifelong love of discovery. Through
-              project-based learning and authentic assessments, I empower students to take
-              ownership of their education. Every student has unique gifts, and my goal is to
-              help each one shine!
+              I believe classrooms should be places where curiosity is honored, mistakes are celebrated as part of growth, and every child is empowered to take ownership of their learning. Each student brings unique strengths and perspectives, and my role as an educator is to design environments where those gifts can emerge, develop, and shine.
             </p>
           </div>
         </motion.div>
