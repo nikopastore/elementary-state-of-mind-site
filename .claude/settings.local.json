@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where:*)",
+      "Bash(convert:*)",
+      "Bash(npm install:*)",
+      "Bash(node scripts/convert-heic.js:*)",
+      "Bash(del \"public\\\\gallery\\\\page-*.png\")"
+    ]
+  }
+}

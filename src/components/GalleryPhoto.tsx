@@ -25,7 +25,7 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
       transition={{ duration: 0.4, delay: index * 0.05 }}
       className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300"
     >
-      <Link href={product.tptUrl} target="_blank" rel="noopener noreferrer">
+      <Link href={`/shop#${product.id}`}>
         <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
           <Image
             src={photo.image}

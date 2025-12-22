@@ -36,6 +36,7 @@ const getCategoryLabel = (category: string) => {
 };
 
 export default function ProductCard({
+  id,
   name,
   description,
   price,
@@ -55,9 +56,10 @@ export default function ProductCard({
 
   return (
     <motion.div
+      id={id}
       whileHover={{ scale: 1.02, y: -4 }}
       transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-      className="bg-white rounded-2xl md:rounded-3xl shadow-soft overflow-hidden w-full max-w-[340px] lg:max-w-sm font-body hover:shadow-glow transition-shadow"
+      className="bg-white rounded-2xl md:rounded-3xl shadow-soft overflow-hidden w-full max-w-[340px] lg:max-w-sm font-body hover:shadow-glow transition-shadow scroll-mt-24"
     >
       {/* Product image */}
       <div className="relative h-44 sm:h-48 md:h-52 w-full overflow-hidden bg-lavender/30">
