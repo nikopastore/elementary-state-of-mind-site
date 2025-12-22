@@ -1,5 +1,6 @@
 import { posts } from '@/lib/posts';
 import BlogCard from '@/components/BlogCard';
+import EmailSubscribe from '@/components/EmailSubscribe';
 
 export default function BlogPage() {
   return (
@@ -11,6 +12,11 @@ export default function BlogPage() {
         <p className="text-base sm:text-lg md:text-xl text-center text-gray mb-8 md:mb-12 max-w-2xl mx-auto">
           Teaching tips, classroom stories, and educator insights
         </p>
+
+        {/* Email Subscribe */}
+        <div className="max-w-2xl mx-auto mb-10 md:mb-14">
+          <EmailSubscribe />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
           {posts.map((post) => (

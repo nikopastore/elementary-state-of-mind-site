@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { posts } from '@/lib/posts';
 import { Calendar, Tag, ArrowLeft } from 'lucide-react';
+import EmailSubscribe from '@/components/EmailSubscribe';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -126,7 +127,7 @@ function renderContent(content: string) {
       );
     } else if (/^\d+\.\s/.test(trimmed)) {
       // Numbered list item
-      flushList();
+      if (inList) flushList();
       inNumberedList = true;
       numberedItems.push(trimmed.replace(/^\d+\.\s/, ''));
     } else if (trimmed.startsWith('- ')) {
@@ -227,6 +228,11 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             )}
           </article>
+
+          {/* Email Subscribe */}
+          <div className="mt-8 md:mt-10">
+            <EmailSubscribe />
+          </div>
         </div>
       </div>
     </div>
