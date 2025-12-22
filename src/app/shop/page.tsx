@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { products } from '@/lib/products';
 import ProductCard from '@/components/ProductCard';
 
@@ -6,8 +7,20 @@ export default function ShopPage() {
   const allProducts = products.filter((p) => !p.featured);
 
   return (
-    <div className="bg-gradient-to-b from-lavender to-white min-h-screen py-10 md:py-14 lg:py-16">
-      <div className="container mx-auto px-4 sm:px-6">
+    <div className="bg-gradient-to-b from-lavender to-white min-h-screen">
+      {/* Banner Image */}
+      <div className="w-full relative h-48 sm:h-64 md:h-80 lg:h-96 overflow-hidden">
+        <Image
+          src="/shop-banner.webp"
+          alt="Elementary State of Mind Shop"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-lavender" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 py-10 md:py-14 lg:py-16">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-center text-black mb-3 md:mb-4">
           The Shop
         </h1>
