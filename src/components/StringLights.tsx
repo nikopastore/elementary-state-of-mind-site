@@ -69,59 +69,98 @@ const StringLights = () => {
 
               {/* Bulb with glow */}
               <div className="relative">
-                {/* Outer glow - pulsing */}
+                {/* Large outer glow - very visible */}
                 <motion.div
                   className="absolute rounded-full"
                   style={{
-                    width: '24px',
-                    height: '24px',
+                    width: '40px',
+                    height: '40px',
                     backgroundColor: light.color,
-                    top: '-4px',
-                    left: '-4px',
-                    filter: 'blur(8px)',
+                    top: '-10px',
+                    left: '-12px',
+                    filter: 'blur(12px)',
                   }}
                   initial={{ opacity: 0 }}
                   animate={{
-                    opacity: [0.2, 0.8, 0.2],
-                    scale: [0.8, 1.2, 0.8],
+                    opacity: [0.1, 0.9, 0.1],
+                    scale: [0.6, 1.3, 0.6],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 1.8,
                     delay: light.loadDelay + 0.4 + light.glowDelay,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
                 />
 
-                {/* Bulb body - pulsing brightness */}
+                {/* Inner bright glow - white/yellow when lit */}
+                <motion.div
+                  className="absolute rounded-full"
+                  style={{
+                    width: '20px',
+                    height: '24px',
+                    background: 'radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,200,0.6) 40%, transparent 70%)',
+                    top: '-2px',
+                    left: '-2px',
+                  }}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 1.8,
+                    delay: light.loadDelay + 0.4 + light.glowDelay,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                />
+
+                {/* Bulb body - changes from dim to bright */}
                 <motion.div
                   className="relative"
                   style={{
                     width: '16px',
                     height: '20px',
-                    backgroundColor: light.color,
                     borderRadius: '50% 50% 50% 50% / 40% 40% 60% 60%',
+                    boxShadow: `0 0 8px 2px ${light.color}`,
                   }}
-                  initial={{ opacity: 0.3 }}
+                  initial={{
+                    backgroundColor: light.color,
+                    opacity: 0.4,
+                  }}
                   animate={{
-                    opacity: [0.5, 1, 0.5],
+                    backgroundColor: [light.color, '#fffef0', light.color],
+                    opacity: [0.4, 1, 0.4],
+                    boxShadow: [
+                      `0 0 4px 1px ${light.color}`,
+                      `0 0 20px 8px ${light.color}`,
+                      `0 0 4px 1px ${light.color}`,
+                    ],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 1.8,
                     delay: light.loadDelay + 0.4 + light.glowDelay,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
                 >
-                  {/* Highlight */}
-                  <div
+                  {/* Highlight - brighter when lit */}
+                  <motion.div
                     className="absolute rounded-full bg-white"
                     style={{
-                      width: '5px',
-                      height: '6px',
-                      top: '4px',
+                      width: '6px',
+                      height: '7px',
+                      top: '3px',
                       left: '3px',
-                      opacity: 0.6,
+                    }}
+                    animate={{
+                      opacity: [0.3, 1, 0.3],
+                    }}
+                    transition={{
+                      duration: 1.8,
+                      delay: light.loadDelay + 0.4 + light.glowDelay,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
                     }}
                   />
                 </motion.div>
