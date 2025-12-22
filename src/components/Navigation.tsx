@@ -10,6 +10,7 @@ import StringLights from './StringLights';
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'The Shop' },
+  { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'Meet the Teacher' },
   { href: '/gallery', label: 'Gallery' },
 ];

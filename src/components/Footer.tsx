@@ -32,6 +32,7 @@ const Footer = () => {
           </div>
           <nav className="flex space-x-8">
             <Link href="/shop" className="hover:text-softPink transition-colors">Shop</Link>
+            <Link href="/blog" className="hover:text-softPink transition-colors">Blog</Link>
             <Link href="/about" className="hover:text-softPink transition-colors">About</Link>
             <Link href="/gallery" className="hover:text-softPink transition-colors">Gallery</Link>
           </nav>
