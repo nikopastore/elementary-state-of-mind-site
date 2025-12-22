@@ -7,6 +7,7 @@ export type Product = {
   image: string;
   tptUrl: string;
   isFree?: boolean;
+  featured?: boolean;
 };
 
 // TPT Store URL
@@ -21,6 +22,7 @@ export const products: Product[] = [
     category: 'bundle',
     image: '/products/space-case-complete.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-Complete-Novel-Study-PBL-15118510',
+    featured: true,
   },
   {
     id: 'space-case-mock-trial',
@@ -48,6 +50,7 @@ export const products: Product[] = [
     category: 'worksheet',
     image: '/products/oreo-opinion-writing.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/OREO-Opinion-Writing-14923127',
+    featured: true,
   },
   {
     id: 'kpop-demonhunters',
@@ -138,6 +141,7 @@ export const products: Product[] = [
     category: 'bundle',
     image: '/products/67th-day.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/67th-Day-of-School-Activities-14863736',
+    featured: true,
   },
   {
     id: 'opinion-tree-map',
@@ -211,6 +215,7 @@ export const products: Product[] = [
     image: '/products/letter-to-teacher.jpg',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Letter-to-my-Teacher-5546447',
     isFree: true,
+    featured: true,
   },
   {
     id: 'goal-setting-bingo',

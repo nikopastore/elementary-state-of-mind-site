@@ -46,7 +46,7 @@ const socials = [
     platform: 'Spotify',
     icon: <SpotifyIcon className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-white" />,
     href: 'https://open.spotify.com/playlist/5FoJvH0raHXq4MS3tUJEAw?si=7Ww2bw5_Qr6VThmWRFWEmw&nd=1&dlsi=5b61906af5a44045',
-    className: 'bg-gradient-to-br from-green-500 to-green-700',
+    className: 'bg-gradient-to-br from-dustyRose to-purple',
   },
 ];
 
