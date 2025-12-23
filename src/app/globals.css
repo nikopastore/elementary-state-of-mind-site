@@ -47,3 +47,43 @@ html {
   background: #a07cc3;
   color: white;
 }
+
+/* Ensure consistent scaling across all viewports */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Fluid container that adapts to viewport */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Prevent content from being too wide on large screens or too cramped on laptops */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .container {
+    max-width: 95%;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1441px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+/* Ensure images and media scale properly */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent horizontal overflow */
+body {
+  overflow-x: hidden;
+}

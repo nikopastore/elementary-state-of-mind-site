@@ -13,7 +13,7 @@ const SpotifyIcon = ({ className }: { className?: string }) => (
 
 const Footer = () => {
   return (
-    <footer className="bg-purple text-white font-body rounded-t-3xl px-8 py-12 mt-auto">
+    <footer className="bg-purple text-white font-body rounded-t-3xl px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 mt-auto">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
           <div className="mb-8 md:mb-0">
@@ -30,7 +30,7 @@ const Footer = () => {
               </span>
             </Link>
           </div>
-          <nav className="flex space-x-8">
+          <nav className="flex flex-wrap justify-center md:justify-end gap-4 sm:gap-6 lg:gap-8">
             <Link href="/shop" className="hover:text-softPink transition-colors">Shop</Link>
             <Link href="/blog" className="hover:text-softPink transition-colors">Blog</Link>
             <Link href="/about" className="hover:text-softPink transition-colors">About</Link>

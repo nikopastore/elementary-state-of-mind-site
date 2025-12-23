@@ -70,7 +70,7 @@ const Hero = () => {
             alt="Elementary State of Mind"
             width={320}
             height={320}
-            className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-64 lg:h-64 xl:w-80 xl:h-80 rounded-full object-cover border-4 border-white shadow-glow"
+            className="relative w-52 h-52 sm:w-60 sm:h-60 md:w-72 md:h-72 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full object-cover border-4 border-white shadow-glow"
             priority
           />
         </motion.div>

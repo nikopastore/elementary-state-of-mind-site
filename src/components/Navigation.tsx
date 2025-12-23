@@ -64,7 +64,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className="hidden items-center gap-4 lg:gap-6 xl:gap-8 md:flex">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
