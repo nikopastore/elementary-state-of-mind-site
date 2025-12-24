@@ -7,11 +7,11 @@ import SocialBento from './SocialBento';
 
 const Hero = () => {
   return (
-    <section className="relative w-full bg-gradient-to-b from-lavender to-white py-12 md:py-16 lg:py-20 overflow-hidden">
-      {/* Decorative elements - smaller on laptops */}
-      <div className="absolute top-10 left-10 w-24 md:w-32 h-24 md:h-32 bg-softPink/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-10 right-10 w-32 md:w-40 h-32 md:h-40 bg-purple/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/4 w-20 md:w-24 h-20 md:h-24 bg-peach/30 rounded-full blur-2xl" />
+    <section className="relative w-full bg-gradient-to-b from-lavender to-white py-8 md:py-12 lg:py-16">
+      {/* Decorative elements - contained within section bounds */}
+      <div className="absolute top-10 left-10 w-24 md:w-32 h-24 md:h-32 bg-softPink/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-32 md:w-40 h-32 md:h-40 bg-purple/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 w-20 md:w-24 h-20 md:h-24 bg-peach/30 rounded-full blur-2xl pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 relative z-10">
         {/* Left Side: Welcome Text and CTAs */}
@@ -81,7 +81,7 @@ const Hero = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="mt-10 md:mt-14 lg:mt-16 container mx-auto px-4"
+        className="mt-6 md:mt-10 lg:mt-14 container mx-auto px-4 pb-4"
       >
         <SocialBento />
       </motion.div>

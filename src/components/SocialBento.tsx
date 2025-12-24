@@ -62,13 +62,14 @@ const containerVariants: Variants = {
 };
 
 const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: { y: 10, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
+      stiffness: 120,
+      damping: 12,
     },
   },
 };
@@ -79,7 +80,7 @@ const SocialBento = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 md:gap-4 p-2 sm:p-4 max-w-xs sm:max-w-xl md:max-w-2xl mx-auto"
+      className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 md:gap-4 p-2 sm:p-4 pb-4 max-w-xs sm:max-w-xl md:max-w-2xl mx-auto"
     >
       {socials.map((social) => (
         <motion.a
