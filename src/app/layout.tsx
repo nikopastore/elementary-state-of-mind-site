@@ -3,6 +3,7 @@ import { DM_Serif_Display, Quicksand } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-heading",
@@ -78,6 +79,7 @@ export default function RootLayout({
         <main className="flex-grow">
           {children}
         </main>
+        <TestimonialsCarousel />
         <Footer />
       </body>
     </html>
