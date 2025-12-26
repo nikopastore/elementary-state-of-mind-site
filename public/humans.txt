@@ -1,0 +1,29 @@
+/* TEAM */
+Creator: Elementary State of Mind
+Role: Educator & Resource Creator
+Location: Phoenix, AZ, USA
+Twitter: @elementarystateofmind
+Instagram: @elementarystateofmind
+
+/* EDUCATION */
+Ed.D. in Educational Leadership - University of Southern California (In Progress)
+M.Ed. in Global Education - Arizona State University
+B.A. in Elementary Education - Arizona State University
+
+/* EXPERIENCE */
+Transformational Teacher Leader - ASU Preparatory Academy
+Former 5th/6th Grade Teacher - Innovations Academy, San Diego
+Former 4th-6th Grade Teacher - Kyrene De Las Manitas, Tempe
+
+/* SITE */
+Last Updated: 2025-12-26
+Language: English
+Standards: HTML5, CSS3, JavaScript ES6+
+Framework: Next.js 16, React 19, Tailwind CSS
+Hosting: Vercel
+Analytics: Privacy-focused
+
+/* THANKS */
+Teachers Pay Teachers Community
+Fellow Educators & Supporters
+The Amazing Students Who Inspire These Resources

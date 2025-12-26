@@ -1,0 +1,53 @@
+{
+  "name": "Elementary State of Mind",
+  "short_name": "ESOM",
+  "description": "Beautiful, engaging digital resources for elementary teachers. Lesson plans, worksheets, novel studies, and classroom decor.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#E6E0F3",
+  "theme_color": "#9B7EBD",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "label": "Elementary State of Mind Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Resources",
+      "url": "/shop",
+      "description": "Browse teaching resources"
+    },
+    {
+      "name": "Read Blog",
+      "url": "/blog",
+      "description": "Teaching tips and insights"
+    },
+    {
+      "name": "View Gallery",
+      "url": "/gallery",
+      "description": "See resources in action"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

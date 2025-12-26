@@ -1,0 +1,13 @@
+# Elementary State of Mind Security Policy
+# https://securitytxt.org/
+
+Contact: https://elementary-state-of-mind.com/about
+Preferred-Languages: en
+Canonical: https://elementary-state-of-mind.com/.well-known/security.txt
+Expires: 2026-12-31T23:59:59.000Z
+
+# This is an educational resource website. We take the security
+# of our visitors seriously. If you discover a security issue,
+# please contact us through the About page.
+
+# Thank you for helping keep our community safe!

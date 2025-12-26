@@ -47,5 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  // Product routes (linking to shop page with anchor)
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${baseUrl}/shop#${product.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: product.featured ? 0.85 : 0.75,
+  }));
+
+  return [...staticRoutes, ...blogRoutes, ...productRoutes];
 }

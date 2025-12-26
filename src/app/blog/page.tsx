@@ -21,6 +21,12 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | Elementary State of Mind",
+    description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
+    images: ["https://elementary-state-of-mind.com/logo.png"],
+  },
   alternates: {
     canonical: "https://elementary-state-of-mind.com/blog",
   },

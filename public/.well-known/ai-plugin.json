@@ -1,0 +1,17 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Elementary State of Mind",
+  "name_for_model": "elementary_state_of_mind",
+  "description_for_human": "Beautiful, engaging digital teaching resources for elementary educators. Lesson plans, worksheets, novel studies, and classroom decor for grades 3-8.",
+  "description_for_model": "Elementary State of Mind is an educational resource platform providing digital teaching materials for elementary and middle school educators (grades 3-8). The platform offers lesson plans, worksheets, graphic organizers, novel studies, mock trial activities, writing resources, and classroom decor. All products are available through Teachers Pay Teachers with instant digital download. Key products include: Space Case Mock Trial and Novel Study bundles, OREO Opinion Writing resources, Any Text Debate Prep Tool, and various ELA anchor charts. The creator is an experienced elementary teacher pursuing a Doctorate in Educational Leadership from USC. Products are designed to be low-prep, high-engagement, and aligned with Common Core standards.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://elementary-state-of-mind.com/llms-full.txt"
+  },
+  "logo_url": "https://elementary-state-of-mind.com/logo.png",
+  "contact_email": "contact@elementary-state-of-mind.com",
+  "legal_info_url": "https://elementary-state-of-mind.com/about"
+}
