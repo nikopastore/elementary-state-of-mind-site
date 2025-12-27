@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
-import AboutPageClient, { faqs } from './AboutPageClient';
+import AboutPageClient from './AboutPageClient';
+import { faqs } from '@/lib/faqs';
 
 export const metadata: Metadata = {
   title: "Meet the Teacher | Elementary State of Mind",
