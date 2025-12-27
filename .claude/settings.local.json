@@ -4,7 +4,10 @@
       "Bash(npm run build:*)",
       "Bash(npx next build)",
       "Bash(npx tsc:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nFix build error: move FAQs to separate lib file\n\n- Moved faqs array from client component to src/lib/faqs.ts\n- Fixed export issue causing \"faqs.map is not a function\" error\n- Client components can''t export data for server-side rendering\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)",
+      "Bash(npx vercel list --token=$VERCEL_TOKEN)"
     ],
     "deny": [],
     "ask": []
