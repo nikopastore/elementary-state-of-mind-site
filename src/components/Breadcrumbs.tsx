@@ -43,7 +43,7 @@ export default function Breadcrumbs() {
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      "item": `https://elementary-state-of-mind.com${crumb.href === '/' ? '' : crumb.href}`,
+      "item": `https://elementarystateofmind.com${crumb.href === '/' ? '' : crumb.href}`,
     })),
   };
 

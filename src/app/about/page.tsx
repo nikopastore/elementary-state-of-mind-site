@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     title: "Meet the Teacher | Elementary State of Mind",
     description: "Meet the educator behind Elementary State of Mind – a dedicated elementary teacher passionate about innovative, student-centered learning.",
     type: "profile",
-    url: "https://elementary-state-of-mind.com/about",
+    url: "https://elementarystateofmind.com/about",
     images: [
       {
-        url: "https://elementary-state-of-mind.com/profile.png",
+        url: "https://elementarystateofmind.com/profile.png",
         width: 800,
         height: 800,
         alt: "Elementary State of Mind Teacher",
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     card: "summary",
     title: "Meet the Teacher | Elementary State of Mind",
     description: "Meet the educator behind Elementary State of Mind – passionate about innovative, student-centered learning.",
-    images: ["https://elementary-state-of-mind.com/profile.png"],
+    images: ["https://elementarystateofmind.com/profile.png"],
   },
   alternates: {
-    canonical: "https://elementary-state-of-mind.com/about",
+    canonical: "https://elementarystateofmind.com/about",
   },
 };
 
@@ -53,7 +53,7 @@ export default function AboutPage() {
       },
     ],
     description: "Elementary teacher and educational leader specializing in innovative, student-centered learning experiences.",
-    url: "https://elementary-state-of-mind.com/about",
+    url: "https://elementarystateofmind.com/about",
     sameAs: [
       "https://www.teacherspayteachers.com/store/elementary-state-of-mind",
       "https://www.instagram.com/elementarystateofmind/",

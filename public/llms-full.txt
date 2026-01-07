@@ -252,7 +252,7 @@ Resources are designed based on these principles:
 
 ## Technical Information
 
-**Website:** https://elementary-state-of-mind.com
+**Website:** https://elementarystateofmind.com
 **Primary Store:** Teachers Pay Teachers
 **Store URL:** https://www.teacherspayteachers.com/store/elementary-state-of-mind
 **Product Format:** Digital downloads (PDF, Google Slides compatible)

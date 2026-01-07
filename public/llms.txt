@@ -8,12 +8,12 @@ Elementary State of Mind is an education resource platform created by a dedicate
 
 ## Website
 
-- Homepage: https://elementary-state-of-mind.com
-- Shop: https://elementary-state-of-mind.com/shop
-- Blog: https://elementary-state-of-mind.com/blog
-- About: https://elementary-state-of-mind.com/about
-- Gallery: https://elementary-state-of-mind.com/gallery
-- Full documentation: https://elementary-state-of-mind.com/llms-full.txt
+- Homepage: https://elementarystateofmind.com
+- Shop: https://elementarystateofmind.com/shop
+- Blog: https://elementarystateofmind.com/blog
+- About: https://elementarystateofmind.com/about
+- Gallery: https://elementarystateofmind.com/gallery
+- Full documentation: https://elementarystateofmind.com/llms-full.txt
 
 ## What We Offer
 

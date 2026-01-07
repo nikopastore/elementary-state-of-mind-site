@@ -1,7 +1,7 @@
 import { posts } from '@/lib/posts';
 
 export async function GET() {
-  const baseUrl = 'https://elementary-state-of-mind.com';
+  const baseUrl = 'https://elementarystateofmind.com';
 
   const rssItems = posts
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -37,8 +37,8 @@ export async function GET() {
       <link>${baseUrl}</link>
     </image>
     <copyright>Copyright ${new Date().getFullYear()} Elementary State of Mind. All rights reserved.</copyright>
-    <managingEditor>contact@elementary-state-of-mind.com (Elementary State of Mind)</managingEditor>
-    <webMaster>contact@elementary-state-of-mind.com (Elementary State of Mind)</webMaster>
+    <managingEditor>contact@elementarystateofmind.com (Elementary State of Mind)</managingEditor>
+    <webMaster>contact@elementarystateofmind.com (Elementary State of Mind)</webMaster>
     <category>Education</category>
     <category>Teaching</category>
     <category>Elementary Education</category>

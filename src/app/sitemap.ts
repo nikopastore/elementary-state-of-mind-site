@@ -3,7 +3,7 @@ import { posts } from '@/lib/posts';
 import { products } from '@/lib/products';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://elementary-state-of-mind.com';
+  const baseUrl = 'https://elementarystateofmind.com';
 
   // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [

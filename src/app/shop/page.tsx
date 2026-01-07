@@ -10,10 +10,10 @@ export const metadata: Metadata = {
     title: "The Shop | Elementary State of Mind",
     description: "Beautiful, engaging digital resources for your classroom.",
     type: "website",
-    url: "https://elementary-state-of-mind.com/shop",
+    url: "https://elementarystateofmind.com/shop",
     images: [
       {
-        url: "https://elementary-state-of-mind.com/logo.png",
+        url: "https://elementarystateofmind.com/logo.png",
         width: 1200,
         height: 630,
         alt: "Elementary State of Mind",
@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Shop | Elementary State of Mind",
     description: "Beautiful, engaging digital resources for your classroom.",
-    images: ["https://elementary-state-of-mind.com/logo.png"],
+    images: ["https://elementarystateofmind.com/logo.png"],
   },
   alternates: {
-    canonical: "https://elementary-state-of-mind.com/shop",
+    canonical: "https://elementarystateofmind.com/shop",
   },
 };
 
@@ -42,7 +42,7 @@ function generateProductSchema(product: typeof products[0]) {
     "@type": "Product",
     name: product.name,
     description: product.description,
-    image: `https://elementary-state-of-mind.com${product.image}`,
+    image: `https://elementarystateofmind.com${product.image}`,
     url: product.tptUrl,
     brand: {
       "@type": "Brand",
@@ -93,11 +93,11 @@ function generateOfferCatalogSchema() {
     "@type": "OfferCatalog",
     name: "Elementary State of Mind Teaching Resources",
     description: "Complete catalog of digital teaching resources for elementary educators",
-    url: "https://elementary-state-of-mind.com/shop",
+    url: "https://elementarystateofmind.com/shop",
     publisher: {
       "@type": "Organization",
       name: "Elementary State of Mind",
-      url: "https://elementary-state-of-mind.com",
+      url: "https://elementarystateofmind.com",
     },
     numberOfItems: products.length,
     itemListOrder: "https://schema.org/ItemListOrderDescending",
@@ -114,7 +114,7 @@ export default function ShopPage() {
     "@type": "ItemList",
     name: "Elementary State of Mind Teaching Resources",
     description: "Digital teaching resources for elementary educators including lesson plans, worksheets, and classroom decor.",
-    url: "https://elementary-state-of-mind.com/shop",
+    url: "https://elementarystateofmind.com/shop",
     numberOfItems: products.length,
     itemListElement: products.map((product, index) => ({
       "@type": "ListItem",
@@ -138,8 +138,8 @@ export default function ShopPage() {
     "@type": "Store",
     name: "Elementary State of Mind Shop",
     description: "Digital teaching resources for elementary educators",
-    url: "https://elementary-state-of-mind.com/shop",
-    image: "https://elementary-state-of-mind.com/logo.png",
+    url: "https://elementarystateofmind.com/shop",
+    image: "https://elementarystateofmind.com/logo.png",
     priceRange: "$0 - $15",
     aggregateRating: {
       "@type": "AggregateRating",

@@ -11,10 +11,10 @@ export const metadata: Metadata = {
     title: "Blog | Elementary State of Mind",
     description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
     type: "website",
-    url: "https://elementary-state-of-mind.com/blog",
+    url: "https://elementarystateofmind.com/blog",
     images: [
       {
-        url: "https://elementary-state-of-mind.com/logo.png",
+        url: "https://elementarystateofmind.com/logo.png",
         width: 1200,
         height: 630,
         alt: "Elementary State of Mind",
@@ -25,10 +25,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Blog | Elementary State of Mind",
     description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
-    images: ["https://elementary-state-of-mind.com/logo.png"],
+    images: ["https://elementarystateofmind.com/logo.png"],
   },
   alternates: {
-    canonical: "https://elementary-state-of-mind.com/blog",
+    canonical: "https://elementarystateofmind.com/blog",
   },
 };
 
