@@ -22,14 +22,25 @@ const quicksand = Quicksand({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://elementarystateofmind.com"),
-  title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
-  description: "Beautiful, engaging digital resources for elementary teachers. Lesson plans, worksheets, classroom decor, and more!",
+  title: {
+    default: "Elementary State of Mind | Teacher Resources",
+    template: "%s | Elementary State of Mind",
+  },
+  description: "Engaging digital resources for elementary teachers — lesson plans, novel studies, anchor charts & classroom decor. Shop standards-aligned ELA materials on Teachers Pay Teachers.",
   keywords: ["teacher resources", "elementary education", "digital downloads", "lesson plans", "classroom decor"],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://elementarystateofmind.com",
     siteName: "Elementary State of Mind",
+    images: [
+      {
+        url: "https://elementarystateofmind.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Elementary State of Mind - Teacher Resources",
+      },
+    ],
   },
   robots: {
     index: true,
