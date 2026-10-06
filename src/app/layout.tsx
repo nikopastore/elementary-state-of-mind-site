@@ -21,7 +21,7 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://elementarystateofmind.com"),
+  metadataBase: new URL("https://www.elementarystateofmind.com"),
   title: {
     default: "Elementary State of Mind | Teacher Resources",
     template: "%s | Elementary State of Mind",
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://elementarystateofmind.com",
+    url: "https://www.elementarystateofmind.com",
     siteName: "Elementary State of Mind",
     images: [
       {
-        url: "https://elementarystateofmind.com/og-image.png",
+        url: "https://www.elementarystateofmind.com/logo.png",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "Elementary State of Mind - Teacher Resources",
       },
     ],
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://elementarystateofmind.com",
+    canonical: "https://www.elementarystateofmind.com",
   },
 };
 
@@ -68,8 +68,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Elementary State of Mind",
-    url: "https://elementarystateofmind.com",
-    logo: "https://elementarystateofmind.com/logo.png",
+    url: "https://www.elementarystateofmind.com",
+    logo: "https://www.elementarystateofmind.com/logo.png",
     description: "Beautiful, engaging digital resources for elementary teachers. Lesson plans, worksheets, novel studies, and classroom decor for grades 3-8.",
     foundingDate: "2020",
     sameAs: [
@@ -82,7 +82,7 @@ export default function RootLayout({
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
-      url: "https://elementarystateofmind.com",
+      url: "https://www.elementarystateofmind.com",
     },
     aggregateRating: {
       "@type": "AggregateRating",
@@ -99,7 +99,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Elementary State of Mind",
-    url: "https://elementarystateofmind.com",
+    url: "https://www.elementarystateofmind.com",
     description: "Digital teaching resources for elementary educators",
     publisher: {
       "@type": "Organization",
@@ -112,7 +112,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Elementary State of Mind",
-    url: "https://elementarystateofmind.com",
+    url: "https://www.elementarystateofmind.com",
     review: testimonials.map((t) => ({
       "@type": "Review",
       author: {
@@ -142,7 +142,7 @@ export default function RootLayout({
       "@type": "SpeakableSpecification",
       cssSelector: ["h1", "h2", ".description"],
     },
-    url: "https://elementarystateofmind.com",
+    url: "https://www.elementarystateofmind.com",
   };
 
   return (

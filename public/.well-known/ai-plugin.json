@@ -9,9 +9,9 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://elementarystateofmind.com/llms-full.txt"
+    "url": "https://www.elementarystateofmind.com/llms-full.txt"
   },
-  "logo_url": "https://elementarystateofmind.com/logo.png",
+  "logo_url": "https://www.elementarystateofmind.com/logo.png",
   "contact_email": "contact@elementarystateofmind.com",
-  "legal_info_url": "https://elementarystateofmind.com/about"
+  "legal_info_url": "https://www.elementarystateofmind.com/about"
 }

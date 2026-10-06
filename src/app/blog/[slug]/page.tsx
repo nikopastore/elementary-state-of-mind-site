@@ -175,7 +175,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const canonicalUrl = `https://elementarystateofmind.com/blog/${post.slug}`;
+  const canonicalUrl = `https://www.elementarystateofmind.com/blog/${post.slug}`;
 
   return {
     title: `${post.title} | Elementary State of Mind Blog`,
@@ -196,17 +196,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: post.images && post.images.length > 0
         ? [
             {
-              url: `https://elementarystateofmind.com${post.images[0]}`,
+              url: `https://www.elementarystateofmind.com${post.images[0]}`,
               width: 1200,
-              height: 630,
+              height: 1200,
               alt: post.title,
             },
           ]
         : [
             {
-              url: "https://elementarystateofmind.com/logo.png",
+              url: "https://www.elementarystateofmind.com/logo.png",
               width: 1200,
-              height: 630,
+              height: 1200,
               alt: "Elementary State of Mind",
             },
           ],
@@ -216,8 +216,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: post.title,
       description: post.excerpt,
       images: post.images && post.images.length > 0
-        ? [`https://elementarystateofmind.com${post.images[0]}`]
-        : ["https://elementarystateofmind.com/logo.png"],
+        ? [`https://www.elementarystateofmind.com${post.images[0]}`]
+        : ["https://www.elementarystateofmind.com/logo.png"],
     },
     alternates: {
       canonical: canonicalUrl,
@@ -240,21 +240,21 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     image: post.images && post.images.length > 0
-      ? `https://elementarystateofmind.com${post.images[0]}`
-      : "https://elementarystateofmind.com/logo.png",
+      ? `https://www.elementarystateofmind.com${post.images[0]}`
+      : "https://www.elementarystateofmind.com/logo.png",
     datePublished: post.date,
     dateModified: post.date,
     author: {
       "@type": "Person",
       name: "Elementary State of Mind",
-      url: "https://elementarystateofmind.com/about",
+      url: "https://www.elementarystateofmind.com/about",
     },
     publisher: {
       "@type": "Organization",
       name: "Elementary State of Mind",
       logo: {
         "@type": "ImageObject",
-        url: "https://elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/logo.png",
       },
     },
   };

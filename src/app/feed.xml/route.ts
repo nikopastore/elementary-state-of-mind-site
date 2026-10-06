@@ -1,7 +1,7 @@
 import { posts } from '@/lib/posts';
 
 export async function GET() {
-  const baseUrl = 'https://elementarystateofmind.com';
+  const baseUrl = 'https://www.elementarystateofmind.com';
 
   const rssItems = posts
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

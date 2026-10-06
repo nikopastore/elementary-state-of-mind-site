@@ -17,12 +17,12 @@ export const metadata: Metadata = {
     title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
     description: "Beautiful, engaging digital resources for elementary teachers. Shop lesson plans, novel studies, anchor charts, and classroom decor.",
     type: "website",
-    url: "https://elementarystateofmind.com",
+    url: "https://www.elementarystateofmind.com",
     images: [
       {
-        url: "https://elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/logo.png",
         width: 1200,
-        height: 630,
+        height: 1200,
         alt: "Elementary State of Mind Logo",
       },
     ],
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
     description: "Beautiful, engaging digital resources for elementary teachers.",
-    images: ["https://elementarystateofmind.com/logo.png"],
+    images: ["https://www.elementarystateofmind.com/logo.png"],
   },
   alternates: {
-    canonical: "https://elementarystateofmind.com",
+    canonical: "https://www.elementarystateofmind.com",
   },
 };
 */

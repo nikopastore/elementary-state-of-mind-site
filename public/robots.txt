@@ -93,4 +93,4 @@ Allow: /
 # /llms-full.txt - Comprehensive documentation
 
 # Sitemap
-Sitemap: https://elementarystateofmind.com/sitemap.xml
+Sitemap: https://www.elementarystateofmind.com/sitemap.xml

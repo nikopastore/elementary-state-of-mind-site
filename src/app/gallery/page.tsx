@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     title: "Products in Action | Elementary State of Mind",
     description: "See our teaching resources come to life in real elementary classrooms.",
     type: "website",
-    url: "https://elementarystateofmind.com/gallery",
+    url: "https://www.elementarystateofmind.com/gallery",
     images: [
       {
-        url: "https://elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/logo.png",
         width: 1200,
         height: 630,
         alt: "Elementary State of Mind Gallery",
@@ -23,10 +23,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Products in Action | Elementary State of Mind",
     description: "See our teaching resources come to life in real elementary classrooms.",
-    images: ["https://elementarystateofmind.com/logo.png"],
+    images: ["https://www.elementarystateofmind.com/logo.png"],
   },
   alternates: {
-    canonical: "https://elementarystateofmind.com/gallery",
+    canonical: "https://www.elementarystateofmind.com/gallery",
   },
 };
 
@@ -37,11 +37,11 @@ export default function GalleryPage() {
     "@type": "ImageGallery",
     name: "Products in Action - Elementary State of Mind",
     description: "Photos of Elementary State of Mind teaching resources being used in real elementary classrooms.",
-    url: "https://elementarystateofmind.com/gallery",
+    url: "https://www.elementarystateofmind.com/gallery",
     publisher: {
       "@type": "Organization",
       name: "Elementary State of Mind",
-      url: "https://elementarystateofmind.com",
+      url: "https://www.elementarystateofmind.com",
     },
   };
 
