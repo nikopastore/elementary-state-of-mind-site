@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     siteName: "Elementary State of Mind",
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/og-image.png",
         width: 1200,
-        height: 1200,
+        height: 630,
         alt: "Elementary State of Mind - Teacher Resources",
       },
     ],

@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     url: "https://www.elementarystateofmind.com/shop",
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/og-image.png",
         width: 1200,
-        height: 1200,
-        alt: "Elementary State of Mind",
+        height: 630,
+        alt: "Elementary State of Mind - The Shop",
       },
     ],
   },
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Shop | Elementary State of Mind",
     description: "Beautiful, engaging digital resources for your classroom.",
-    images: ["https://www.elementarystateofmind.com/logo.png"],
+    images: ["https://www.elementarystateofmind.com/og-image.png"],
   },
   alternates: {
     canonical: "https://www.elementarystateofmind.com/shop",
