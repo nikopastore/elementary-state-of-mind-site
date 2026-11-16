@@ -18,7 +18,7 @@ export const faqs: FAQ[] = [
   },
   {
     question: 'Do you offer any free resources?',
-    answer: 'Yes! I offer several free resources including the "Letter to My Teacher" activity, "2025 Goal Setting BINGO," and various graphic organizers. Visit the Shop page to filter by free resources.',
+    answer: 'Yes! I offer several free resources including the "Letter to My Teacher" activity and various graphic organizers. Visit the Shop page to find free resources.',
   },
   {
     question: 'Are your resources aligned with Common Core or state standards?',

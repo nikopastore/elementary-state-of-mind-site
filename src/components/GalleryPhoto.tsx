@@ -3,9 +3,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { GalleryPhoto as GalleryPhotoType } from '@/lib/galleryPhotos';
 import { products } from '@/lib/products';
+import { getTptUrl } from '@/lib/tpt';
 import { X } from 'lucide-react';
 
 interface GalleryPhotoProps {
@@ -101,8 +101,10 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Image - clicking navigates to product */}
-              <Link
-                href={`/shop#${product.id}`}
+              <a
+                href={getTptUrl(product, 'gallery', photo.id)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative block w-full h-auto cursor-pointer group"
                 onClick={() => setIsOpen(false)}
               >
@@ -122,7 +124,7 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
                     View Product
                   </span>
                 </div>
-              </Link>
+              </a>
 
               {/* Caption and product info */}
               <div className="mt-4 text-center text-white">

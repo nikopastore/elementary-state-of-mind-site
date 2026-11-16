@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/lib/products";
+import { getTptUrl } from "@/lib/tpt";
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>;
@@ -14,13 +15,6 @@ function getProduct(slug: string) {
   return products.find((product) => product.id === slug);
 }
 
-function getTptUrl(productUrl: string, slug: string) {
-  const url = new URL(productUrl);
-  url.searchParams.set("utm_source", "esom_site");
-  url.searchParams.set("utm_medium", "shop");
-  url.searchParams.set("utm_campaign", slug);
-  return url.toString();
-}
 
 function formatPrice(priceInCents: number, isFree?: boolean) {
   if (isFree || priceInCents === 0) return "Free";
@@ -73,7 +67,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (!product) notFound();
 
   const onSiteUrl = `${siteUrl}/shop/${product.id}`;
-  const tptUrl = getTptUrl(product.tptUrl, product.id);
+  const tptUrl = getTptUrl(product, "shop");
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",

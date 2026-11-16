@@ -1,15 +1,11 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CheckCircle, Download, ArrowLeft } from 'lucide-react';
 import { Suspense } from 'react';
 
 function SuccessContent() {
-  const searchParams = useSearchParams();
-  const productId = searchParams.get('product_id');
-
   return (
     <main className="min-h-screen bg-gradient-to-b from-lavender to-white flex items-center justify-center p-4">
       <motion.div

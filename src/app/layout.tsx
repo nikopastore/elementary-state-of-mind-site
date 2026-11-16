@@ -14,6 +14,8 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
 });
 
+const pinterestDomainVerify = process.env.NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY ?? "";
+
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
@@ -160,6 +162,7 @@ export default function RootLayout({
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#9B7EBD" />
+        <meta name="p:domain_verify" content={pinterestDomainVerify} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

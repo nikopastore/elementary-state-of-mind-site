@@ -10,11 +10,11 @@ import { ArrowRight } from "lucide-react";
 // Note: Metadata is defined in root layout for homepage
 /*
 export const metadata: Metadata = {
-  title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+  title: "Teacher Resources & Digital Downloads",
   description: "Beautiful, engaging digital resources for elementary teachers. Shop lesson plans, novel studies, anchor charts, and classroom decor on Teachers Pay Teachers.",
   keywords: ["teacher resources", "elementary education", "digital downloads", "lesson plans", "classroom decor", "ELA resources", "teaching tools"],
   openGraph: {
-    title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+    title: "Teacher Resources & Digital Downloads",
     description: "Beautiful, engaging digital resources for elementary teachers. Shop lesson plans, novel studies, anchor charts, and classroom decor.",
     type: "website",
     url: "https://www.elementarystateofmind.com",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Elementary State of Mind | Teacher Resources & Digital Downloads",
+    title: "Teacher Resources & Digital Downloads",
     description: "Beautiful, engaging digital resources for elementary teachers.",
     images: ["https://www.elementarystateofmind.com/logo.png"],
   },
