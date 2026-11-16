@@ -14,6 +14,8 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
 });
 
+const pinterestDomainVerify = process.env.NEXT_PUBLIC_PINTEREST_DOMAIN_VERIFY ?? "";
+
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   subsets: ["latin"],
@@ -35,9 +37,9 @@ export const metadata: Metadata = {
     siteName: "Elementary State of Mind",
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/og-image.png",
         width: 1200,
-        height: 1200,
+        height: 630,
         alt: "Elementary State of Mind - Teacher Resources",
       },
     ],
@@ -160,6 +162,7 @@ export default function RootLayout({
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#9B7EBD" />
+        <meta name="p:domain_verify" content={pinterestDomainVerify} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

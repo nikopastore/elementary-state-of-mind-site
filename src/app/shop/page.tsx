@@ -1,30 +1,31 @@
 import { Metadata } from 'next';
 import { products } from '@/lib/products';
+import { getTptUrl } from '@/lib/tpt';
 import ProductCard from '@/components/ProductCard';
 
 export const metadata: Metadata = {
-  title: "The Shop | Elementary State of Mind",
+  title: "The Shop",
   description: "Beautiful, engaging digital resources for your classroom. Shop lesson plans, novel studies, anchor charts, and classroom decor for elementary teachers.",
   keywords: ["teacher resources", "digital downloads", "lesson plans", "novel studies", "anchor charts", "classroom decor", "teacherspayteachers", "elementary teaching materials"],
   openGraph: {
-    title: "The Shop | Elementary State of Mind",
+    title: "The Shop",
     description: "Beautiful, engaging digital resources for your classroom.",
     type: "website",
     url: "https://www.elementarystateofmind.com/shop",
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: "https://www.elementarystateofmind.com/og-image.png",
         width: 1200,
-        height: 1200,
-        alt: "Elementary State of Mind",
+        height: 630,
+        alt: "Elementary State of Mind - The Shop",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "The Shop | Elementary State of Mind",
+    title: "The Shop",
     description: "Beautiful, engaging digital resources for your classroom.",
-    images: ["https://www.elementarystateofmind.com/logo.png"],
+    images: ["https://www.elementarystateofmind.com/og-image.png"],
   },
   alternates: {
     canonical: "https://www.elementarystateofmind.com/shop",
@@ -43,7 +44,7 @@ function generateProductSchema(product: typeof products[0]) {
     name: product.name,
     description: product.description,
     image: `https://www.elementarystateofmind.com${product.image}`,
-    url: product.tptUrl,
+    url: getTptUrl(product, 'shop'),
     brand: {
       "@type": "Brand",
       name: "Elementary State of Mind",
@@ -53,7 +54,7 @@ function generateProductSchema(product: typeof products[0]) {
       price: product.isFree ? "0.00" : (product.price / 100).toFixed(2),
       priceCurrency: "USD",
       availability: "https://schema.org/InStock",
-      url: product.tptUrl,
+      url: getTptUrl(product, 'shop'),
       seller: {
         "@type": "Organization",
         name: "Elementary State of Mind",

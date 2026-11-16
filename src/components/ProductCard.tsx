@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Tag, ExternalLink } from 'lucide-react';
 
@@ -11,7 +12,6 @@ type ProductCardProps = {
   price: number; // in cents
   category: string;
   image: string;
-  tptUrl: string;
   isFree?: boolean;
 };
 
@@ -42,15 +42,8 @@ export default function ProductCard({
   price,
   category,
   image,
-  tptUrl,
   isFree,
 }: ProductCardProps) {
-  const handleClick = () => {
-    if (tptUrl) {
-      window.open(tptUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
-
   const priceDisplay = formatPrice(price, isFree);
   const isProductFree = isFree || price === 0;
 
@@ -83,13 +76,13 @@ export default function ProductCard({
         </div>
         <h3 className="text-lg md:text-xl font-heading font-bold text-black mb-1.5 md:mb-2 line-clamp-2">{name}</h3>
         <p className="text-gray text-xs md:text-sm mb-4 md:mb-6 line-clamp-2">{description}</p>
-        <button
-          onClick={handleClick}
+        <Link
+          href={`/shop/${id}`}
           className={`w-full ${isProductFree ? 'bg-purple hover:bg-dustyRose' : 'bg-dustyRose hover:bg-purple'} text-white font-semibold py-2.5 md:py-3 rounded-xl md:rounded-2xl flex items-center justify-center gap-1.5 md:gap-2 transition-all shadow-md hover:shadow-lg text-sm md:text-base`}
         >
           <ExternalLink className="h-4 w-4 md:h-5 md:w-5" />
-          <span>{isProductFree ? 'Get Free on TPT' : 'View on TPT'}</span>
-        </button>
+          <span>View resource</span>
+        </Link>
       </div>
     </motion.div>
   );

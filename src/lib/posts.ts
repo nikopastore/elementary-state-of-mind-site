@@ -1,5 +1,6 @@
 export type Post = {
   slug: string;
+  productId: string;
   title: string;
   excerpt: string;
   content: string;
@@ -12,6 +13,7 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: 'opinion-writing-elementary-oreo-strategy',
+    productId: 'oreo-opinion-writing',
     title: 'Opinion Writing in Elementary: The OREO Strategy That Actually Works',
     excerpt: 'Teaching opinion writing to elementary students can feel overwhelming. The OREO method gives students a simple, memorable framework that builds confidence and clarity in their persuasive writing.',
     content: `
@@ -91,6 +93,7 @@ When students have the right tools, opinion writing transforms from frustrating 
   },
   {
     slug: 'informative-essay-graphic-organizer-guide',
+    productId: 'informative-essay-packet',
     title: 'Informative Essay Graphic Organizers: A Teacher\'s Guide to Better Student Writing',
     excerpt: 'The right graphic organizer can transform how students approach informative writing. Learn which organizers work best for different stages of the writing process.',
     content: `
@@ -155,6 +158,7 @@ Strong informative writing starts with strong planning.
   },
   {
     slug: 'narrative-writing-structure-tips',
+    productId: 'narrative-writing-packet',
     title: 'Teaching Narrative Writing: Structure Tips That Help Students Tell Better Stories',
     excerpt: 'Student narratives often fall flat because of weak structure, not weak ideas. These practical tips help elementary students organize their stories for maximum impact.',
     content: `
@@ -241,6 +245,7 @@ When students understand structure, their stories come alive.
   },
   {
     slug: 'debate-activities-middle-school',
+    productId: 'any-text-debate',
     title: 'Debate Activities for Middle School and Upper Elementary: Building Evidence-Based Arguments',
     excerpt: 'Classroom debates develop critical thinking, speaking skills, and the ability to use evidence effectively. Here\'s how to make debate work for grades 4-8.',
     content: `
@@ -322,6 +327,7 @@ When students learn to argue with evidence, they learn to think.
   },
   {
     slug: 'anchor-charts-ela-classroom',
+    productId: 'ela-anchor-charts',
     title: 'ELA Anchor Charts That Actually Get Used: Tips for Effective Classroom References',
     excerpt: 'Your anchor charts should be tools, not wallpaper. Learn how to create and use ELA anchor charts that students actually reference during independent work.',
     content: `
@@ -399,6 +405,7 @@ The best anchor chart is one that students actually use.
   },
   {
     slug: 'student-led-conferences-guide',
+    productId: 'slc-guide',
     title: 'Student-Led Conferences: A Complete Guide for Elementary Teachers',
     excerpt: 'Student-led conferences shift the spotlight from teacher to student, building ownership and reflection skills. Here\'s how to implement them successfully.',
     content: `
@@ -480,6 +487,7 @@ When students lead, everyone learns more.
   },
   {
     slug: 'teaching-fractions-visually',
+    productId: 'math-notes-fractions',
     title: 'Teaching Fractions Visually: Math Notes That Make Sense to Students',
     excerpt: 'When students can see fractions and decimals, they can understand them. Visual math notes create lasting conceptual understanding beyond rote procedures.',
     content: `
@@ -555,6 +563,7 @@ When students can see the math, they can do the math.
   },
   {
     slug: 'endangered-species-reading-activities',
+    productId: 'article-a-week',
     title: 'Endangered Species Reading Activities: Engaging Nonfiction for Elementary Students',
     excerpt: 'Students care about animals, making endangered species an ideal topic for building nonfiction reading skills. These activities combine high interest with rigorous comprehension work.',
     content: `
@@ -632,6 +641,7 @@ When students care about what they're reading, comprehension follows.
   },
   {
     slug: 'holiday-classroom-activities-thanksgiving',
+    productId: 'friendsgiving',
     title: 'Meaningful Holiday Classroom Activities: Beyond Crafts and Worksheets',
     excerpt: 'Holiday activities don\'t have to be academic-free zones. These Friendsgiving-inspired activities build community while practicing real skills.',
     content: `
@@ -712,6 +722,7 @@ Celebrations should build community AND support learning.
   },
   {
     slug: 'mock-trial-lesson-plan-novel-study',
+    productId: 'space-case-mock-trial',
     title: 'Mock Trial Lesson Plans: Bringing Novels to Life Through Courtroom Drama',
     excerpt: 'Mock trials transform passive reading into active engagement. Students become lawyers, witnesses, and jurors, using text evidence to build and defend arguments.',
     content: `
@@ -796,6 +807,7 @@ When students argue about books, they're really reading deeply.
   },
   {
     slug: 'turning-novel-study-into-mock-trial',
+    productId: 'space-case-mock-trial',
     title: 'Turning a Novel Study Into a Mock Trial: Teaching Reading, Evidence, and Critical Thinking Through Play',
     excerpt: 'Real readers reread. They argue. They defend ideas with evidence. That\'s precisely what a mock trial allows students to do. Learn how to transform your next novel study into an engaging courtroom experience.',
     content: `
@@ -891,6 +903,7 @@ After teachers kept asking for our materials, I created the **Space Case Mock Tr
   },
   {
     slug: 'what-is-an-elementary-state-of-mind',
+    productId: 'letter-to-teacher',
     title: 'What Is an Elementary State of Mind? (And Why It Matters More Than Ever)',
     excerpt: 'Elementary State of Mind started as a mindset long before it became a website, a shop, or a brand. It was born in those moments when I looked around my classroom and thought, there has to be a way to teach deeply, meet standards, and still let kids be kids.',
     content: `

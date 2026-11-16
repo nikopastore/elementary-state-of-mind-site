@@ -2,11 +2,11 @@ import { Metadata } from 'next';
 import GalleryPageClient from './GalleryPageClient';
 
 export const metadata: Metadata = {
-  title: "Products in Action | Elementary State of Mind",
+  title: "Products in Action",
   description: "See Elementary State of Mind resources in action! Browse photos of students engaging with mock trials, writing activities, and classroom projects in real elementary classrooms.",
   keywords: ["classroom photos", "teacher resources in action", "student engagement", "elementary classroom", "mock trial photos", "project-based learning"],
   openGraph: {
-    title: "Products in Action | Elementary State of Mind",
+    title: "Products in Action",
     description: "See our teaching resources come to life in real elementary classrooms.",
     type: "website",
     url: "https://www.elementarystateofmind.com/gallery",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Products in Action | Elementary State of Mind",
+    title: "Products in Action",
     description: "See our teaching resources come to life in real elementary classrooms.",
     images: ["https://www.elementarystateofmind.com/logo.png"],
   },

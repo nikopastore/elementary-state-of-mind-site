@@ -3,11 +3,11 @@ import AboutPageClient from './AboutPageClient';
 import { faqs } from '@/lib/faqs';
 
 export const metadata: Metadata = {
-  title: "Meet the Teacher | Elementary State of Mind",
+  title: "Meet the Teacher",
   description: "Meet the educator behind Elementary State of Mind. A dedicated elementary teacher with a Doctorate in Educational Leadership from USC, sharing resources and insights for engaging education.",
   keywords: ["elementary teacher", "teacher resources", "educational leadership", "USC education", "Arizona State University", "classroom teacher", "ELA teacher"],
   openGraph: {
-    title: "Meet the Teacher | Elementary State of Mind",
+    title: "Meet the Teacher",
     description: "Meet the educator behind Elementary State of Mind – a dedicated elementary teacher passionate about innovative, student-centered learning.",
     type: "profile",
     url: "https://www.elementarystateofmind.com/about",
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: "Meet the Teacher | Elementary State of Mind",
+    title: "Meet the Teacher",
     description: "Meet the educator behind Elementary State of Mind – passionate about innovative, student-centered learning.",
     images: ["https://www.elementarystateofmind.com/profile.png"],
   },

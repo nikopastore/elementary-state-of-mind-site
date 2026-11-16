@@ -3,6 +3,8 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { posts } from '@/lib/posts';
+import { products } from '@/lib/products';
+import { getTptUrl } from '@/lib/tpt';
 import { Calendar, Tag, ArrowLeft } from 'lucide-react';
 import EmailSubscribe from '@/components/EmailSubscribe';
 
@@ -170,7 +172,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: "Post Not Found | Elementary State of Mind",
+      title: "Post Not Found",
       description: "The blog post you're looking for could not be found.",
     };
   }
@@ -178,7 +180,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `https://www.elementarystateofmind.com/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Elementary State of Mind Blog`,
+    title: post.title,
     description: post.excerpt,
     keywords: [
       "elementary education",
@@ -259,6 +261,8 @@ export default async function BlogPostPage({ params }: Props) {
     },
   };
 
+  const featuredProduct = products.find((product) => product.id === post.productId);
+
   return (
     <div className="bg-gradient-to-b from-lavender to-white min-h-screen py-10 md:py-14 lg:py-16">
       <script
@@ -298,6 +302,22 @@ export default async function BlogPostPage({ params }: Props) {
           {/* Post content */}
           <article className="bg-white rounded-2xl md:rounded-3xl shadow-soft p-6 sm:p-8 md:p-10">
             {renderContent(post.content)}
+
+            {featuredProduct && (
+              <div className="mt-8 rounded-2xl bg-lavender/50 p-5 text-center">
+                <p className="font-heading text-xl font-bold text-black">
+                  Ready to use this resource?
+                </p>
+                <a
+                  href={getTptUrl(featuredProduct, 'blog', post.slug)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center justify-center rounded-xl bg-purple px-5 py-3 font-body text-sm font-semibold text-white transition hover:bg-dustyRose"
+                >
+                  View {featuredProduct.name} on TPT →
+                </a>
+              </div>
+            )}
 
             {/* Image Gallery */}
             {post.images && post.images.length > 0 && (

@@ -4,11 +4,11 @@ import BlogCard from '@/components/BlogCard';
 import EmailSubscribe from '@/components/EmailSubscribe';
 
 export const metadata: Metadata = {
-  title: "Blog | Elementary State of Mind",
+  title: "Blog",
   description: "Teaching tips, classroom stories, and educator insights for elementary teachers. Read about evidence-based practices, engagement strategies, and classroom management.",
   keywords: ["teaching tips", "classroom management", "ELA instruction", "elementary education", "teaching blog", "educator resources"],
   openGraph: {
-    title: "Blog | Elementary State of Mind",
+    title: "Blog",
     description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
     type: "website",
     url: "https://www.elementarystateofmind.com/blog",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | Elementary State of Mind",
+    title: "Blog",
     description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
     images: ["https://www.elementarystateofmind.com/logo.png"],
   },

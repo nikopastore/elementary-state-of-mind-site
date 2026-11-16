@@ -180,15 +180,6 @@ export const products: Product[] = [
     tptUrl: 'https://www.teacherspayteachers.com/Product/Informative-Essay-Tree-Map-Graphic-Organizer-12548206',
   },
   {
-    id: 'seven-minute-strategy',
-    name: 'Seven-Minute-Strategy Share Out Tool',
-    description: 'Template for teachers to share strategies, best practices, or classroom management techniques during staff meetings, PLC time, or collaboration sessions.',
-    price: 100,
-    category: 'lesson-plan',
-    image: '/products/seven-minute-strategy.jpg',
-    tptUrl: 'https://www.teacherspayteachers.com/Product/Seven-Minute-Strategy-Share-Out-Tool-for-Staff-Meetings-PLC-or-Collab-13055750',
-  },
-  {
     id: 'student-work-posters',
     name: 'Student Work Coming Soon Posters',
     description: 'Printable posters designed for hanging in lieu of student work at the beginning of the year or anytime you need a placeholder for bulletin boards.',
@@ -225,16 +216,6 @@ export const products: Product[] = [
     tptUrl: 'https://www.teacherspayteachers.com/Product/Letter-to-my-Teacher-5546447',
     isFree: true,
     featured: true,
-  },
-  {
-    id: 'goal-setting-bingo',
-    name: '2025 Goal Setting BINGO',
-    description: 'FREE printable BINGO card and Google slideshow for students to set and track their 2025 goals. A fun, interactive way to start the new year!',
-    price: 0,
-    category: 'worksheet',
-    image: '/products/goal-setting-bingo.jpg',
-    tptUrl: 'https://www.teacherspayteachers.com/Product/2025-Goal-Setting-BINGO-12778057',
-    isFree: true,
   },
   {
     id: 'opinion-brain-dump',

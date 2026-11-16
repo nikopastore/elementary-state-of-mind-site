@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { posts } from '@/lib/posts';
+import { products } from '@/lib/products';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.elementarystateofmind.com';
@@ -46,5 +47,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  // Dynamic product routes
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${baseUrl}/shop/${product.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...blogRoutes, ...productRoutes];
 }
