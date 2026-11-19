@@ -1,36 +1,77 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { GalleryPhoto as GalleryPhotoType } from '@/lib/galleryPhotos';
 import { products } from '@/lib/products';
-import { X } from 'lucide-react';
+import { X, ArrowUpRight } from 'lucide-react';
 
 interface GalleryPhotoProps {
   photo: GalleryPhotoType;
   thumbnailSizes: string;
+  frameClassName?: string;
+  objectPosition?: string;
 }
 
-export default function GalleryPhoto({ photo, thumbnailSizes }: GalleryPhotoProps) {
+const LIGHTBOX_SIZES = '(max-width: 768px) 92vw, 820px';
+const preloadedLightboxUrls = new Set<string>();
+
+function preloadLightboxImage(src: string) {
+  if (typeof window === 'undefined' || !src) return;
+  const targetWidth = window.devicePixelRatio > 1 ? 1200 : 1080;
+  const optimizedUrl = `/_next/image?url=${encodeURIComponent(src)}&w=${targetWidth}&q=75`;
+  if (preloadedLightboxUrls.has(optimizedUrl)) return;
+  preloadedLightboxUrls.add(optimizedUrl);
+  const img = new window.Image();
+  img.decoding = 'async';
+  img.src = optimizedUrl;
+}
+
+export default function GalleryPhoto({
+  photo,
+  thumbnailSizes,
+  frameClassName = '',
+  objectPosition,
+}: GalleryPhotoProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [instantSrc, setInstantSrc] = useState<string | null>(null);
+  const [highResLoaded, setHighResLoaded] = useState(false);
   const thumbnail = useRef<HTMLButtonElement>(null);
-  const reducedMotion = useReducedMotion();
   const product = products.find((p) => p.id === photo.productId);
+
+  // Warm the lightbox cache gently after visible thumbnails settle
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      preloadLightboxImage(photo.image);
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [photo.image]);
+
+  const openPhoto = useCallback(() => {
+    const imgEl = thumbnail.current?.querySelector('img');
+    const cachedSrc = imgEl?.currentSrc || imgEl?.getAttribute('src') || null;
+    setInstantSrc(cachedSrc);
+    setHighResLoaded(false);
+    preloadLightboxImage(photo.image);
+    setIsOpen(true);
+  }, [photo.image]);
 
   const closePhoto = useCallback(() => {
     setIsOpen(false);
     thumbnail.current?.focus();
   }, []);
 
-  // Close modal on Escape key
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closePhoto();
-    }
-  }, [closePhoto]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closePhoto();
+      }
+    },
+    [closePhoto],
+  );
 
   useEffect(() => {
     if (!isOpen) return;
@@ -49,100 +90,102 @@ export default function GalleryPhoto({ photo, thumbnailSizes }: GalleryPhotoProp
 
   return (
     <>
-      {/* Thumbnail in gallery grid */}
       <button
         ref={thumbnail}
         type="button"
         aria-haspopup="dialog"
         aria-label={`Open photo: ${photo.alt}`}
         className="book-photo-button"
-        onClick={() => setIsOpen(true)}
+        onMouseEnter={() => preloadLightboxImage(photo.image)}
+        onFocus={() => preloadLightboxImage(photo.image)}
+        onPointerDown={() => preloadLightboxImage(photo.image)}
+        onClick={openPhoto}
       >
-        <span className="book-photo-frame">
+        <span className={`book-photo-frame ${frameClassName}`.trim()}>
           <Image
             src={photo.image}
             alt={photo.alt}
             fill
             className="book-photo-image"
+            style={objectPosition ? { objectPosition } : undefined}
             sizes={thumbnailSizes}
             loading="eager"
           />
-
         </span>
       </button>
 
-      {/* Lightbox Modal */}
-      {typeof document !== 'undefined' && createPortal(
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              role="dialog"
-              aria-modal="true"
-              aria-label={photo.alt}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reducedMotion ? 0 : 0.2 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-8"
+      {typeof document !== 'undefined' &&
+        isOpen &&
+        createPortal(
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={photo.alt}
+            className="gallery-lightbox-backdrop"
+            onClick={closePhoto}
+          >
+            <button
+              type="button"
               onClick={closePhoto}
+              className="gallery-lightbox-close"
+              aria-label="Close"
+              autoFocus
             >
-              {/* Close button */}
-              <button
-                onClick={closePhoto}
-                className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
-                aria-label="Close"
-                autoFocus
-              >
-                <X className="w-6 h-6 text-white" />
-              </button>
+              <X className="w-6 h-6 text-white" />
+            </button>
 
-              {/* Modal content */}
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ duration: reducedMotion ? 0 : 0.2 }}
-                className="relative max-w-4xl w-full max-h-[90vh] flex flex-col"
-                onClick={(e) => e.stopPropagation()}
+            <div
+              className="gallery-lightbox-panel"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Link
+                href={`/shop#${product.id}`}
+                className="gallery-lightbox-media group"
+                onClick={() => setIsOpen(false)}
               >
-                {/* Image - clicking navigates to product */}
-                <Link
-                  href={`/shop#${product.id}`}
-                  className="relative block w-full h-auto cursor-pointer group"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <div className="relative w-full aspect-[3/4] max-h-[70vh]">
-                    <Image
-                      src={photo.image}
-                      alt={photo.alt}
-                      fill
-                      className="object-contain rounded-lg"
-                      sizes="(max-width: 768px) 100vw, 80vw"
-                      priority
+                <div className="gallery-lightbox-image-wrap">
+                  {instantSrc && !highResLoaded && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={instantSrc}
+                      alt=""
+                      aria-hidden="true"
+                      className="gallery-lightbox-instant"
                     />
-                  </div>
-                  {/* Hint to click for product */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors rounded-lg">
-                    <span className="text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity bg-purple/80 px-4 py-2 rounded-full">
-                      View Product
-                    </span>
-                  </div>
-                </Link>
-
-                {/* Caption and product info */}
-                <div className="mt-4 text-center text-white">
-                  {photo.caption && (
-                    <p className="text-lg font-medium mb-1">{photo.caption}</p>
                   )}
-                  <p className="text-sm opacity-80">{product.name}</p>
-                  <p className="text-xs opacity-60 mt-2">Click image to view product</p>
+                  <Image
+                    src={photo.image}
+                    alt={photo.alt}
+                    fill
+                    className={`gallery-lightbox-full ${highResLoaded ? 'is-loaded' : ''}`}
+                    sizes={LIGHTBOX_SIZES}
+                    quality={75}
+                    priority
+                    onLoad={() => setHighResLoaded(true)}
+                  />
                 </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>,
-        document.body,
-      )}
+                <div className="gallery-lightbox-hover-hint">
+                  <span className="gallery-lightbox-cta">
+                    View Product
+                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+
+              <div className="gallery-lightbox-meta">
+                {photo.caption && (
+                  <p className="gallery-lightbox-caption">{photo.caption}</p>
+                )}
+                <div className="gallery-lightbox-sub">
+                  <span>{product.name}</span>
+                  <span className="gallery-lightbox-dot" aria-hidden="true">·</span>
+                  <span>Click image to view product</span>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
     </>
   );
 }
