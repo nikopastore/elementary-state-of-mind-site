@@ -1,282 +1,134 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import GalleryPhoto from '@/components/GalleryPhoto';
+import type { GalleryPhoto as Photo } from '@/lib/galleryPhotos';
 
-interface FlipBookProps {
-  pages: string[];
-  title?: string;
+export interface BookPage {
+  title: string;
+  product: { id: string; name: string };
+  photos: Photo[];
 }
 
-export default function FlipBook({ pages }: FlipBookProps) {
-  // Current spread index (0 = cover, 1 = pages 1-2, 2 = pages 3-4, etc.)
-  const [currentSpread, setCurrentSpread] = useState(0);
-  const [isFlipping, setIsFlipping] = useState(false);
-  const [flipDirection, setFlipDirection] = useState<'next' | 'prev'>('next');
+const spreadQuery = '(min-width: 960px)';
+const subscribeToSpread = (listener: () => void) => {
+  const media = window.matchMedia(spreadQuery);
+  media.addEventListener('change', listener);
+  return () => media.removeEventListener('change', listener);
+};
+const canShowSpread = () => window.matchMedia(spreadQuery).matches;
+const showInitialSpread = () => true;
 
-  // Calculate total spreads (cover + page pairs + back cover)
-  const totalSpreads = Math.ceil((pages.length - 1) / 2) + 1;
+type Turn = { from: number; to: number; step: 1 | 2; direction: -1 | 1 };
 
-  const goToNextSpread = () => {
-    if (currentSpread < totalSpreads - 1 && !isFlipping) {
-      setFlipDirection('next');
-      setIsFlipping(true);
-      setTimeout(() => {
-        setCurrentSpread(prev => prev + 1);
-        setIsFlipping(false);
-      }, 600);
-    }
-  };
-
-  const goToPrevSpread = () => {
-    if (currentSpread > 0 && !isFlipping) {
-      setFlipDirection('prev');
-      setIsFlipping(true);
-      setTimeout(() => {
-        setCurrentSpread(prev => prev - 1);
-        setIsFlipping(false);
-      }, 600);
-    }
-  };
-
-  // Get pages for current spread
-  const getSpreadPages = () => {
-    if (currentSpread === 0) {
-      // Cover - show first page as cover
-      return { left: null, right: pages[0], isCover: true };
-    }
-
-    const leftIndex = (currentSpread - 1) * 2 + 1;
-    const rightIndex = leftIndex + 1;
-
-    return {
-      left: pages[leftIndex] || null,
-      right: pages[rightIndex] || null,
-      isCover: false,
-    };
-  };
-
-  const { left, right, isCover } = getSpreadPages();
+function PrintedPage({ page, turning = false }: { page?: BookPage; turning?: boolean }) {
+  if (!page) return <div className="book-page book-page-blank" />;
+  const imageSizes = page.photos.length === 1
+    ? '(min-width: 1344px) 560px, (min-width: 960px) 45vw, 90vw'
+    : '(min-width: 1344px) 275px, (min-width: 960px) 22vw, 43vw';
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4">
-      {/* 3D Book Container */}
-      <div
-        className="relative mx-auto"
-        style={{ perspective: '2500px' }}
-      >
-        {/* Book wrapper - responsive sizing for laptops */}
-        <div
-          className={`relative mx-auto transition-all duration-500 ${
-            isCover
-              ? 'w-[280px] sm:w-[320px] md:w-[360px] lg:w-[400px]'
-              : 'w-full max-w-[600px] md:max-w-[700px] lg:max-w-[800px]'
-          }`}
-          style={{
-            transformStyle: 'preserve-3d',
-          }}
-        >
-          {/* Book Shadow - responsive */}
-          <div
-            className={`absolute -bottom-3 md:-bottom-4 left-1/2 -translate-x-1/2 bg-black/20 blur-xl rounded-full transition-all duration-500 ${
-              isCover
-                ? 'w-[240px] sm:w-[280px] md:w-[320px] lg:w-[350px]'
-                : 'w-[90%] max-w-[650px]'
-            }`}
-            style={{ height: '25px' }}
-          />
+    <article className="book-page">
+      <h2>{page.title}</h2>
+      <div className="book-photographs" data-photos={page.photos.length}>
+        {page.photos.map((photo) => (
+          <figure key={photo.id}>
+            {turning ? (
+              <div className="book-photo-frame" aria-hidden="true">
+                <Image src={photo.image} alt="" fill sizes={imageSizes} className="book-photo-image" loading="eager" />
+              </div>
+            ) : <GalleryPhoto photo={photo} thumbnailSizes={imageSizes} />}
+            <figcaption>{photo.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      <Link className="book-resource" href={`/shop#${page.product.id}`}>{page.product.name}</Link>
+    </article>
+  );
+}
 
-          {/* The Book - responsive min-height */}
+export default function FlipBook({ pages }: { pages: BookPage[] }) {
+  const spread = useSyncExternalStore(subscribeToSpread, canShowSpread, showInitialSpread);
+  const [position, setPosition] = useState(0);
+  const [turn, setTurn] = useState<Turn | null>(null);
+  const step = spread ? 2 : 1;
+  const first = position - position % step;
+  const last = Math.min(first + step, pages.length);
+  const activeTurn = turn?.step === step ? turn : null;
+
+  useEffect(() => {
+    if (!turn) return;
+    const timeout = window.setTimeout(() => {
+      setPosition(turn.to);
+      setTurn(null);
+    }, 850);
+    return () => window.clearTimeout(timeout);
+  }, [turn]);
+
+  function move(direction: -1 | 1) {
+    const target = first + direction * step;
+    if (turn || target < 0 || target >= pages.length) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setPosition(target);
+    } else {
+      setTurn({ from: first, to: target, step, direction });
+    }
+  }
+
+  const forward = activeTurn?.direction === 1;
+  const left = activeTurn && (!spread || !forward) ? activeTurn.to : first;
+  const right = activeTurn && forward ? activeTurn.to + 1 : first + 1;
+  const sheetFront = activeTurn && pages[activeTurn.from + (spread && forward ? 1 : 0)];
+  const sheetBack = activeTurn && spread ? pages[activeTurn.to + (forward ? 0 : 1)] : undefined;
+  const pageLabel = last === first + 1 ? `Page ${last} of ${pages.length}` : `Pages ${first + 1}–${last} of ${pages.length}`;
+
+  if (!pages.length) return null;
+
+  return (
+    <section className="gallery-book" aria-label="Classroom photo book">
+      <div id="gallery-book-pages" className="book-stage" data-layout={spread ? 'spread' : 'single'}>
+        <div className="book-pages" inert={Boolean(activeTurn)}>
+          <PrintedPage key={left} page={pages[left]} />
+          {spread && <PrintedPage key={right} page={pages[right]} />}
+        </div>
+        {activeTurn && (
           <div
-            className={`relative bg-gradient-to-r from-purple to-dustyRose rounded-r-lg shadow-2xl transition-all duration-500 min-h-[350px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] ${
-              isCover ? 'rounded-l-lg' : 'rounded-l-none'
-            }`}
-            style={{
-              transformStyle: 'preserve-3d',
-              aspectRatio: isCover ? '3/4' : '6/4',
+            className="book-turning-sheet"
+            data-direction={forward ? 'next' : 'previous'}
+            aria-hidden="true"
+            inert
+            onAnimationEnd={(event) => {
+              if (event.currentTarget !== event.target) return;
+              setPosition(activeTurn.to);
+              setTurn(null);
             }}
           >
-            {/* Book Spine */}
-            {!isCover && (
-              <div
-                className="absolute left-1/2 top-0 bottom-0 w-4 -translate-x-1/2 bg-gradient-to-r from-black/30 via-black/10 to-black/30 z-20"
-                style={{ boxShadow: 'inset 0 0 10px rgba(0,0,0,0.3)' }}
-              />
-            )}
-
-            {/* Cover View */}
-            {isCover && (
-              <motion.div
-                initial={{ rotateY: -20 }}
-                animate={{ rotateY: isFlipping && flipDirection === 'next' ? -180 : 0 }}
-                transition={{ duration: 0.6, ease: 'easeInOut' as const }}
-                className="absolute inset-0 rounded-lg overflow-hidden cursor-pointer"
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transformOrigin: 'right center',
-                  backfaceVisibility: 'hidden',
-                }}
-                onClick={goToNextSpread}
-              >
-                {/* Cover image */}
-                <div className="relative w-full h-full bg-white">
-                  <Image
-                    src={right!}
-                    alt="Book Cover"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
-                {/* Cover edge effect */}
-                <div className="absolute right-0 top-0 bottom-0 w-3 bg-gradient-to-l from-black/20 to-transparent" />
-                {/* Click hint */}
-                <div className="absolute bottom-4 right-4 bg-white/90 px-4 py-2 rounded-full text-sm font-medium text-purple shadow-lg">
-                  Click to open
-                </div>
-              </motion.div>
-            )}
-
-            {/* Open Book View - Two Page Spread */}
-            {!isCover && (
-              <div className="relative w-full h-full flex">
-                {/* Left Page */}
-                <div
-                  className="relative w-1/2 h-full bg-white overflow-hidden"
-                  style={{
-                    boxShadow: 'inset -5px 0 15px rgba(0,0,0,0.1)',
-                    borderTopLeftRadius: '4px',
-                    borderBottomLeftRadius: '4px',
-                  }}
-                >
-                  {left ? (
-                    <Image
-                      src={left}
-                      alt={`Page ${(currentSpread - 1) * 2 + 1}`}
-                      fill
-                      className="object-contain p-2"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-gray">
-                      <span className="text-lg">End of book</span>
-                    </div>
-                  )}
-                  {/* Page curl shadow */}
-                  <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/5 to-transparent" />
-                </div>
-
-                {/* Right Page */}
-                <div
-                  className="relative w-1/2 h-full bg-white overflow-hidden"
-                  style={{
-                    boxShadow: 'inset 5px 0 15px rgba(0,0,0,0.1)',
-                    borderTopRightRadius: '4px',
-                    borderBottomRightRadius: '4px',
-                  }}
-                >
-                  {right ? (
-                    <Image
-                      src={right}
-                      alt={`Page ${(currentSpread - 1) * 2 + 2}`}
-                      fill
-                      className="object-contain p-2"
-                    />
-                  ) : (
-                    <div className="flex items-center justify-center h-full text-gray">
-                      <span className="text-lg">End of book</span>
-                    </div>
-                  )}
-                  {/* Page curl shadow */}
-                  <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/5 to-transparent" />
-                </div>
-
-                {/* Page flip animation overlay */}
-                <AnimatePresence>
-                  {isFlipping && (
-                    <motion.div
-                      initial={{
-                        rotateY: flipDirection === 'next' ? 0 : -180,
-                      }}
-                      animate={{
-                        rotateY: flipDirection === 'next' ? -180 : 0,
-                      }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.6, ease: 'easeInOut' as const }}
-                      className="absolute top-0 bottom-0 w-1/2 bg-white z-30 overflow-hidden"
-                      style={{
-                        transformStyle: 'preserve-3d',
-                        transformOrigin: flipDirection === 'next' ? 'left center' : 'right center',
-                        left: flipDirection === 'next' ? '50%' : '0',
-                        boxShadow: '0 0 20px rgba(0,0,0,0.3)',
-                      }}
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-black/10" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            )}
+            <div className="book-sheet-front"><PrintedPage page={sheetFront || undefined} turning /></div>
+            {spread && <div className="book-sheet-back"><PrintedPage page={sheetBack} turning /></div>}
           </div>
-        </div>
-
-        {/* Navigation Controls - responsive */}
-        <div className="flex items-center justify-center gap-2 sm:gap-4 mt-6 md:mt-8">
-          <button
-            onClick={goToPrevSpread}
-            disabled={currentSpread === 0 || isFlipping}
-            aria-label="Previous page"
-            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-5 md:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
-              currentSpread === 0 || isFlipping
-                ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
-                : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
-            }`}
-          >
-            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-            <span className="hidden sm:inline">{currentSpread === 1 ? 'Close Book' : 'Previous'}</span>
-          </button>
-
-          {/* Page indicator */}
-          <div className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-4">
-            {Array.from({ length: totalSpreads }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => {
-                  if (!isFlipping && i !== currentSpread) {
-                    setFlipDirection(i > currentSpread ? 'next' : 'prev');
-                    setCurrentSpread(i);
-                  }
-                }}
-                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
-                  i === currentSpread
-                    ? 'bg-purple scale-125'
-                    : 'bg-lavenderGray hover:bg-dustyRose'
-                }`}
-              />
-            ))}
-          </div>
-
-          <button
-            onClick={goToNextSpread}
-            disabled={currentSpread === totalSpreads - 1 || isFlipping}
-            aria-label="Next page"
-            className={`flex items-center gap-1 sm:gap-2 px-3 sm:px-5 md:px-6 py-2 sm:py-3 rounded-full font-semibold text-sm sm:text-base transition-all ${
-              currentSpread === totalSpreads - 1 || isFlipping
-                ? 'bg-gray/20 text-gray/50 cursor-not-allowed'
-                : 'bg-white text-purple shadow-lg hover:shadow-xl hover:scale-105 active:scale-95'
-            }`}
-          >
-            <span className="hidden sm:inline">{currentSpread === 0 ? 'Open Book' : 'Next'}</span>
-            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-          </button>
-        </div>
-
-        {/* Page info */}
-        <p className="text-center text-gray mt-4 font-body">
-          {isCover ? 'Cover' : `Pages ${(currentSpread - 1) * 2 + 1}-${Math.min((currentSpread - 1) * 2 + 2, pages.length - 1)} of ${pages.length - 1}`}
-        </p>
+        )}
       </div>
-    </div>
+      <nav
+        className="book-controls"
+        aria-label="Turn gallery pages"
+        onKeyDown={(event) => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          move(event.key === 'ArrowLeft' ? -1 : 1);
+        }}
+      >
+        <button className="book-control" type="button" aria-controls="gallery-book-pages" aria-disabled={first === 0 || Boolean(turn)} onClick={() => move(-1)}>
+          <ChevronLeft aria-hidden="true" size={19} /><span>Previous</span>
+        </button>
+        <p className="book-position" aria-live="polite">{pageLabel}</p>
+        <button className="book-control" type="button" aria-controls="gallery-book-pages" aria-disabled={last === pages.length || Boolean(turn)} onClick={() => move(1)}>
+          <span>Next</span><ChevronRight aria-hidden="true" size={19} />
+        </button>
+      </nav>
+    </section>
   );
 }

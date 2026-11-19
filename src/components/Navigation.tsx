@@ -28,7 +28,10 @@ export default function Navigation() {
         }
       }}>
         <Link href="/" className="wordmark" onClick={() => setOpen(false)}>
-          <Image src="/logo.png" alt="" width={43} height={43} />
+          <span className="wordmark-logo" aria-hidden="true">
+            <Image src="/logo.png" alt="" width={78} height={78} sizes="(max-width: 700px) 62px, 78px" />
+            <Image className="wordmark-logo-ink" src="/logo.png" alt="" width={78} height={78} sizes="(max-width: 700px) 62px, 78px" />
+          </span>
           <span>Elementary<br />State of Mind</span>
         </Link>
         <button id="menu-toggle" type="button" className="menu-toggle" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="primary-nav" onClick={() => setOpen(!open)}>
