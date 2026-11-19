@@ -5,7 +5,7 @@ import { galleryPhotos } from '@/lib/galleryPhotos';
 import { posts } from '@/lib/posts';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Award, BookOpen, GraduationCap, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, GraduationCap, Sparkles } from 'lucide-react';
 
 const showcasePhotoIds = ['space-case-8', 'friendsgiving-2', 'kpop-1'];
 
@@ -26,15 +26,6 @@ export default function Home() {
       <section className="home-highlights" aria-label="Educator highlights">
         <div className="site-width highlights-grid">
           <div className="highlight-tile" data-reveal="card" data-stagger="0">
-            <span className="highlight-icon tint-lavender" aria-hidden="true">
-              <Star size={18} />
-            </span>
-            <div>
-              <strong>4.95 / 5 Rating</strong>
-              <span>43+ five-star educator reviews on TPT</span>
-            </div>
-          </div>
-          <div className="highlight-tile" data-reveal="card" data-stagger="1">
             <span className="highlight-icon tint-mint" aria-hidden="true">
               <Sparkles size={18} />
             </span>
@@ -43,7 +34,7 @@ export default function Home() {
               <span>Standards-aligned PBL &amp; writing tools</span>
             </div>
           </div>
-          <div className="highlight-tile" data-reveal="card" data-stagger="2">
+          <div className="highlight-tile" data-reveal="card" data-stagger="1">
             <span className="highlight-icon tint-mustard" aria-hidden="true">
               <Award size={18} />
             </span>
@@ -52,7 +43,7 @@ export default function Home() {
               <span>2026 ASU Prep District honoree</span>
             </div>
           </div>
-          <div className="highlight-tile" data-reveal="card" data-stagger="3">
+          <div className="highlight-tile" data-reveal="card" data-stagger="2">
             <span className="highlight-icon tint-peach" aria-hidden="true">
               <GraduationCap size={18} />
             </span>

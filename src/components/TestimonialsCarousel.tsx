@@ -13,10 +13,6 @@ export default function TestimonialsCarousel() {
     <section className="reviews-section" aria-labelledby="reviews-heading">
       <div className="site-width reviews-grid">
         <div className="reviews-intro" data-reveal="heading">
-          <span className="reviews-badge">
-            <Star size={14} fill="currentColor" aria-hidden="true" />
-            <span>4.95 Average Rating on TPT</span>
-          </span>
           <h2 id="reviews-heading">What Teachers Are Saying</h2>
           <p>Real reviews from real educators using these resources in their classrooms.</p>
           <a

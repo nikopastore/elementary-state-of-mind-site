@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Award, Sparkles, Star } from 'lucide-react';
+import { ArrowRight, Award, Sparkles } from 'lucide-react';
 import SocialBento from './SocialBento';
 
 export default function Hero() {
@@ -35,18 +35,6 @@ export default function Hero() {
         </div>
 
         <div className="hero-board">
-          <div className="hero-pin-note" aria-hidden="true">
-            <div className="hero-pin-stars">
-              <Star size={12} fill="currentColor" />
-              <Star size={12} fill="currentColor" />
-              <Star size={12} fill="currentColor" />
-              <Star size={12} fill="currentColor" />
-              <Star size={12} fill="currentColor" />
-            </div>
-            <strong>4.95 on TPT</strong>
-            <span>43+ teacher reviews</span>
-          </div>
-
           <div className="hero-photo">
             <Image
               src="/zoe-usc-graduation.webp"
