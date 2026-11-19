@@ -33,17 +33,34 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const sortedPosts = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
+  const [leadPost, ...restPosts] = sortedPosts;
+
   return (
     <div className="site-width content-page blog-index">
       <div className="page-title">
+        <span className="section-kicker">Educator Journal</span>
         <h1>Blog</h1>
         <p>Teaching tips, classroom stories, and educator insights</p>
       </div>
+
+      {leadPost && (
+        <div className="blog-lead">
+          <BlogCard {...leadPost} featured />
+        </div>
+      )}
+
       <div className="blog-list">
-        {sortedPosts.map((post) => <div key={post.slug} data-reveal="card"><BlogCard {...post} /></div>)}
+        {restPosts.map((post, index) => (
+          <BlogCard key={post.slug} {...post} staggerIndex={index} />
+        ))}
       </div>
-      <div className="subscribe-block" data-reveal="panel"><EmailSubscribe /></div>
+
+      <div className="subscribe-block" data-reveal="panel">
+        <EmailSubscribe />
+      </div>
     </div>
   );
 }

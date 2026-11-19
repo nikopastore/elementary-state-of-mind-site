@@ -23,7 +23,7 @@ export default function EmailSubscribe() {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: new URLSearchParams({ email }),
-        }
+        },
       );
 
       if (response.ok) {
@@ -40,43 +40,48 @@ export default function EmailSubscribe() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple/10 to-dustyRose/10 rounded-2xl p-6 md:p-8">
-      <div className="flex items-center gap-3 mb-3">
-        <div className="w-10 h-10 rounded-full bg-purple/20 flex items-center justify-center">
-          <Mail className="w-5 h-5 text-purple" />
+    <div className="subscribe-card">
+      <div className="subscribe-copy">
+        <div className="subscribe-head">
+          <span className="subscribe-icon" aria-hidden="true">
+            <Mail size={19} />
+          </span>
+          <div>
+            <span className="section-kicker">Newsletter</span>
+            <h3>Subscribe to Updates</h3>
+          </div>
         </div>
-        <h3 className="text-xl md:text-2xl font-heading font-bold text-black">
-          Subscribe to Updates
-        </h3>
+        <p>Get new blog posts and teaching tips delivered to your inbox.</p>
       </div>
-      <p className="text-gray mb-4">
-        Get new blog posts and teaching tips delivered to your inbox.
-      </p>
 
       {status === 'success' ? (
-        <div className="flex items-center gap-2 text-green-600 bg-green-50 rounded-xl p-4">
-          <Check className="w-5 h-5" />
+        <div className="subscribe-success" role="status">
+          <Check size={18} aria-hidden="true" />
           <span>{message}</span>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+        <form onSubmit={handleSubmit} className="subscribe-form">
+          <label className="sr-only" htmlFor="subscribe-email">
+            Email address
+          </label>
           <input
+            id="subscribe-email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
             required
-            className="flex-1 px-4 py-3 rounded-xl border border-gray/20 focus:outline-none focus:ring-2 focus:ring-purple/50 focus:border-purple transition-all"
+            className="subscribe-input"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="inline-flex items-center justify-center gap-2 bg-dustyRose hover:bg-purple text-white font-semibold px-6 py-3 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="button subscribe-submit"
           >
             {status === 'loading' ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
+              <Loader2 size={16} className="animate-spin" aria-hidden="true" />
             ) : (
-              <Send className="w-5 h-5" />
+              <Send size={15} aria-hidden="true" />
             )}
             <span>Subscribe</span>
           </button>
@@ -84,7 +89,9 @@ export default function EmailSubscribe() {
       )}
 
       {status === 'error' && (
-        <p className="mt-3 text-red-500 text-sm">{message}</p>
+        <p className="subscribe-error" role="alert">
+          {message}
+        </p>
       )}
     </div>
   );
