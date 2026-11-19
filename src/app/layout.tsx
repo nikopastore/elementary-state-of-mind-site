@@ -173,7 +173,7 @@ export default function RootLayout({
         </main>
         <TestimonialsCarousel />
         <Footer />
-        <Script src="/section-motion.js?v=2" strategy="afterInteractive" />
+        <Script src="/section-motion.js?v=3" strategy="afterInteractive" />
       </body>
     </html>
   );

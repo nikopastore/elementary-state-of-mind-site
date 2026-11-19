@@ -1,79 +1,157 @@
 (() => {
-  if (!('IntersectionObserver' in window) || !('MutationObserver' in window)) return;
-
-  const selector = '[data-reveal]';
+  const root = document.documentElement;
+  const scroller = document.scrollingElement || root;
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const revealInset = Math.min(104, Math.round(document.documentElement.clientHeight * 0.14));
+  const preferenceKey = 'esom-scroll-effects';
+  const revealSelector = '[data-reveal]';
+  const controlSelector = '[data-scroll-effects-toggle]';
+  const inset = Math.min(80, Math.round(root.clientHeight * 0.11));
   const seen = new WeakSet();
   const pending = new Set();
-  const observer = new IntersectionObserver((entries) => {
-    for (const { target, isIntersecting } of entries) {
-      if (isIntersecting) show(target, true);
+  let override = readPreference();
+  let enabled;
+  let lastProgress = -1;
+  let lastHeroProgress = -1;
+  let scrollFrame = 0;
+  let refreshFrame = 0;
+
+  const observer = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) show(entry.target, true);
+        }
+      }, { rootMargin: `0px 0px -${inset}px 0px` })
+    : null;
+
+  function readPreference() {
+    try {
+      const value = window.localStorage.getItem(preferenceKey);
+      return value === 'on' ? true : value === 'off' ? false : null;
+    } catch {
+      return null;
     }
-  }, { rootMargin: `0px 0px -${revealInset}px 0px` });
+  }
 
   function show(element, animate) {
     if (!pending.delete(element)) return;
-    observer.unobserve(element);
+    observer?.unobserve(element);
     element.classList.remove('reveal-waiting');
-    if (animate && !reducedMotion.matches && !element.matches(':focus-within, :target')) {
+    if (animate && enabled && !element.matches(':focus-within, :target')) {
       element.classList.add('reveal-entering');
     }
   }
 
+  function updateScroll() {
+    if (!enabled) return;
+    const position = Math.max(0, scroller.scrollTop);
+    const range = Math.max(1, scroller.scrollHeight - root.clientHeight);
+    const pageProgress = Math.min(1, position / range);
+    const openingProgress = Math.min(1, position / 320);
+    const heroProgress = openingProgress * (2 - openingProgress);
+
+    if (pageProgress !== lastProgress) {
+      root.style.setProperty('--page-scroll-progress', pageProgress.toFixed(4));
+      lastProgress = pageProgress;
+    }
+    if (heroProgress !== lastHeroProgress) {
+      root.style.setProperty('--hero-scroll-progress', heroProgress.toFixed(4));
+      lastHeroProgress = heroProgress;
+    }
+  }
+
+  function scheduleScroll() {
+    if (!enabled || scrollFrame) return;
+    scrollFrame = requestAnimationFrame(() => {
+      scrollFrame = 0;
+      updateScroll();
+    });
+  }
+
   function refresh() {
+    for (const control of document.querySelectorAll(controlSelector)) {
+      const state = enabled ? 'On' : 'Off';
+      if (control.getAttribute('aria-pressed') !== String(enabled)) {
+        control.setAttribute('aria-pressed', String(enabled));
+      }
+      const label = control.querySelector('[data-scroll-effects-state]');
+      if (label && label.textContent !== state) label.textContent = state;
+      control.hidden = false;
+    }
     for (const element of pending) {
       if (!element.isConnected) {
         show(element, false);
         seen.delete(element);
       }
     }
+    if (!enabled || !observer) return;
 
-    if (reducedMotion.matches) return;
-
-    const activationEdge = document.documentElement.clientHeight - revealInset;
-    const belowViewport = [];
-    for (const element of document.querySelectorAll(selector)) {
+    const activationEdge = root.clientHeight - inset;
+    const below = [];
+    for (const element of document.querySelectorAll(revealSelector)) {
       if (seen.has(element) || !element.getClientRects().length) continue;
-
       seen.add(element);
-      // Leave content that already reached the reading area visible.
       if (element.getBoundingClientRect().top >= activationEdge && !element.matches(':focus-within, :target')) {
-        belowViewport.push(element);
+        below.push(element);
       }
     }
-
-    for (const element of belowViewport) {
+    for (const element of below) {
       pending.add(element);
       element.classList.add('reveal-waiting');
       observer.observe(element);
     }
   }
 
-  let frame = 0;
-  const scheduleRefresh = () => {
-    if (frame) return;
-    frame = requestAnimationFrame(() => {
-      frame = 0;
+  function scheduleRefresh() {
+    if (refreshFrame) return;
+    refreshFrame = requestAnimationFrame(() => {
+      refreshFrame = 0;
       refresh();
+      updateScroll();
     });
-  };
+  }
 
-  new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+  function syncPreference() {
+    enabled = override ?? !reducedMotion.matches;
+    root.classList.toggle('scroll-effects-on', enabled);
+    if (!enabled) {
+      for (const element of pending) {
+        show(element, false);
+        seen.delete(element);
+      }
+      document.querySelectorAll('.reveal-entering').forEach((element) => element.classList.remove('reveal-entering'));
+    }
+    refresh();
+    updateScroll();
+  }
+
+  window.addEventListener('scroll', scheduleScroll, { passive: true });
+  window.addEventListener('resize', scheduleRefresh, { passive: true });
+  window.addEventListener('pageshow', scheduleRefresh);
+  reducedMotion.addEventListener('change', syncPreference);
+
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleScroll).observe(document.body);
+  if ('MutationObserver' in window) {
+    new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+  }
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest(controlSelector)) return;
+    override = !enabled;
+    try {
+      window.localStorage.setItem(preferenceKey, override ? 'on' : 'off');
+    } catch {
+      // The control still works when this browser blocks storage.
+    }
+    syncPreference();
+  });
   document.addEventListener('focusin', (event) => {
-    const element = event.target.closest(selector);
+    if (!(event.target instanceof Element)) return;
+    const element = event.target.closest(revealSelector);
     if (element) show(element, false);
   });
   document.addEventListener('animationend', (event) => {
     if (event.animationName === 'section-reveal') event.target.classList.remove('reveal-entering');
   });
-  reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) {
-      for (const element of pending) show(element, false);
-      document.querySelectorAll('.reveal-entering').forEach((element) => element.classList.remove('reveal-entering'));
-    } else {
-      scheduleRefresh();
-    }
-  });
-  refresh();
+
+  syncPreference();
 })();

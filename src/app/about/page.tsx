@@ -1,14 +1,14 @@
 import { Metadata } from 'next';
-import AboutPageClient from './AboutPageClient';
+import AboutPageClient, { districtTeacherAward } from './AboutPageClient';
 import { faqs } from '@/lib/faqs';
 
 export const metadata: Metadata = {
   title: "Meet the Teacher | Elementary State of Mind",
-  description: "Meet the educator behind Elementary State of Mind. A dedicated elementary teacher with a Doctorate in Educational Leadership from USC, sharing resources and insights for engaging education.",
+  description: `Meet Dr. Zoe Pastore, the ${districtTeacherAward} and educator behind Elementary State of Mind.`,
   keywords: ["elementary teacher", "teacher resources", "educational leadership", "USC education", "Arizona State University", "classroom teacher", "ELA teacher"],
   openGraph: {
     title: "Meet the Teacher | Elementary State of Mind",
-    description: "Meet the educator behind Elementary State of Mind – a dedicated elementary teacher passionate about innovative, student-centered learning.",
+    description: "Meet the educator behind Elementary State of Mind - a dedicated elementary teacher passionate about innovative, student-centered learning.",
     type: "profile",
     url: "https://www.elementarystateofmind.com/about",
     images: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Meet the Teacher | Elementary State of Mind",
-    description: "Meet the educator behind Elementary State of Mind – passionate about innovative, student-centered learning.",
+    description: "Meet the educator behind Elementary State of Mind - passionate about innovative, student-centered learning.",
     images: ["https://www.elementarystateofmind.com/profile.png"],
   },
   alternates: {
@@ -36,7 +36,10 @@ export default function AboutPage() {
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Elementary State of Mind",
+    name: "Zoe Pastore",
+    alternateName: "Zoe Glover",
+    honorificPrefix: "Dr.",
+    award: districtTeacherAward,
     jobTitle: "Transformational Teacher Leader",
     worksFor: {
       "@type": "EducationalOrganization",
@@ -81,7 +84,7 @@ export default function AboutPage() {
   const credentialsSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Elementary State of Mind",
+    name: "Zoe Pastore",
     hasCredential: [
       {
         "@type": "EducationalOccupationalCredential",

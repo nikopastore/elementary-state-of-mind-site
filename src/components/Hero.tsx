@@ -13,10 +13,13 @@ export default function Hero() {
             <Link href="/shop" className="button">Shop Now</Link>
             <Link href="/about" className="button button-outline">Meet the Teacher</Link>
           </div>
+          <button className="motion-switch" type="button" aria-pressed={false} data-scroll-effects-toggle hidden>
+            Scroll effects <span data-scroll-effects-state aria-hidden="true">Off</span>
+          </button>
         </div>
         <div className="hero-board">
           <div className="hero-photo">
-            <Image src="/zoe-usc-graduation.webp" alt="Zoe Glover in USC graduation regalia, holding her diploma cover" fill priority sizes="(max-width: 820px) 73vw, 400px" />
+            <Image src="/zoe-usc-graduation.webp" alt="Zoe Pastore in USC graduation regalia, holding her diploma cover" fill priority sizes="(max-width: 820px) 73vw, 400px" />
           </div>
           <Link className="hero-resource" href="/shop#space-case-mock-trial" aria-label="Find Space Case Mock Trial in the shop">
             <Image src="/products/space-case-mock-trial.jpg" alt="" width={320} height={320} />
