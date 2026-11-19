@@ -334,7 +334,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
   line-height: 1.15;
   color: var(--ink);
 }
-.highlight-tile span {
+.highlight-tile > div span {
   display: block;
   font-size: 0.82rem;
   color: var(--muted);
@@ -342,13 +342,18 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
   line-height: 1.3;
 }
 .highlight-icon {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   flex: none;
   border-radius: 10px;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--ink);
+}
+.highlight-icon svg {
+  display: block;
+  flex: none;
 }
 .highlight-icon.tint-lavender { background: var(--lavender); color: #47396a; }
 .highlight-icon.tint-mint { background: var(--mint); color: #1f5348; }
