@@ -87,7 +87,7 @@ export default function AboutPageClient() {
       <section className="award-showcase" id="teacher-of-the-year" aria-labelledby="district-award-title" data-reveal="panel">
         <div className="award-intro">
           <Award className="award-icon" aria-hidden="true" />
-          <p>ASU Preparatory Academy � 2026</p>
+          <p>ASU Preparatory Academy · 2026</p>
           <h2 id="district-award-title">District Teacher of the Year</h2>
         </div>
         <div className="award-story">
@@ -106,7 +106,7 @@ export default function AboutPageClient() {
             <div className="about-record" key={degree}>
               <h3>{degree}</h3>
               <p>{school}</p>
-              <p className="record-detail">{year} � GPA: {gpa}</p>
+              <p className="record-detail">{year} · GPA: {gpa}</p>
             </div>
           ))}
         </section>
@@ -116,7 +116,7 @@ export default function AboutPageClient() {
             <div className="about-record" key={school}>
               <h3>{title}</h3>
               <p>{school}</p>
-              <p className="record-detail">{location} � {period}</p>
+              <p className="record-detail">{location} · {period}</p>
               <ul>{highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
             </div>
           ))}
@@ -127,7 +127,7 @@ export default function AboutPageClient() {
         </section>
         <section className="about-section" data-reveal="heading">
           <h2>Professional Learning</h2>
-          <ul className="about-list">{professionalLearning.map(({ name, year }) => <li key={name}>{name} � {year}</li>)}</ul>
+          <ul className="about-list">{professionalLearning.map(({ name, year }) => <li key={name}>{name} · {year}</li>)}</ul>
         </section>
       </div>
       <section className="about-section teaching-philosophy" data-reveal="panel">
