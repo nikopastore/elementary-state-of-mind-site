@@ -13,9 +13,6 @@ export default function Hero() {
             <Link href="/shop" className="button">Shop Now</Link>
             <Link href="/about" className="button button-outline">Meet the Teacher</Link>
           </div>
-          <button className="motion-switch" type="button" aria-pressed={false} data-scroll-effects-toggle hidden>
-            Scroll effects <span data-scroll-effects-state aria-hidden="true">Off</span>
-          </button>
         </div>
         <div className="hero-board">
           <div className="hero-photo">

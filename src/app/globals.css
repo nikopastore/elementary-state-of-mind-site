@@ -223,72 +223,37 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 }
 
 [data-reveal] {
-  --reveal-y: 26px;
+  --reveal-y: 25px;
   --reveal-x: 0px;
   --reveal-scale: 1;
-  --reveal-delay: 0ms;
-  --reveal-duration: 560ms;
 }
 [data-reveal="card"] {
   --reveal-y: 30px;
   --reveal-scale: .985;
-  --reveal-duration: 640ms;
-}
-[data-reveal="photo"] {
-  --reveal-y: 22px;
-  --reveal-scale: .975;
-  --reveal-duration: 660ms;
 }
 [data-reveal="panel"] {
-  --reveal-x: 20px;
-  --reveal-y: 8px;
+  --reveal-x: 18px;
+  --reveal-y: 9px;
 }
-.scroll-effects-on .reveal-waiting:not(:focus-within, :target) {
-  opacity: 0;
-  transform: translate3d(var(--reveal-x), var(--reveal-y), 0) scale(var(--reveal-scale));
+.scroll-effects-on [data-reveal]:not(:focus-within, :target) {
+  --section-travel: calc(1 - var(--section-scroll-progress, 1));
+  opacity: calc(.12 + var(--section-scroll-progress, 1) * .88);
+  transform: translate3d(
+    calc(var(--reveal-x) * var(--section-travel)),
+    calc(var(--reveal-y) * var(--section-travel)),
+    0
+  ) scale(calc(1 - (1 - var(--reveal-scale)) * var(--section-travel)));
 }
-.scroll-effects-on .reveal-entering:not(:focus-within, :target) {
-  animation: section-reveal var(--reveal-duration) cubic-bezier(.18, .75, .3, 1) var(--reveal-delay) backwards;
-}
-@keyframes section-reveal {
-  from {
-    opacity: 0;
-    transform: translate3d(var(--reveal-x), var(--reveal-y), 0) scale(var(--reveal-scale));
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-.scroll-effects-on .section-heading.reveal-waiting::after {
-  transform: scaleX(0);
-}
-.scroll-effects-on .section-heading.reveal-entering::after {
-  animation: section-rule 660ms cubic-bezier(.18, .75, .3, 1) both;
-}
-@keyframes section-rule {
-  from { transform: scaleX(0); }
-  to { transform: scaleX(1); }
-}
-@media (min-width: 821px) {
-  .product-grid > [data-reveal]:nth-child(3n + 2) { --reveal-delay: 65ms; }
-  .product-grid > [data-reveal]:nth-child(3n + 3) { --reveal-delay: 130ms; }
-}
-@media (min-width: 571px) and (max-width: 820px) {
-  .product-grid > [data-reveal]:nth-child(even) { --reveal-delay: 65ms; }
+.scroll-effects-on .section-heading:not(:focus-within, :target)::after {
+  transform: scaleX(var(--section-scroll-progress, 1));
 }
 @media (max-width: 570px) {
-  [data-reveal] {
+  [data-reveal], [data-reveal="card"], [data-reveal="panel"] {
     --reveal-y: 17px;
     --reveal-x: 0px;
-    --reveal-duration: 430ms;
-  }
-  [data-reveal="card"], [data-reveal="photo"], [data-reveal="panel"] {
-    --reveal-y: 17px;
-    --reveal-x: 0px;
-    --reveal-duration: 480ms;
   }
 }
+
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .product-card {
     transition: box-shadow 240ms ease, border-color 240ms ease, translate 240ms ease;
@@ -300,7 +265,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
   }
 }
 
-/* Track actual page scroll on the header and the two hero layers. */
+/* The progress line and opening collage follow the actual page position. */
 .scroll-effects-on .site-header::after {
   content: "";
   position: absolute;
@@ -313,36 +278,17 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 }
 .scroll-effects-on .hero-photo { translate: 0 calc(var(--hero-scroll-progress, 0) * 76px); }
 .scroll-effects-on .hero-resource { translate: 0 calc(var(--hero-scroll-progress, 0) * -56px); }
-.motion-switch {
-  min-height: 44px;
-  margin-top: .55rem;
-  padding: .35rem .4rem .35rem 0;
-  color: var(--muted);
-  font-size: .9rem;
-  font-weight: 650;
-  cursor: pointer;
-}
-.motion-switch[hidden] { display: inline-block !important; visibility: hidden; }
-.motion-switch span {
-  margin-inline-start: .28rem;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: .12rem .4rem;
-}
-.motion-switch[aria-pressed="true"] span {
-  color: #46335f;
-  border-color: #c1adcf;
-  background: var(--lavender);
-}
-.motion-switch:hover { color: var(--ink); }
 @media (max-width: 570px) {
   .scroll-effects-on .hero-photo { translate: 0 calc(var(--hero-scroll-progress, 0) * 45px); }
   .scroll-effects-on .hero-resource { translate: 0 calc(var(--hero-scroll-progress, 0) * -30px); }
 }
-/* A visitor's explicit scroll-effects choice overrides the system default for these reveals only. */
 @media (prefers-reduced-motion: reduce) {
-  :root.scroll-effects-on .reveal-entering { animation-duration: var(--reveal-duration) !important; }
-  :root.scroll-effects-on .section-heading.reveal-entering::after { animation-duration: 660ms !important; }
+  .scroll-effects-on .hero-photo, .scroll-effects-on .hero-resource { translate: none; }
+  .scroll-effects-on [data-reveal]:not(:focus-within, :target) {
+    opacity: 1;
+    transform: none;
+  }
+  .scroll-effects-on .section-heading:not(:focus-within, :target)::after { transform: none; }
 }
 
 /* Header mark and the gallery's printed pages. */

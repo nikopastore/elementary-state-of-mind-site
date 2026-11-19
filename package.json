@@ -11,6 +11,7 @@
   "dependencies": {
     "@stripe/stripe-js": "^8.6.0",
     "framer-motion": "^12.23.26",
+    "lenis": "1.3.19",
     "lucide-react": "^0.562.0",
     "next": "16.1.0",
     "react": "19.2.3",

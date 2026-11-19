@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { testimonials } from "@/lib/testimonials";
@@ -133,7 +135,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         {/* Preconnect hints for performance */}
@@ -173,7 +175,8 @@ export default function RootLayout({
         </main>
         <TestimonialsCarousel />
         <Footer />
-        <Script src="/section-motion.js?v=3" strategy="afterInteractive" />
+        <SmoothScroll />
+        <Script src="/section-motion.js?v=4" strategy="afterInteractive" />
       </body>
     </html>
   );

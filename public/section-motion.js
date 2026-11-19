@@ -1,157 +1,80 @@
 (() => {
   const root = document.documentElement;
   const scroller = document.scrollingElement || root;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const preferenceKey = 'esom-scroll-effects';
-  const revealSelector = '[data-reveal]';
-  const controlSelector = '[data-scroll-effects-toggle]';
-  const inset = Math.min(80, Math.round(root.clientHeight * 0.11));
-  const seen = new WeakSet();
-  const pending = new Set();
-  let override = readPreference();
-  let enabled;
-  let lastProgress = -1;
-  let lastHeroProgress = -1;
-  let scrollFrame = 0;
-  let refreshFrame = 0;
+  const clamp = (value) => Math.max(0, Math.min(1, value));
+  let scrollRange = 0;
+  let targets = [];
+  let needsMeasurement = true;
+  let frame = 0;
+  let lastProgress = '';
+  let lastHeroProgress = '';
 
-  const observer = 'IntersectionObserver' in window
-    ? new IntersectionObserver((entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) show(entry.target, true);
-        }
-      }, { rootMargin: `0px 0px -${inset}px 0px` })
-    : null;
+  function measure() {
+    const viewportHeight = root.clientHeight;
+    scrollRange = Math.max(0, scroller.scrollHeight - viewportHeight);
+    const inset = Math.min(48, viewportHeight * 0.06);
+    const revealDistance = Math.max(90, Math.min(220, viewportHeight * 0.23));
 
-  function readPreference() {
-    try {
-      const value = window.localStorage.getItem(preferenceKey);
-      return value === 'on' ? true : value === 'off' ? false : null;
-    } catch {
-      return null;
-    }
+    targets = Array.from(document.querySelectorAll('[data-reveal]'))
+      .filter((element) => element.getClientRects().length > 0)
+      .map((element) => {
+        // Layout offsets stay steady as CSS moves the element in and out of view.
+        let top = 0;
+        for (let node = element; node; node = node.offsetParent) top += node.offsetTop;
+        const start = top - viewportHeight + inset;
+        const end = Math.min(start + revealDistance, scrollRange);
+        return { element, start: Math.min(start, end - 1), end, previous: '' };
+      });
   }
 
-  function show(element, animate) {
-    if (!pending.delete(element)) return;
-    observer?.unobserve(element);
-    element.classList.remove('reveal-waiting');
-    if (animate && enabled && !element.matches(':focus-within, :target')) {
-      element.classList.add('reveal-entering');
+  function paint() {
+    frame = 0;
+    if (needsMeasurement) {
+      needsMeasurement = false;
+      measure();
     }
-  }
 
-  function updateScroll() {
-    if (!enabled) return;
     const position = Math.max(0, scroller.scrollTop);
-    const range = Math.max(1, scroller.scrollHeight - root.clientHeight);
-    const pageProgress = Math.min(1, position / range);
-    const openingProgress = Math.min(1, position / 320);
-    const heroProgress = openingProgress * (2 - openingProgress);
+    const pageProgress = (scrollRange ? clamp(position / scrollRange) : 0).toFixed(4);
+    const openingProgress = clamp(position / 320);
+    const heroProgress = (openingProgress * (2 - openingProgress)).toFixed(4);
 
     if (pageProgress !== lastProgress) {
-      root.style.setProperty('--page-scroll-progress', pageProgress.toFixed(4));
+      root.style.setProperty('--page-scroll-progress', pageProgress);
       lastProgress = pageProgress;
     }
     if (heroProgress !== lastHeroProgress) {
-      root.style.setProperty('--hero-scroll-progress', heroProgress.toFixed(4));
+      root.style.setProperty('--hero-scroll-progress', heroProgress);
       lastHeroProgress = heroProgress;
+    }
+
+    for (const target of targets) {
+      const fraction = clamp((position - target.start) / (target.end - target.start));
+      const progress = (fraction * fraction * (3 - 2 * fraction)).toFixed(3);
+      if (progress !== target.previous) {
+        target.element.style.setProperty('--section-scroll-progress', progress);
+        target.previous = progress;
+      }
     }
   }
 
-  function scheduleScroll() {
-    if (!enabled || scrollFrame) return;
-    scrollFrame = requestAnimationFrame(() => {
-      scrollFrame = 0;
-      updateScroll();
-    });
+  function schedule() {
+    if (!frame) frame = requestAnimationFrame(paint);
   }
 
   function refresh() {
-    for (const control of document.querySelectorAll(controlSelector)) {
-      const state = enabled ? 'On' : 'Off';
-      if (control.getAttribute('aria-pressed') !== String(enabled)) {
-        control.setAttribute('aria-pressed', String(enabled));
-      }
-      const label = control.querySelector('[data-scroll-effects-state]');
-      if (label && label.textContent !== state) label.textContent = state;
-      control.hidden = false;
-    }
-    for (const element of pending) {
-      if (!element.isConnected) {
-        show(element, false);
-        seen.delete(element);
-      }
-    }
-    if (!enabled || !observer) return;
-
-    const activationEdge = root.clientHeight - inset;
-    const below = [];
-    for (const element of document.querySelectorAll(revealSelector)) {
-      if (seen.has(element) || !element.getClientRects().length) continue;
-      seen.add(element);
-      if (element.getBoundingClientRect().top >= activationEdge && !element.matches(':focus-within, :target')) {
-        below.push(element);
-      }
-    }
-    for (const element of below) {
-      pending.add(element);
-      element.classList.add('reveal-waiting');
-      observer.observe(element);
-    }
+    needsMeasurement = true;
+    schedule();
   }
 
-  function scheduleRefresh() {
-    if (refreshFrame) return;
-    refreshFrame = requestAnimationFrame(() => {
-      refreshFrame = 0;
-      refresh();
-      updateScroll();
-    });
-  }
-
-  function syncPreference() {
-    enabled = override ?? !reducedMotion.matches;
-    root.classList.toggle('scroll-effects-on', enabled);
-    if (!enabled) {
-      for (const element of pending) {
-        show(element, false);
-        seen.delete(element);
-      }
-      document.querySelectorAll('.reveal-entering').forEach((element) => element.classList.remove('reveal-entering'));
-    }
-    refresh();
-    updateScroll();
-  }
-
-  window.addEventListener('scroll', scheduleScroll, { passive: true });
-  window.addEventListener('resize', scheduleRefresh, { passive: true });
-  window.addEventListener('pageshow', scheduleRefresh);
-  reducedMotion.addEventListener('change', syncPreference);
-
-  if ('ResizeObserver' in window) new ResizeObserver(scheduleScroll).observe(document.body);
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', refresh, { passive: true });
+  window.addEventListener('pageshow', refresh);
+  if ('ResizeObserver' in window) new ResizeObserver(refresh).observe(document.body);
   if ('MutationObserver' in window) {
-    new MutationObserver(scheduleRefresh).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(refresh).observe(document.body, { childList: true, subtree: true });
   }
 
-  document.addEventListener('click', (event) => {
-    if (!(event.target instanceof Element) || !event.target.closest(controlSelector)) return;
-    override = !enabled;
-    try {
-      window.localStorage.setItem(preferenceKey, override ? 'on' : 'off');
-    } catch {
-      // The control still works when this browser blocks storage.
-    }
-    syncPreference();
-  });
-  document.addEventListener('focusin', (event) => {
-    if (!(event.target instanceof Element)) return;
-    const element = event.target.closest(revealSelector);
-    if (element) show(element, false);
-  });
-  document.addEventListener('animationend', (event) => {
-    if (event.animationName === 'section-reveal') event.target.classList.remove('reveal-entering');
-  });
-
-  syncPreference();
+  paint();
+  root.classList.add('scroll-effects-on');
 })();
