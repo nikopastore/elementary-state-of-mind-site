@@ -3,6 +3,7 @@
   const scroller = document.scrollingElement || root;
   const clamp = (value) => Math.max(0, Math.min(1, value));
   let scrollRange = 0;
+  let heroDistance = 1;
   let targets = [];
   let needsMeasurement = true;
   let frame = 0;
@@ -12,8 +13,10 @@
   function measure() {
     const viewportHeight = root.clientHeight;
     scrollRange = Math.max(0, scroller.scrollHeight - viewportHeight);
-    const inset = Math.min(48, viewportHeight * 0.06);
-    const revealDistance = Math.max(90, Math.min(220, viewportHeight * 0.23));
+    heroDistance = Math.max(1, Math.min(620, viewportHeight * 0.68));
+    // Keep the reveal in motion from the lower edge to around mid-screen.
+    const entryLine = viewportHeight * 0.96;
+    const revealDistance = Math.min(460, viewportHeight * 0.46);
 
     targets = Array.from(document.querySelectorAll('[data-reveal]'))
       .filter((element) => element.getClientRects().length > 0)
@@ -21,7 +24,7 @@
         // Layout offsets stay steady as CSS moves the element in and out of view.
         let top = 0;
         for (let node = element; node; node = node.offsetParent) top += node.offsetTop;
-        const start = top - viewportHeight + inset;
+        const start = top - entryLine;
         const end = Math.min(start + revealDistance, scrollRange);
         return { element, start: Math.min(start, end - 1), end, previous: '' };
       });
@@ -36,7 +39,7 @@
 
     const position = Math.max(0, scroller.scrollTop);
     const pageProgress = (scrollRange ? clamp(position / scrollRange) : 0).toFixed(4);
-    const openingProgress = clamp(position / 320);
+    const openingProgress = clamp(position / heroDistance);
     const heroProgress = (openingProgress * (2 - openingProgress)).toFixed(4);
 
     if (pageProgress !== lastProgress) {

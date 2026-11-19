@@ -176,7 +176,7 @@ export default function RootLayout({
         <TestimonialsCarousel />
         <Footer />
         <SmoothScroll />
-        <Script src="/section-motion.js?v=4" strategy="afterInteractive" />
+        <Script src="/section-motion.js?v=5" strategy="afterInteractive" />
       </body>
     </html>
   );

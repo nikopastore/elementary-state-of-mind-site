@@ -223,21 +223,28 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 }
 
 [data-reveal] {
-  --reveal-y: 25px;
+  --reveal-y: 42px;
   --reveal-x: 0px;
   --reveal-scale: 1;
+  --reveal-transition: opacity 280ms cubic-bezier(.18, .75, .3, 1), transform 360ms cubic-bezier(.18, .75, .3, 1);
 }
 [data-reveal="card"] {
-  --reveal-y: 30px;
-  --reveal-scale: .985;
+  --reveal-y: 50px;
+  --reveal-scale: .98;
 }
 [data-reveal="panel"] {
-  --reveal-x: 18px;
-  --reveal-y: 9px;
+  --reveal-x: 24px;
+  --reveal-y: 18px;
+}
+.scroll-effects-on :where([data-reveal]) {
+  transition: var(--reveal-transition);
+}
+.scroll-effects-on [data-reveal]:is(:focus-within, :target) {
+  transition-duration: 0s;
 }
 .scroll-effects-on [data-reveal]:not(:focus-within, :target) {
   --section-travel: calc(1 - var(--section-scroll-progress, 1));
-  opacity: calc(.12 + var(--section-scroll-progress, 1) * .88);
+  opacity: calc(.1 + var(--section-scroll-progress, 1) * .9);
   transform: translate3d(
     calc(var(--reveal-x) * var(--section-travel)),
     calc(var(--reveal-y) * var(--section-travel)),
@@ -246,17 +253,18 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 }
 .scroll-effects-on .section-heading:not(:focus-within, :target)::after {
   transform: scaleX(var(--section-scroll-progress, 1));
+  transition: transform 360ms cubic-bezier(.18, .75, .3, 1);
 }
 @media (max-width: 570px) {
   [data-reveal], [data-reveal="card"], [data-reveal="panel"] {
-    --reveal-y: 17px;
+    --reveal-y: 30px;
     --reveal-x: 0px;
   }
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
   .product-card {
-    transition: box-shadow 240ms ease, border-color 240ms ease, translate 240ms ease;
+    transition: box-shadow 240ms ease, border-color 240ms ease, translate 240ms ease, var(--reveal-transition);
   }
   .product-card:hover {
     translate: 0 -3px;
@@ -285,7 +293,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 @media (prefers-reduced-motion: reduce) {
   .scroll-effects-on .hero-photo, .scroll-effects-on .hero-resource { translate: none; }
   .scroll-effects-on [data-reveal]:not(:focus-within, :target) {
-    opacity: 1;
+    opacity: calc(.42 + var(--section-scroll-progress, 1) * .58);
     transform: none;
   }
   .scroll-effects-on .section-heading:not(:focus-within, :target)::after { transform: none; }

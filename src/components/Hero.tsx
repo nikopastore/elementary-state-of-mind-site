@@ -24,7 +24,7 @@ export default function Hero() {
           </Link>
         </div>
       </div>
-      <div className="site-width"><SocialBento /></div>
+      <div className="site-width" data-reveal="heading"><SocialBento /></div>
     </section>
   );
 }
