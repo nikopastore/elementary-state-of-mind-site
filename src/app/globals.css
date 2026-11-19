@@ -67,7 +67,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
   background: var(--peach);
   box-shadow: 0 12px 23px #25263a25;
 }
-.hero-photo img { object-fit: cover; object-position: 42% 56%; }
+.hero-photo img { object-fit: cover; object-position: 50% 72%; }
 .hero-resource {
   position: absolute;
   width: 35%;

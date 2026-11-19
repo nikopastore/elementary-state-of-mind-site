@@ -16,7 +16,7 @@ export default function Hero() {
         </div>
         <div className="hero-board">
           <div className="hero-photo">
-            <Image src="/profile.png" alt="Zoe Glover, the teacher behind Elementary State of Mind" fill priority sizes="(max-width: 820px) 73vw, 400px" />
+            <Image src="/zoe-usc-graduation.webp" alt="Zoe Glover in USC graduation regalia, holding her diploma cover" fill priority sizes="(max-width: 820px) 73vw, 400px" />
           </div>
           <Link className="hero-resource" href="/shop#space-case-mock-trial" aria-label="Find Space Case Mock Trial in the shop">
             <Image src="/products/space-case-mock-trial.jpg" alt="" width={320} height={320} />
