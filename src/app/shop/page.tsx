@@ -3,7 +3,7 @@ import { products } from '@/lib/products';
 import ShopCatalog from '@/components/ShopCatalog';
 
 export const metadata: Metadata = {
-  title: "The Shop | Elementary State of Mind",
+  title: "Elementary Teaching Resources & Lesson Plans",
   description: "Beautiful, engaging digital resources for your classroom. Shop lesson plans, novel studies, anchor charts, and classroom decor for elementary teachers.",
   keywords: ["teacher resources", "digital downloads", "lesson plans", "novel studies", "anchor charts", "classroom decor", "teacherspayteachers", "elementary teaching materials"],
   openGraph: {
@@ -31,162 +31,25 @@ export const metadata: Metadata = {
   },
 };
 
-// Generate Product schema for each product with enhanced digital product info
-function generateProductSchema(product: typeof products[0]) {
-  const categoryName = product.category === 'lesson-plan' ? 'Lesson Plans' :
-                       product.category === 'worksheet' ? 'Worksheets' :
-                       product.category === 'decor' ? 'Classroom Decor' :
-                       product.category === 'bundle' ? 'Resource Bundles' : product.category;
-
-  return {
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: `https://www.elementarystateofmind.com${product.image}`,
-    url: product.tptUrl,
-    brand: {
-      "@type": "Brand",
-      name: "Elementary State of Mind",
-    },
-    offers: {
-      "@type": "Offer",
-      price: product.isFree ? "0.00" : (product.price / 100).toFixed(2),
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: product.tptUrl,
-      seller: {
-        "@type": "Organization",
-        name: "Elementary State of Mind",
-      },
-      itemCondition: "https://schema.org/NewCondition",
-      priceValidUntil: "2025-12-31",
-    },
-    category: categoryName,
-    isAccessoryOrSparePartFor: {
-      "@type": "EducationalOccupationalProgram",
-      name: "Elementary Education",
-    },
-    audience: {
-      "@type": "EducationalAudience",
-      educationalRole: "Teacher",
-      audienceType: "Elementary Educators",
-    },
-    additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "File Format",
-        value: "PDF, Google Slides",
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Delivery Method",
-        value: "Instant Digital Download",
-      },
-    ],
-  };
-}
-
-// Generate OfferCatalog schema for the entire store
-function generateOfferCatalogSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "OfferCatalog",
-    name: "Elementary State of Mind Teaching Resources",
-    description: "Complete catalog of digital teaching resources for elementary educators",
-    url: "https://www.elementarystateofmind.com/shop",
-    publisher: {
-      "@type": "Organization",
-      name: "Elementary State of Mind",
-      url: "https://www.elementarystateofmind.com",
-    },
-    numberOfItems: products.length,
-    itemListOrder: "https://schema.org/ItemListOrderDescending",
-  };
-}
-
 export default function ShopPage() {
-  const featuredProducts = products.filter((p) => p.featured);
-
-  // Generate ItemList schema for all products
-  const itemListSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Elementary State of Mind Teaching Resources",
-    description: "Digital teaching resources for elementary educators including lesson plans, worksheets, and classroom decor.",
-    url: "https://www.elementarystateofmind.com/shop",
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Elementary teaching resources',
     numberOfItems: products.length,
     itemListElement: products.map((product, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: generateProductSchema(product),
+      '@type': 'ListItem', position: index + 1, name: product.name,
+      url: 'https://www.elementarystateofmind.com/shop/' + product.id,
     })),
   };
-
-  // Generate individual Product schemas for featured products (for rich snippets)
-  const featuredProductSchemas = featuredProducts.map(product => ({
-    "@context": "https://schema.org",
-    ...generateProductSchema(product),
-  }));
-
-  // Generate OfferCatalog schema
-  const offerCatalogSchema = generateOfferCatalogSchema();
-
-  // Store aggregate rating schema
-  const storeRatingSchema = {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    name: "Elementary State of Mind Shop",
-    description: "Digital teaching resources for elementary educators",
-    url: "https://www.elementarystateofmind.com/shop",
-    image: "https://www.elementarystateofmind.com/logo.png",
-    priceRange: "$0 - $15",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.95",
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: "43",
-      reviewCount: "43",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Teaching Resources",
-      itemListElement: [
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Lesson Plans" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Worksheets" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Novel Studies" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Classroom Decor" } },
-      ],
-    },
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalogSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(storeRatingSchema) }}
-      />
-      {featuredProductSchemas.map((schema, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
-
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <div className="content-page">
         <div className="site-width">
           <div className="page-title">
             <h1>The Shop</h1>
-            <p>Beautiful, engaging digital resources for your classroom</p>
+            <p>Browse novel studies, writing organizers, classroom activities and free downloads.</p>
           </div>
           <ShopCatalog products={products} />
         </div>

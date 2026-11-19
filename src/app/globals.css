@@ -2722,3 +2722,10 @@ button.book-contents-item:hover {
   .award-showcase { grid-template-columns: minmax(0, 1fr); }
 }
 
+
+.resource-details { display: grid; grid-template-columns: minmax(150px, 260px) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); }
+.resource-cover { position: relative; aspect-ratio: 1; }
+@media (max-width: 650px) {
+  .resource-details { grid-template-columns: 1fr; }
+  .resource-cover { width: min(100%, 260px); margin: auto; }
+}

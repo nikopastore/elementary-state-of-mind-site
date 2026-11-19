@@ -3,7 +3,7 @@ import AboutPageClient, { districtTeacherAward } from './AboutPageClient';
 import { faqs } from '@/lib/faqs';
 
 export const metadata: Metadata = {
-  title: "Meet the Teacher | Elementary State of Mind",
+  title: "Meet Dr. Zoe Pastore, Elementary Educator",
   description: `Meet Dr. Zoe Pastore, the ${districtTeacherAward} and educator behind Elementary State of Mind.`,
   keywords: ["elementary teacher", "teacher resources", "educational leadership", "USC education", "Arizona State University", "classroom teacher", "ELA teacher"],
   openGraph: {

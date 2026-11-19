@@ -4,7 +4,7 @@
 
 ## About
 
-Elementary State of Mind is an education resource platform created by a dedicated elementary teacher pursuing a Doctorate in Educational Leadership from USC. We provide high-quality, classroom-tested digital resources designed to save teachers time while inspiring student engagement.
+Elementary State of Mind is an education resource platform created by Dr. Zoe Pastore, an elementary educator who earned her Doctor of Education in Educational Leadership at USC. We provide high-quality, classroom-tested digital resources designed to save teachers time while inspiring student engagement.
 
 ## Website
 
@@ -25,12 +25,12 @@ Elementary State of Mind is an education resource platform created by a dedicate
 - Classroom decor and bulletin board materials
 - Assessment tools and rubrics
 
-### Featured Products
-1. Space Case Complete Novel Study & PBL - Ultimate bundle combining mock trial with assessment ($11.20)
-2. Space Case Mock Trial - Immersive courtroom experience for novel studies ($12.00)
-3. Any Text Debate Prep Tool - Evidence-based reasoning using CER, OREO, and RACES frameworks ($4.00)
-4. OREO Opinion Writing - Differentiated opinion writing resources ($5.00)
-5. ELA Anchor Charts - Hand-drawn, student-friendly charts for interactive notebooks ($5.00)
+### Featured resources
+- [Space Case novel study bundle](https://www.elementarystateofmind.com/shop/space-case-complete)
+- [Space Case mock trial](https://www.elementarystateofmind.com/shop/space-case-mock-trial)
+- [Any Text Debate Prep Tool](https://www.elementarystateofmind.com/shop/any-text-debate)
+- [OREO opinion writing](https://www.elementarystateofmind.com/shop/oreo-opinion-writing)
+- [ELA anchor charts](https://www.elementarystateofmind.com/shop/ela-anchor-charts)
 
 ### Free Resources
 - Letter to my Teacher - End of year letter activity

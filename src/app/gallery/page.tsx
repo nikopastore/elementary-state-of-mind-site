@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import GalleryPageClient from './GalleryPageClient';
 
 export const metadata: Metadata = {
-  title: "Products in Action | Elementary State of Mind",
+  title: "Classroom Photo Gallery and Teaching Resources in Action",
   description: "See Elementary State of Mind resources in action! Browse photos of students engaging with mock trials, writing activities, and classroom projects in real elementary classrooms.",
   keywords: ["classroom photos", "teacher resources in action", "student engagement", "elementary classroom", "mock trial photos", "project-based learning"],
   openGraph: {

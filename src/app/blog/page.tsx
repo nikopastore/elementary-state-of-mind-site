@@ -4,7 +4,7 @@ import BlogCard from '@/components/BlogCard';
 import EmailSubscribe from '@/components/EmailSubscribe';
 
 export const metadata: Metadata = {
-  title: "Blog | Elementary State of Mind",
+  title: "Elementary Teaching Strategies and Classroom Guides",
   description: "Teaching tips, classroom stories, and educator insights for elementary teachers. Read about evidence-based practices, engagement strategies, and classroom management.",
   keywords: ["teaching tips", "classroom management", "ELA instruction", "elementary education", "teaching blog", "educator resources"],
   openGraph: {

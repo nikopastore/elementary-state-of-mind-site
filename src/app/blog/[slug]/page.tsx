@@ -173,7 +173,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `https://www.elementarystateofmind.com/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Elementary State of Mind Blog`,
+    title: post.title,
     description: post.excerpt,
     keywords: [
       "elementary education",
@@ -239,7 +239,7 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.date,
     dateModified: post.date,
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: "Elementary State of Mind",
       url: "https://www.elementarystateofmind.com/about",
     },
@@ -278,6 +278,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
           <h1>{post.title}</h1>
           <p className="article-lead">{post.excerpt}</p>
+          <Link className="article-back-link" href="/about">About the educator behind Elementary State of Mind</Link>
         </header>
 
         <article className="article-canvas" data-reveal="panel">

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight } from 'lucide-react';
 import type { Product } from '@/lib/products';
@@ -32,12 +33,10 @@ export default function ProductCard({
       data-reveal="card"
       data-stagger={staggerIndex % 3}
     >
-      <a
-        href={tptUrl}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={'/shop/' + id}
         className="product-art"
-        aria-label={name + ' on Teachers Pay Teachers'}
+        aria-label={name + ' resource details'}
       >
         <Image
           src={image}
@@ -45,7 +44,7 @@ export default function ProductCard({
           fill
           sizes="(max-width: 570px) 90vw, (max-width: 940px) 44vw, 30vw"
         />
-      </a>
+      </Link>
       <div className="product-copy">
         <div className="product-meta">
           <span className="product-category-pill">
@@ -55,7 +54,7 @@ export default function ProductCard({
             {free ? 'FREE' : '$' + (price / 100).toFixed(2)}
           </strong>
         </div>
-        <h3>{name}</h3>
+        <h3><Link href={'/shop/' + id}>{name}</Link></h3>
         <p>{description}</p>
         <a
           href={tptUrl}

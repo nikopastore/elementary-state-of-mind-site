@@ -7,7 +7,6 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.elementarystateofmind.com"),
@@ -52,7 +51,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Organization Schema for SEO with AggregateRating
+  // Organization Schema for SEO
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -73,17 +72,9 @@ export default function RootLayout({
       contactType: "Customer Service",
       url: "https://www.elementarystateofmind.com",
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.95",
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: "43",
-      reviewCount: "43",
-    },
   };
 
-  // WebSite schema for sitelinks searchbox
+  // WebSite schema
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -94,44 +85,6 @@ export default function RootLayout({
       "@type": "Organization",
       name: "Elementary State of Mind",
     },
-  };
-
-  // Review schema for individual reviews
-  const reviewsSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Elementary State of Mind",
-    url: "https://www.elementarystateofmind.com",
-    review: testimonials.map((t) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: t.reviewer,
-      },
-      datePublished: t.date,
-      reviewBody: t.review,
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: t.rating,
-        bestRating: 5,
-      },
-      itemReviewed: {
-        "@type": "Product",
-        name: t.product,
-      },
-    })),
-  };
-
-  // Speakable schema for voice search optimization
-  const speakableSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Elementary State of Mind - Teaching Resources",
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["h1", "h2", ".description"],
-    },
-    url: "https://www.elementarystateofmind.com",
   };
 
   return (
@@ -157,14 +110,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
         />
       </head>
       <body className="antialiased min-h-screen flex flex-col">

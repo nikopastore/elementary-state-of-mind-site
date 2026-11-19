@@ -82,7 +82,7 @@ For students ready for more challenge:
 
 ## A Resource That Helps
 
-If you want ready-to-use materials for teaching opinion writing, the [OREO Opinion Writing resource](/shop) includes differentiated graphic organizers, anchor charts, and practice prompts for grades 3-6.
+If you want ready-to-use materials for teaching opinion writing, the [OREO Opinion Writing resource](/shop/oreo-opinion-writing) includes differentiated graphic organizers, anchor charts, and practice prompts for grades 3-6.
 
 When students have the right tools, opinion writing transforms from frustrating to empowering.
     `.trim(),
@@ -146,7 +146,7 @@ Breaking the process into chunks makes it manageable for elementary writers.
 
 The key is consistency. When students use the same organizer format repeatedly, the process becomes automatic, freeing mental energy for the actual thinking and writing.
 
-Ready-to-use materials like the [Informative 5 Paragraph Essay Writing Packet](/shop) include brain dump pages, tree maps, and paragraph frames designed to work together.
+Ready-to-use materials like the [Informative 5 Paragraph Essay Writing Packet](/shop/informative-essay-packet) include brain dump pages, tree maps, and paragraph frames designed to work together.
 
 Strong informative writing starts with strong planning.
     `.trim(),
@@ -232,7 +232,7 @@ More detailed than story mountains, plot diagrams include:
 4. Draft in sections (not all at once)
 5. Revise specifically for structure
 
-The [Narrative Writing Packet](/shop) includes step-by-step graphic organizers that guide students through each element of narrative structure.
+The [Narrative Writing Packet](/shop/narrative-writing-packet) includes step-by-step graphic organizers that guide students through each element of narrative structure.
 
 When students understand structure, their stories come alive.
     `.trim(),
@@ -313,7 +313,7 @@ For students who need support:
 - Allow preparation time with a partner
 - Use sentence frames for arguments
 
-The [Any Text Debate Prep Tool](/shop) helps students organize their thinking using CER, OREO, and RACES frameworks—perfect for debates on any text or topic.
+The [Any Text Debate Prep Tool](/shop/any-text-debate) helps students organize their thinking using CER, OREO, and RACES frameworks—perfect for debates on any text or topic.
 
 When students learn to argue with evidence, they learn to think.
     `.trim(),
@@ -390,7 +390,7 @@ Anchor charts should evolve. Add student examples, clarify confusing sections, o
 
 ## A Time-Saving Option
 
-Creating effective anchor charts takes time. If you want ready-to-print options with hand-drawn appeal, the [ELA Anchor Chart Printables](/shop) include 9 charts covering essential reading and writing skills.
+Creating effective anchor charts takes time. If you want ready-to-print options with hand-drawn appeal, the [ELA Anchor Chart Printables](/shop/ela-anchor-charts) include 9 charts covering essential reading and writing skills.
 
 The best anchor chart is one that students actually use.
     `.trim(),
@@ -471,7 +471,7 @@ You're a facilitator, not the main presenter. Your job is to:
 
 ## Resources to Help
 
-The [Student-Led Conference Guide](/shop) includes everything you need: student preparation materials, parent communication templates, and a conference-day checklist.
+The [Student-Led Conference Guide](/shop/slc-guide) includes everything you need: student preparation materials, parent communication templates, and a conference-day checklist.
 
 When students lead, everyone learns more.
     `.trim(),
@@ -546,7 +546,7 @@ When students see the connection visually, conversion becomes intuitive.
 
 ## A Resource That Helps
 
-The [5th/6th Grade 4-Square Math Notes](/shop) provide hand-drawn visual supports for fractions and decimals, perfect for interactive notebooks or classroom reference.
+The [5th/6th Grade 4-Square Math Notes](/shop/math-notes-fractions) provide hand-drawn visual supports for fractions and decimals, perfect for interactive notebooks or classroom reference.
 
 When students can see the math, they can do the math.
     `.trim(),
@@ -623,7 +623,7 @@ Connect reading to action:
 
 ## A Ready-to-Use Resource
 
-The [Article-A-Week: Endangered Species](/shop) pack includes 10 articles with comprehension questions, vocabulary support, and writing prompts—perfect for independent reading rotations or whole-class instruction.
+The [Article-A-Week: Endangered Species](/shop/article-a-week) pack includes 10 articles with comprehension questions, vocabulary support, and writing prompts—perfect for independent reading rotations or whole-class instruction.
 
 When students care about what they're reading, comprehension follows.
     `.trim(),
@@ -701,9 +701,9 @@ High-engagement days need clear structure:
 
 ## Resources That Help
 
-The [Friendsgiving Potluck & Gratitude Toasts](/shop) resource includes student planning sheets, gratitude toast templates, and teacher guides for a meaningful celebration.
+The [Friendsgiving Potluck & Gratitude Toasts](/shop/friendsgiving) resource includes student planning sheets, gratitude toast templates, and teacher guides for a meaningful celebration.
 
-The [67th Day of School Activities](/shop) pack turns an ordinary day into something memorable while practicing writing and math skills.
+The [67th Day of School Activities](/shop/67th-day) pack turns an ordinary day into something memorable while practicing writing and math skills.
 
 Celebrations should build community AND support learning.
     `.trim(),
@@ -787,7 +787,7 @@ After the trial, discuss:
 
 ## A Complete Resource
 
-The [Space Case Mock Trial](/shop) includes everything you need: role cards, evidence organizers, trial procedures, and assessment rubrics. It turns the mystery novel into an unforgettable classroom experience.
+The [Space Case Mock Trial](/shop/space-case-mock-trial) includes everything you need: role cards, evidence organizers, trial procedures, and assessment rubrics. It turns the mystery novel into an unforgettable classroom experience.
 
 When students argue about books, they're really reading deeply.
     `.trim(),
@@ -878,7 +878,7 @@ Consider turning your next novel study into an experience.
 
 After teachers kept asking for our materials, I created the **Space Case Mock Trial** resource so others could bring this experience into their classrooms.
 
-[View the Space Case Mock Trial Resource](/shop) | [Browse All Resources](/shop)
+[View the Space Case Mock Trial Resource](/shop/space-case-mock-trial) | [Browse All Resources](/shop)
     `.trim(),
     date: '2025-12-22',
     category: 'classroom',
