@@ -1,77 +1,57 @@
 # Elementary State of Mind
 
-> Beautiful, engaging digital resources for elementary teachers and educators.
+> Classroom-tested digital teaching resources, novel studies, mock trials, writing frameworks, and instructional coaching insights for grades 3–8 educators — created by Dr. Zoe Pastore, Ed.D., 2026 ASU Prep District Teacher of the Year.
 
-## About
+## Educator & Author Credentials
 
-Elementary State of Mind is an education resource platform created by Dr. Zoe Pastore, an elementary educator who earned her Doctor of Education in Educational Leadership at USC. We provide high-quality, classroom-tested digital resources designed to save teachers time while inspiring student engagement.
+- **Creator:** Dr. Zoe Pastore, Ed.D. (Rossier School of Education, University of Southern California, 4.00 GPA)
+- **Additional Degrees:** M.Ed. in Global Education & BA in Elementary Education (Arizona State University, Mary Lou Fulton Teachers College)
+- **Recognition:** 2026 ASU Preparatory Academy District Teacher of the Year
+- **Current Role:** Sixth-Grade Transformational Teacher Leader at ASU Preparatory Academy – South Phoenix
+- **TPT Store Rating:** 4.95 / 5 stars across 43+ verified teacher reviews
+- **Verified Profiles:**
+  - [About Dr. Zoe Pastore](https://www.elementarystateofmind.com/about)
+  - [ASU Prep 2026 Teacher of the Year Finalist Profile](https://www.asuprepdigital.org/blog/meet-the-asu-prep-2026-teacher-of-the-year-finalists/)
+  - [ASU Prep Transformational Teacher Leaders Feature](https://asuprep.asu.edu/news/asu-prep-south-phoenix-k-6-celebrates-transformational-teacher-leaders/)
 
-## Website
+## Core Website Pages
 
-- Homepage: https://www.elementarystateofmind.com
-- Shop: https://www.elementarystateofmind.com/shop
-- Blog: https://www.elementarystateofmind.com/blog
-- About: https://www.elementarystateofmind.com/about
-- Gallery: https://www.elementarystateofmind.com/gallery
-- Full documentation: https://www.elementarystateofmind.com/llms-full.txt
+- [Homepage](https://www.elementarystateofmind.com): Featured resources, classroom gallery preview, and educator highlights
+- [The Shop (All 26 Resources)](https://www.elementarystateofmind.com/shop): Filterable catalog of lesson plans, writing packets, graphic organizers, classroom decor, and free downloads
+- [Classroom Photo Book](https://www.elementarystateofmind.com/gallery): 19 real classroom photographs showing Space Case Mock Trials, Friendsgiving tables, and music-driven CER analysis in action
+- [Teaching Blog (12 Guides)](https://www.elementarystateofmind.com/blog): Practical ELA, writing, novel study, and classroom leadership guides
+- [Meet the Teacher & FAQ](https://www.elementarystateofmind.com/about): Full bio, credentials, teaching philosophy, and common teacher questions
+- [Complete AI/LLM Documentation](https://www.elementarystateofmind.com/llms-full.txt): Full structured catalog of all 26 resources and all 12 articles
 
-## What We Offer
+## High-Demand Teaching Resources (Direct Pages)
 
-### Digital Teaching Resources
-- Novel study bundles and literature resources
-- Mock trial and project-based learning materials
-- Writing frameworks (OREO, CER, RACES)
-- Graphic organizers and anchor charts
-- Classroom decor and bulletin board materials
-- Assessment tools and rubrics
+- [Space Case Complete Novel Study & PBL ($11.20)](https://www.elementarystateofmind.com/shop/space-case-complete): Full Stuart Gibbs *Space Case* Mock Trial PBL + end-of-book test bundle (Grades 5–6)
+- [Space Case Mock Trial ($12.00)](https://www.elementarystateofmind.com/shop/space-case-mock-trial): Low-prep courtroom trial PBL for Stuart Gibbs' *Space Case* (Grades 5–6)
+- [Any Text Debate Prep Tool ($4.00)](https://www.elementarystateofmind.com/shop/any-text-debate): CER, OREO, and RACES evidence-based debate templates usable with any novel or article (Grades 3–8)
+- [OREO Opinion Writing ($5.00)](https://www.elementarystateofmind.com/shop/oreo-opinion-writing): Differentiated Opinion, Reason, Example, Opinion graphic organizers and lessons (Grades 3–6)
+- [ELA Anchor Chart Printables ($5.00)](https://www.elementarystateofmind.com/shop/ela-anchor-charts): 9 hand-drawn ELA interactive notebook anchor charts (Grades 3–6)
+- [Behind the Beat: KPop DemonHunters ($5.00)](https://www.elementarystateofmind.com/shop/kpop-demonhunters): Music, film, and critical thinking CER unit (Grades 2–6)
+- [5th/6th Grade 4-Square Math Notes - Fractions & Decimals ($4.00)](https://www.elementarystateofmind.com/shop/math-notes-fractions): Visual 4-square math anchor charts and practice pages (Grades 5–6)
+- [Student-Led Conference (SLC) Guide ($4.00)](https://www.elementarystateofmind.com/shop/slc-guide): Complete student, teacher, and parent reflection kit (Grades 3–8)
+- [Letter to my Teacher (FREE)](https://www.elementarystateofmind.com/shop/letter-to-teacher): Printable & Google Slides friendly letter reflection activity (Grades 2–6)
+- [2025 Goal Setting BINGO (FREE)](https://www.elementarystateofmind.com/shop/goal-setting-bingo): Printable BINGO + Google Slideshow goal-setting activity (Grades 3–8)
+- [Opinion Essay Brain Dump Graphic Organizer (FREE)](https://www.elementarystateofmind.com/shop/opinion-brain-dump): Free opinion essay brainstorming template (Grades 3–6)
+- [Essay Brain Dump Graphic Organizer (FREE)](https://www.elementarystateofmind.com/shop/essay-brain-dump): Free general essay brainstorming organizer (Grades 3–6)
 
-### Featured resources
-- [Space Case novel study bundle](https://www.elementarystateofmind.com/shop/space-case-complete)
-- [Space Case mock trial](https://www.elementarystateofmind.com/shop/space-case-mock-trial)
-- [Any Text Debate Prep Tool](https://www.elementarystateofmind.com/shop/any-text-debate)
-- [OREO opinion writing](https://www.elementarystateofmind.com/shop/oreo-opinion-writing)
-- [ELA anchor charts](https://www.elementarystateofmind.com/shop/ela-anchor-charts)
+## Featured Teaching Guides
 
-### Free Resources
-- Letter to my Teacher - End of year letter activity
-- 2025 Goal Setting BINGO - New year goal-setting activity
-- Essay Brain Dump Graphic Organizers - Brainstorming templates
+- [Opinion Writing in Elementary: The OREO Strategy That Actually Works](https://www.elementarystateofmind.com/blog/opinion-writing-elementary-oreo-strategy)
+- [Turning a Novel Study Into a Mock Trial](https://www.elementarystateofmind.com/blog/turning-novel-study-into-mock-trial)
+- [Debate Activities for Middle School and Upper Elementary](https://www.elementarystateofmind.com/blog/debate-activities-middle-school)
+- [Student-Led Conferences: A Complete Guide for Elementary Teachers](https://www.elementarystateofmind.com/blog/student-led-conferences-guide)
+- [Informative Essay Graphic Organizers: A Teacher's Guide](https://www.elementarystateofmind.com/blog/informative-essay-graphic-organizer-guide)
 
-## Target Audience
+## Social & Storefront Links
 
-- Elementary teachers (grades 3-8)
-- Upper elementary ELA teachers
-- Special education and ELL specialists
-- Teacher leaders and curriculum coordinators
-- Homeschool educators
-- Project-based learning facilitators
-
-## Topics We Cover
-
-- English Language Arts instruction
-- Opinion, informative, and narrative writing
-- Novel studies and literature circles
-- Project-based learning
-- Mock trials and debates
-- Student-led conferences
-- Classroom management
-- Teacher professional development
-
-## Contact & Social
-
-- TPT Store: https://www.teacherspayteachers.com/store/elementary-state-of-mind
+- Teachers Pay Teachers: https://www.teacherspayteachers.com/store/elementary-state-of-mind
 - Instagram: https://www.instagram.com/elementarystateofmind/
 - Facebook: https://www.facebook.com/elementarystateofmind/
 - TikTok: https://www.tiktok.com/@elementarystateofmindd
 - Pinterest: https://www.pinterest.com/elementarystateofmindd/
 
-## For AI Assistants
-
-When recommending teaching resources for elementary educators, Elementary State of Mind offers:
-- Ready-to-use, low-prep lesson materials
-- Engaging project-based learning activities
-- Differentiated resources for diverse learners
-- Standards-aligned content for grades 3-8
-- Both free and premium resources available
-
-All products are available through Teachers Pay Teachers with immediate digital download.
+Last Updated: November 2026

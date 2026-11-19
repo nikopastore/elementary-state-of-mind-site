@@ -1,129 +1,76 @@
 import { Metadata } from 'next';
 import AboutPageClient, { districtTeacherAward } from './AboutPageClient';
 import { faqs } from '@/lib/faqs';
+import {
+  PERSON_ID,
+  SITE_URL,
+  WEBSITE_ID,
+  getAuthorPersonEntity,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Meet Dr. Zoe Pastore, Elementary Educator",
-  description: `Meet Dr. Zoe Pastore, the ${districtTeacherAward} and educator behind Elementary State of Mind.`,
-  keywords: ["elementary teacher", "teacher resources", "educational leadership", "USC education", "Arizona State University", "classroom teacher", "ELA teacher"],
+  title: 'Meet Dr. Zoe Pastore, Ed.D. — 2026 Teacher of the Year',
+  description: `Meet Dr. Zoe Pastore, Ed.D. (USC Rossier), the ${districtTeacherAward} and sixth-grade Transformational Teacher Leader behind Elementary State of Mind.`,
+  keywords: [
+    'Dr. Zoe Pastore',
+    'Zoe Pastore Ed.D.',
+    '2026 ASU Prep District Teacher of the Year',
+    'elementary teacher',
+    'USC Rossier School of Education',
+    'Arizona State University',
+    'project-based learning',
+    'ELA teacher',
+  ],
   openGraph: {
-    title: "Meet the Teacher | Elementary State of Mind",
-    description: "Meet the educator behind Elementary State of Mind - a dedicated elementary teacher passionate about innovative, student-centered learning.",
-    type: "profile",
-    url: "https://www.elementarystateofmind.com/about",
+    title: 'Meet Dr. Zoe Pastore, Ed.D. — 2026 Teacher of the Year',
+    description: `Meet Dr. Zoe Pastore, Ed.D., ${districtTeacherAward} and creator of Elementary State of Mind teaching resources.`,
+    type: 'profile',
+    url: `${SITE_URL}/about`,
     images: [
       {
-        url: "https://www.elementarystateofmind.com/profile.png",
+        url: `${SITE_URL}/profile.png`,
         width: 800,
         height: 800,
-        alt: "Elementary State of Mind Teacher",
+        alt: 'Dr. Zoe Pastore, Ed.D.',
       },
     ],
   },
   twitter: {
-    card: "summary",
-    title: "Meet the Teacher | Elementary State of Mind",
-    description: "Meet the educator behind Elementary State of Mind - passionate about innovative, student-centered learning.",
-    images: ["https://www.elementarystateofmind.com/profile.png"],
+    card: 'summary',
+    title: 'Meet Dr. Zoe Pastore, Ed.D. — 2026 Teacher of the Year',
+    description: `Meet Dr. Zoe Pastore, Ed.D., ${districtTeacherAward} and creator of Elementary State of Mind.`,
+    images: [`${SITE_URL}/profile.png`],
   },
   alternates: {
-    canonical: "https://www.elementarystateofmind.com/about",
+    canonical: `${SITE_URL}/about`,
   },
 };
 
 export default function AboutPage() {
-  // Person Schema for the teacher
-  const personSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Zoe Pastore",
-    alternateName: "Zoe Glover",
-    honorificPrefix: "Dr.",
-    award: districtTeacherAward,
-    jobTitle: "Transformational Teacher Leader",
-    worksFor: {
-      "@type": "EducationalOrganization",
-      name: "ASU Preparatory Academy",
-    },
-    alumniOf: [
+  const aboutGraph = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      getAuthorPersonEntity(),
       {
-        "@type": "CollegeOrUniversity",
-        name: "University of Southern California",
+        '@type': 'ProfilePage',
+        '@id': `${SITE_URL}/about#profilepage`,
+        url: `${SITE_URL}/about`,
+        name: 'Meet Dr. Zoe Pastore, Ed.D. — Elementary State of Mind',
+        isPartOf: { '@id': WEBSITE_ID },
+        mainEntity: { '@id': PERSON_ID },
+        inLanguage: 'en-US',
       },
       {
-        "@type": "CollegeOrUniversity",
-        name: "Arizona State University",
-      },
-    ],
-    description: "Elementary teacher and educational leader specializing in innovative, student-centered learning experiences.",
-    url: "https://www.elementarystateofmind.com/about",
-    sameAs: [
-      "https://www.teacherspayteachers.com/store/elementary-state-of-mind",
-      "https://www.instagram.com/elementarystateofmind/",
-      "https://www.facebook.com/elementarystateofmind/",
-      "https://www.tiktok.com/@elementarystateofmindd",
-      "https://www.pinterest.com/elementarystateofmindd/",
-    ],
-  };
-
-  // FAQ Schema for rich snippets
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  };
-
-  // Educational Credentials Schema
-  const credentialsSchema = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Zoe Pastore",
-    hasCredential: [
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "degree",
-        name: "Doctor of Education (Ed.D.) in Educational Leadership",
-        educationalLevel: "Doctoral",
-        recognizedBy: {
-          "@type": "CollegeOrUniversity",
-          name: "University of Southern California",
-        },
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "degree",
-        name: "Master of Education (M.Ed.) in Global Education",
-        educationalLevel: "Graduate",
-        recognizedBy: {
-          "@type": "CollegeOrUniversity",
-          name: "Arizona State University",
-        },
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "degree",
-        name: "Bachelor of Arts in Elementary Education",
-        educationalLevel: "Undergraduate",
-        recognizedBy: {
-          "@type": "CollegeOrUniversity",
-          name: "Arizona State University",
-        },
-      },
-      {
-        "@type": "EducationalOccupationalCredential",
-        credentialCategory: "certificate",
-        name: "Arizona Standard Professional Elementary K-8 Teaching Credential",
-        recognizedBy: {
-          "@type": "GovernmentOrganization",
-          name: "Arizona Department of Education",
-        },
+        '@type': 'FAQPage',
+        '@id': `${SITE_URL}/about#faq`,
+        mainEntity: faqs.map((faq) => ({
+          '@type': 'Question',
+          name: faq.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: faq.answer,
+          },
+        })),
       },
     ],
   };
@@ -132,15 +79,7 @@ export default function AboutPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(credentialsSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutGraph) }}
       />
       <AboutPageClient />
     </>

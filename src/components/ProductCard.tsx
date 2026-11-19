@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import type { Product } from '@/lib/products';
 
 export const categoryLabels: Record<string, string> = {
@@ -34,13 +34,13 @@ export default function ProductCard({
       data-stagger={staggerIndex % 3}
     >
       <Link
-        href={'/shop/' + id}
+        href={`/shop/${id}`}
         className="product-art"
-        aria-label={name + ' resource details'}
+        aria-label={`View details for ${name}`}
       >
         <Image
           src={image}
-          alt=""
+          alt={name}
           fill
           sizes="(max-width: 570px) 90vw, (max-width: 940px) 44vw, 30vw"
         />
@@ -54,18 +54,28 @@ export default function ProductCard({
             {free ? 'FREE' : '$' + (price / 100).toFixed(2)}
           </strong>
         </div>
-        <h3><Link href={'/shop/' + id}>{name}</Link></h3>
+        <h3>
+          <Link href={`/shop/${id}`} className="product-title-link">
+            {name}
+          </Link>
+        </h3>
         <p>{description}</p>
-        <a
-          href={tptUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="product-link product-card-cta"
-          aria-label={(free ? 'Get free on TPT: ' : 'View on TPT: ') + name}
-        >
-          <span>{free ? 'Get Free on TPT' : 'View on TPT'}</span>
-          <ArrowUpRight size={15} aria-hidden="true" />
-        </a>
+        <div className="product-card-actions">
+          <Link href={`/shop/${id}`} className="product-link product-card-details">
+            <span>Details</span>
+            <ArrowRight size={14} aria-hidden="true" />
+          </Link>
+          <a
+            href={tptUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="product-link product-card-cta"
+            aria-label={(free ? 'Get free on TPT: ' : 'View on TPT: ') + name}
+          >
+            <span>{free ? 'Get Free on TPT' : 'View on TPT'}</span>
+            <ArrowUpRight size={15} aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </article>
   );

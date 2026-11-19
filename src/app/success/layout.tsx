@@ -1,8 +1,17 @@
 import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
 
-export const metadata: Metadata = { robots: { index: false, follow: false } };
+export const metadata: Metadata = {
+  title: 'Order Complete',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
-export default function SuccessLayout({ children }: { children: ReactNode }) {
+export default function SuccessLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return children;
 }

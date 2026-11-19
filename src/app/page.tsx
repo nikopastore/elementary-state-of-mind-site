@@ -1,11 +1,39 @@
+import type { Metadata } from 'next';
 import Hero from '@/components/Hero';
 import ProductCard from '@/components/ProductCard';
 import { products } from '@/lib/products';
 import { galleryPhotos } from '@/lib/galleryPhotos';
 import { posts } from '@/lib/posts';
+import { ORG_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Award, BookOpen, GraduationCap, Sparkles } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Elementary State of Mind | Elementary ELA & PBL Teacher Resources',
+  },
+  description:
+    'Classroom-tested ELA, mock trial, and project-based learning resources for grades 3–8 created by Dr. Zoe Pastore, Ed.D., 2026 ASU Prep District Teacher of the Year.',
+  alternates: {
+    canonical: SITE_URL,
+  },
+  openGraph: {
+    title: 'Elementary State of Mind | Elementary ELA & PBL Teacher Resources',
+    description:
+      'Discover classroom-tested novel studies, OREO & CER writing frameworks, anchor charts, and free graphic organizers for upper elementary teachers.',
+    url: SITE_URL,
+    type: 'website',
+    images: [
+      {
+        url: `${SITE_URL}/logo.png`,
+        width: 1200,
+        height: 1200,
+        alt: 'Elementary State of Mind',
+      },
+    ],
+  },
+};
 
 const showcasePhotoIds = ['space-case-8', 'friendsgiving-2', 'kpop-1'];
 
@@ -18,8 +46,29 @@ export default function Home() {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 2);
 
+  const webPageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${SITE_URL}/#webpage`,
+    url: SITE_URL,
+    name: 'Elementary State of Mind | Elementary ELA & PBL Teacher Resources',
+    description:
+      'Classroom-tested digital teaching resources for grades 3–8 by Dr. Zoe Pastore, Ed.D., 2026 ASU Prep District Teacher of the Year.',
+    isPartOf: { '@id': WEBSITE_ID },
+    about: { '@id': ORG_ID },
+    inLanguage: 'en-US',
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'h2', '.hero-copy p'],
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <Hero />
 
       {/* Editorial Highlights Strip */}

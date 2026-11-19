@@ -2,9 +2,11 @@ import { posts } from '@/lib/posts';
 
 export async function GET() {
   const baseUrl = 'https://www.elementarystateofmind.com';
+  const sortedPosts = [...posts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+  );
 
-  const rssItems = posts
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const rssItems = sortedPosts
     .map((post) => {
       const postUrl = `${baseUrl}/blog/${post.slug}`;
       const pubDate = new Date(post.date).toUTCString();
@@ -17,7 +19,7 @@ export async function GET() {
       <description><![CDATA[${post.excerpt}]]></description>
       <pubDate>${pubDate}</pubDate>
       <category>${post.category}</category>
-      <author>Elementary State of Mind</author>
+      <author>contact@elementarystateofmind.com (Dr. Zoe Pastore, Ed.D.)</author>
     </item>`;
     })
     .join('');
@@ -27,7 +29,7 @@ export async function GET() {
   <channel>
     <title>Elementary State of Mind Blog</title>
     <link>${baseUrl}/blog</link>
-    <description>Teaching tips, classroom stories, and educator insights for elementary teachers. Evidence-based practices, engagement strategies, and classroom management.</description>
+    <description>Teaching tips, classroom stories, and educator insights for elementary teachers from Dr. Zoe Pastore, Ed.D. Evidence-based practices, engagement strategies, and classroom management.</description>
     <language>en-US</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>
@@ -37,8 +39,8 @@ export async function GET() {
       <link>${baseUrl}</link>
     </image>
     <copyright>Copyright ${new Date().getFullYear()} Elementary State of Mind. All rights reserved.</copyright>
-    <managingEditor>contact@elementarystateofmind.com (Elementary State of Mind)</managingEditor>
-    <webMaster>contact@elementarystateofmind.com (Elementary State of Mind)</webMaster>
+    <managingEditor>contact@elementarystateofmind.com (Dr. Zoe Pastore, Ed.D.)</managingEditor>
+    <webMaster>contact@elementarystateofmind.com (Dr. Zoe Pastore, Ed.D.)</webMaster>
     <category>Education</category>
     <category>Teaching</category>
     <category>Elementary Education</category>

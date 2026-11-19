@@ -6,6 +6,7 @@ export type Testimonial = {
   product: string;
   productId?: string;
   date: string;
+  isoDate: string;
 };
 
 export const testimonials: Testimonial[] = [
@@ -15,8 +16,9 @@ export const testimonials: Testimonial[] = [
     rating: 5,
     review: 'My students loved doing this on the 67th day of school!',
     product: '67th Day of School Activities',
-    productId: '67th-day-activities',
+    productId: '67th-day',
     date: 'December 2025',
+    isoDate: '2025-12-12',
   },
   {
     id: 'review-2',
@@ -26,6 +28,7 @@ export const testimonials: Testimonial[] = [
     product: 'Opinion 5 Paragraph Essay Writing Packet',
     productId: 'opinion-essay-packet',
     date: 'June 2025',
+    isoDate: '2025-06-15',
   },
   {
     id: 'review-3',
@@ -35,6 +38,7 @@ export const testimonials: Testimonial[] = [
     product: 'Narrative Writing Packet',
     productId: 'narrative-writing-packet',
     date: 'December 2025',
+    isoDate: '2025-12-08',
   },
   {
     id: 'review-4',
@@ -44,6 +48,7 @@ export const testimonials: Testimonial[] = [
     product: 'Letter to my Teacher',
     productId: 'letter-to-teacher',
     date: 'May 2025',
+    isoDate: '2025-05-20',
   },
   {
     id: 'review-5',
@@ -53,6 +58,7 @@ export const testimonials: Testimonial[] = [
     product: 'Letter to my Teacher',
     productId: 'letter-to-teacher',
     date: 'August 2023',
+    isoDate: '2023-08-18',
   },
   {
     id: 'review-6',
@@ -62,6 +68,7 @@ export const testimonials: Testimonial[] = [
     product: 'Letter to my Teacher',
     productId: 'letter-to-teacher',
     date: 'July 2023',
+    isoDate: '2023-07-14',
   },
   {
     id: 'review-7',
@@ -71,5 +78,6 @@ export const testimonials: Testimonial[] = [
     product: 'Letter to my Teacher',
     productId: 'letter-to-teacher',
     date: 'October 2022',
+    isoDate: '2022-10-19',
   },
 ];
