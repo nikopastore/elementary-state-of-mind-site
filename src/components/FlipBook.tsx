@@ -420,10 +420,11 @@ export default function FlipBook({ pages, chapters }: FlipBookProps) {
   // Safety fallback timer in case animationend is skipped (e.g. background tab)
   useEffect(() => {
     if (!turn) return;
+    const isCover = turn.from === 0 || turn.to === 0;
     const timeout = window.setTimeout(() => {
       setPosition(normalizePosition(turn.to, spread, pages.length));
       setTurn(null);
-    }, 950);
+    }, isCover ? 1150 : 1020);
     return () => window.clearTimeout(timeout);
   }, [turn, spread, pages.length]);
 
