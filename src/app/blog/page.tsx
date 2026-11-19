@@ -2,33 +2,45 @@ import { Metadata } from 'next';
 import { posts } from '@/lib/posts';
 import BlogCard from '@/components/BlogCard';
 import EmailSubscribe from '@/components/EmailSubscribe';
+import { ORG_ID, PERSON_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "Blog | Elementary State of Mind",
-  description: "Teaching tips, classroom stories, and educator insights for elementary teachers. Read about evidence-based practices, engagement strategies, and classroom management.",
-  keywords: ["teaching tips", "classroom management", "ELA instruction", "elementary education", "teaching blog", "educator resources"],
+  title: 'Elementary Teaching Blog — ELA, Writing & PBL Tips',
+  description:
+    'Classroom-tested ELA teaching tips, OREO & informative writing guides, mock trial PBL walkthroughs, and student-led conference strategies from Dr. Zoe Pastore, Ed.D.',
+  keywords: [
+    'teaching tips',
+    'classroom management',
+    'ELA instruction',
+    'OREO opinion writing',
+    'mock trial lesson plans',
+    'elementary education blog',
+    'educator resources',
+  ],
   openGraph: {
-    title: "Blog | Elementary State of Mind",
-    description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
-    type: "website",
-    url: "https://www.elementarystateofmind.com/blog",
+    title: 'Elementary Teaching Blog — ELA, Writing & PBL Tips',
+    description:
+      'Teaching tips, classroom stories, and evidence-based ELA strategies for grades 3–8 teachers.',
+    type: 'website',
+    url: `${SITE_URL}/blog`,
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: `${SITE_URL}/logo.png`,
         width: 1200,
         height: 1200,
-        alt: "Elementary State of Mind",
+        alt: 'Elementary State of Mind Blog',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Blog | Elementary State of Mind",
-    description: "Teaching tips, classroom stories, and educator insights for elementary teachers.",
-    images: ["https://www.elementarystateofmind.com/logo.png"],
+    card: 'summary_large_image',
+    title: 'Elementary Teaching Blog — ELA, Writing & PBL Tips',
+    description:
+      'Teaching tips, classroom stories, and educator insights for elementary teachers.',
+    images: [`${SITE_URL}/logo.png`],
   },
   alternates: {
-    canonical: "https://www.elementarystateofmind.com/blog",
+    canonical: `${SITE_URL}/blog`,
   },
 };
 
@@ -38,8 +50,34 @@ export default function BlogPage() {
   );
   const [leadPost, ...restPosts] = sortedPosts;
 
+  const blogSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${SITE_URL}/blog#blog`,
+    url: `${SITE_URL}/blog`,
+    name: 'Elementary State of Mind Teaching Blog',
+    description:
+      'Practical classroom guides on OREO opinion writing, graphic organizers, novel study mock trials, debate prep, and student-led conferences.',
+    inLanguage: 'en-US',
+    isPartOf: { '@id': WEBSITE_ID },
+    publisher: { '@id': ORG_ID },
+    author: { '@id': PERSON_ID },
+    blogPost: sortedPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      url: `${SITE_URL}/blog/${post.slug}`,
+      author: { '@id': PERSON_ID },
+    })),
+  };
+
   return (
     <div className="site-width content-page blog-index">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
       <div className="page-title">
         <span className="section-kicker">Educator Journal</span>
         <h1>Blog</h1>

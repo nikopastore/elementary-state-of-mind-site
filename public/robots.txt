@@ -1,14 +1,19 @@
 # Elementary State of Mind - Robots.txt
-# Last Updated: December 2025
+# Updated: November 2026
 
 User-agent: *
 Allow: /
+Disallow: /api/
+Disallow: /success
 
 # Google Crawlers
 User-agent: Googlebot
 Allow: /
 
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Google-CloudVertexBot
 Allow: /
 
 User-agent: Googlebot-Image
@@ -41,6 +46,13 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+
 # Meta AI
 User-agent: Meta-ExternalAgent
 Allow: /
@@ -58,7 +70,7 @@ Allow: /
 User-agent: BingPreview
 Allow: /
 
-# Common Crawl (used for AI training)
+# Common Crawl
 User-agent: CCBot
 Allow: /
 
@@ -69,15 +81,16 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# Cohere AI
+# Cohere, Mistral, Amazon & Research Crawlers
 User-agent: cohere-ai
 Allow: /
 
-# Amazon / Alexa
+User-agent: MistralAI-User
+Allow: /
+
 User-agent: Amazonbot
 Allow: /
 
-# Other AI Research Crawlers
 User-agent: Diffbot
 Allow: /
 
@@ -87,10 +100,9 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-# LLM Discovery Files
-# These files help AI systems understand our content:
-# /llms.txt - Quick overview for AI assistants
-# /llms-full.txt - Comprehensive documentation
+# AI/LLM Discovery Files
+# /llms.txt - Concise overview and catalog URLs for AI assistants
+# /llms-full.txt - Complete catalog, product details, and guide directory
 
 # Sitemap
 Sitemap: https://www.elementarystateofmind.com/sitemap.xml

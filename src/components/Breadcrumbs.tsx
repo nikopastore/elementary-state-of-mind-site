@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ChevronRight, Home } from 'lucide-react';
+import { products } from '@/lib/products';
+import { posts } from '@/lib/posts';
 
 interface BreadcrumbItem {
   name: string;
@@ -16,21 +18,37 @@ const pathNameMap: Record<string, string> = {
   gallery: 'Gallery',
 };
 
+const productTitles = new Map(products.map((p) => [p.id, p.name]));
+const postTitles = new Map(posts.map((p) => [p.slug, p.title]));
+
+function resolveSegmentName(segment: string, parentSegment?: string): string {
+  if (parentSegment === 'shop') {
+    const productName = productTitles.get(segment);
+    if (productName) return productName;
+  }
+  if (parentSegment === 'blog') {
+    const postTitle = postTitles.get(segment);
+    if (postTitle) return postTitle;
+  }
+  return (
+    pathNameMap[segment] ||
+    segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
+  );
+}
+
 export default function Breadcrumbs() {
   const pathname = usePathname();
 
-  if (pathname === '/') return null;
+  if (pathname === '/' || pathname === '/success') return null;
 
   const pathSegments = pathname.split('/').filter(Boolean);
 
   const breadcrumbs: BreadcrumbItem[] = [{ name: 'Home', href: '/' }];
 
   let currentPath = '';
-  pathSegments.forEach((segment) => {
+  pathSegments.forEach((segment, index) => {
     currentPath += `/${segment}`;
-    const name =
-      pathNameMap[segment] ||
-      segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ');
+    const name = resolveSegmentName(segment, pathSegments[index - 1]);
     breadcrumbs.push({ name, href: currentPath });
   });
 

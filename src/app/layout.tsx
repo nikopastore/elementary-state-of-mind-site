@@ -7,29 +7,56 @@ import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { testimonials } from "@/lib/testimonials";
+import {
+  SITE_URL,
+  getAuthorPersonEntity,
+  getOrganizationEntity,
+  getWebSiteEntity,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.elementarystateofmind.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Elementary State of Mind | Teacher Resources",
+    default: "Elementary State of Mind | Elementary ELA & PBL Teacher Resources",
     template: "%s | Elementary State of Mind",
   },
-  description: "Engaging digital resources for elementary teachers - lesson plans, novel studies, anchor charts & classroom decor. Shop standards-aligned ELA materials on Teachers Pay Teachers.",
-  keywords: ["teacher resources", "elementary education", "digital downloads", "lesson plans", "classroom decor"],
+  description:
+    "Classroom-tested digital teaching resources for grades 3–8 by Dr. Zoe Pastore, Ed.D. (2026 ASU Prep District Teacher of the Year). Shop novel studies, mock trials, OREO & CER writing organizers, and anchor charts.",
+  keywords: [
+    "elementary teaching resources",
+    "teacher resources",
+    "Dr. Zoe Pastore",
+    "Space Case Mock Trial",
+    "OREO opinion writing",
+    "CER debate prep",
+    "project-based learning",
+    "graphic organizers",
+    "anchor charts",
+    "Teachers Pay Teachers",
+  ],
+  authors: [{ name: "Dr. Zoe Pastore, Ed.D.", url: `${SITE_URL}/about` }],
+  creator: "Dr. Zoe Pastore, Ed.D.",
+  publisher: "Elementary State of Mind",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://www.elementarystateofmind.com",
+    url: SITE_URL,
     siteName: "Elementary State of Mind",
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: `${SITE_URL}/logo.png`,
         width: 1200,
         height: 1200,
         alt: "Elementary State of Mind - Teacher Resources",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Elementary State of Mind | Elementary ELA & PBL Teacher Resources",
+    description:
+      "Classroom-tested digital resources for grades 3–8 educators: mock trial PBL units, writing organizers, anchor charts & classroom inspiration.",
+    images: [`${SITE_URL}/logo.png`],
   },
   robots: {
     index: true,
@@ -42,9 +69,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: "https://www.elementarystateofmind.com",
-  },
 };
 
 export default function RootLayout({
@@ -52,86 +76,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Organization Schema for SEO with AggregateRating
-  const organizationSchema = {
+  const siteGraph = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Elementary State of Mind",
-    url: "https://www.elementarystateofmind.com",
-    logo: "https://www.elementarystateofmind.com/logo.png",
-    description: "Beautiful, engaging digital resources for elementary teachers. Lesson plans, worksheets, novel studies, and classroom decor for grades 3-8.",
-    foundingDate: "2020",
-    sameAs: [
-      "https://www.teacherspayteachers.com/store/elementary-state-of-mind",
-      "https://www.instagram.com/elementarystateofmind/",
-      "https://www.facebook.com/elementarystateofmind/",
-      "https://www.tiktok.com/@elementarystateofmindd",
-      "https://www.pinterest.com/elementarystateofmindd/",
+    "@graph": [
+      getOrganizationEntity(),
+      getAuthorPersonEntity(),
+      getWebSiteEntity(),
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "Customer Service",
-      url: "https://www.elementarystateofmind.com",
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.95",
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: "43",
-      reviewCount: "43",
-    },
-  };
-
-  // WebSite schema for sitelinks searchbox
-  const websiteSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "Elementary State of Mind",
-    url: "https://www.elementarystateofmind.com",
-    description: "Digital teaching resources for elementary educators",
-    publisher: {
-      "@type": "Organization",
-      name: "Elementary State of Mind",
-    },
-  };
-
-  // Review schema for individual reviews
-  const reviewsSchema = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Elementary State of Mind",
-    url: "https://www.elementarystateofmind.com",
-    review: testimonials.map((t) => ({
-      "@type": "Review",
-      author: {
-        "@type": "Person",
-        name: t.reviewer,
-      },
-      datePublished: t.date,
-      reviewBody: t.review,
-      reviewRating: {
-        "@type": "Rating",
-        ratingValue: t.rating,
-        bestRating: 5,
-      },
-      itemReviewed: {
-        "@type": "Product",
-        name: t.product,
-      },
-    })),
-  };
-
-  // Speakable schema for voice search optimization
-  const speakableSchema = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: "Elementary State of Mind - Teaching Resources",
-    speakable: {
-      "@type": "SpeakableSpecification",
-      cssSelector: ["h1", "h2", ".description"],
-    },
-    url: "https://www.elementarystateofmind.com",
   };
 
   return (
@@ -143,8 +94,9 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&amp;family=Instrument+Sans:wght@400..700&amp;family=Newsreader:ital,wght@0,400..600;1,400..600&amp;display=swap" />
-        {/* LLM discovery */}
-        <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
+        {/* AI/LLM discovery */}
+        <link rel="alternate" type="text/markdown" href="/llms.txt" title="LLM Overview" />
+        <link rel="alternate" type="text/markdown" href="/llms-full.txt" title="LLM Complete Documentation" />
         {/* RSS Feed */}
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Elementary State of Mind Blog RSS Feed" />
         {/* PWA Manifest */}
@@ -152,19 +104,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#fff9f1" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteGraph) }}
         />
       </head>
       <body className="antialiased min-h-screen flex flex-col">

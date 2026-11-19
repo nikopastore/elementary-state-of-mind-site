@@ -3,8 +3,10 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { posts } from '@/lib/posts';
-import { Calendar, ArrowLeft } from 'lucide-react';
+import { products } from '@/lib/products';
+import { Calendar, ArrowLeft, ArrowRight, Award } from 'lucide-react';
 import EmailSubscribe from '@/components/EmailSubscribe';
+import { ORG_ID, PERSON_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -32,6 +34,61 @@ const formatDate = (dateString: string) => {
     month: 'long',
     day: 'numeric',
   });
+};
+
+const POST_RECOMMENDED_PRODUCTS: Record<string, string[]> = {
+  'opinion-writing-elementary-oreo-strategy': [
+    'oreo-opinion-writing',
+    'opinion-essay-packet',
+    'opinion-tree-map',
+  ],
+  'informative-essay-graphic-organizer-guide': [
+    'informative-essay-packet',
+    'informative-tree-map',
+    'essay-brain-dump',
+  ],
+  'narrative-writing-structure-tips': [
+    'narrative-writing-packet',
+    'story-elements',
+    'plot-diagram',
+  ],
+  'debate-activities-middle-school': [
+    'any-text-debate',
+    'space-case-mock-trial',
+    'kpop-demonhunters',
+  ],
+  'anchor-charts-ela-classroom': [
+    'ela-anchor-charts',
+    'math-notes-fractions',
+    'oreo-opinion-writing',
+  ],
+  'student-led-conferences-guide': [
+    'slc-guide',
+    'goal-setting-bingo',
+    'letter-to-teacher',
+  ],
+  'teaching-fractions-visually': ['math-notes-fractions', 'ela-anchor-charts'],
+  'endangered-species-reading-activities': ['article-a-week', 'any-text-debate'],
+  'holiday-classroom-activities-thanksgiving': [
+    'friendsgiving',
+    'letter-to-teacher',
+    '67th-day',
+  ],
+  'mock-trial-lesson-plan-novel-study': [
+    'space-case-mock-trial',
+    'space-case-complete',
+    'space-case-test',
+  ],
+  'turning-novel-study-into-mock-trial': [
+    'space-case-complete',
+    'space-case-mock-trial',
+    'any-text-debate',
+  ],
+  'what-is-an-elementary-state-of-mind': [
+    'space-case-complete',
+    'oreo-opinion-writing',
+    'letter-to-teacher',
+  ],
 };
 
 // Render inline **bold** and *italic* formatting cleanly
@@ -165,54 +222,58 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: "Post Not Found | Elementary State of Mind",
+      title: 'Post Not Found',
       description: "The blog post you're looking for could not be found.",
     };
   }
 
-  const canonicalUrl = `https://www.elementarystateofmind.com/blog/${post.slug}`;
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
 
   return {
-    title: `${post.title} | Elementary State of Mind Blog`,
+    title: post.title,
     description: post.excerpt,
     keywords: [
-      "elementary education",
-      "teaching",
-      "classroom management",
-      "ELA instruction",
+      'elementary education',
+      'teaching',
+      'classroom management',
+      'ELA instruction',
+      'Dr. Zoe Pastore',
       post.category,
     ],
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      type: "article",
+      type: 'article',
       url: canonicalUrl,
       publishedTime: post.date,
-      images: post.images && post.images.length > 0
-        ? [
-            {
-              url: `https://www.elementarystateofmind.com${post.images[0]}`,
-              width: 1200,
-              height: 1200,
-              alt: post.title,
-            },
-          ]
-        : [
-            {
-              url: "https://www.elementarystateofmind.com/logo.png",
-              width: 1200,
-              height: 1200,
-              alt: "Elementary State of Mind",
-            },
-          ],
+      authors: ['Dr. Zoe Pastore, Ed.D.'],
+      images:
+        post.images && post.images.length > 0
+          ? [
+              {
+                url: `${SITE_URL}${post.images[0]}`,
+                width: 1200,
+                height: 1200,
+                alt: post.title,
+              },
+            ]
+          : [
+              {
+                url: `${SITE_URL}/logo.png`,
+                width: 1200,
+                height: 1200,
+                alt: 'Elementary State of Mind',
+              },
+            ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
-      images: post.images && post.images.length > 0
-        ? [`https://www.elementarystateofmind.com${post.images[0]}`]
-        : ["https://www.elementarystateofmind.com/logo.png"],
+      images:
+        post.images && post.images.length > 0
+          ? [`${SITE_URL}${post.images[0]}`]
+          : [`${SITE_URL}/logo.png`],
     },
     alternates: {
       canonical: canonicalUrl,
@@ -228,29 +289,45 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const wordCount = post.content.trim().split(/\s+/).length;
+  const canonicalUrl = `${SITE_URL}/blog/${post.slug}`;
+
+  const recommendedProducts = (POST_RECOMMENDED_PRODUCTS[post.slug] ?? [])
+    .map((id) => products.find((p) => p.id === id))
+    .filter((p): p is NonNullable<typeof p> => Boolean(p));
+
+  const relatedPosts = posts
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => {
+      const aMatch = a.category === post.category ? 1 : 0;
+      const bMatch = b.category === post.category ? 1 : 0;
+      if (aMatch !== bMatch) return bMatch - aMatch;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    })
+    .slice(0, 2);
+
   const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${canonicalUrl}#article`,
     headline: post.title,
     description: post.excerpt,
-    image: post.images && post.images.length > 0
-      ? `https://www.elementarystateofmind.com${post.images[0]}`
-      : "https://www.elementarystateofmind.com/logo.png",
+    image:
+      post.images && post.images.length > 0
+        ? post.images.map((img) => `${SITE_URL}${img}`)
+        : `${SITE_URL}/logo.png`,
     datePublished: post.date,
     dateModified: post.date,
-    author: {
-      "@type": "Person",
-      name: "Elementary State of Mind",
-      url: "https://www.elementarystateofmind.com/about",
+    inLanguage: 'en-US',
+    wordCount,
+    articleSection: getCategoryLabel(post.category),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Elementary State of Mind",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://www.elementarystateofmind.com/logo.png",
-      },
-    },
+    isPartOf: { '@id': WEBSITE_ID },
+    author: { '@id': PERSON_ID },
+    publisher: { '@id': ORG_ID },
   };
 
   return (
@@ -291,7 +368,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <div key={index} className="article-gallery-item">
                     <Image
                       src={img}
-                      alt={`Classroom photo ${index + 1}`}
+                      alt={`Classroom photo ${index + 1} for ${post.title}`}
                       fill
                       sizes="(max-width: 700px) 90vw, 380px"
                     />
@@ -300,7 +377,86 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
           )}
+
+          {/* Author E-E-A-T Byline Box */}
+          <aside className="article-author-box" aria-label="About the author">
+            <div className="article-author-avatar">
+              <Image src="/profile.png" alt="Dr. Zoe Pastore" fill sizes="72px" />
+            </div>
+            <div className="article-author-copy">
+              <span className="article-author-badge">
+                <Award size={13} aria-hidden="true" />
+                <span>2026 ASU Prep District Teacher of the Year</span>
+              </span>
+              <h3>Written by Dr. Zoe Pastore, Ed.D.</h3>
+              <p>
+                Sixth-grade Transformational Teacher Leader (USC Ed.D., ASU
+                M.Ed.) sharing classroom-tested ELA and project-based learning
+                strategies.
+              </p>
+              <Link href="/about" className="product-link">
+                Meet the Teacher →
+              </Link>
+            </div>
+          </aside>
         </article>
+
+        {/* Internal Links to Matching Products */}
+        {recommendedProducts.length > 0 && (
+          <section className="article-related-block" data-reveal="heading">
+            <span className="section-kicker">Classroom Resources Mentioned</span>
+            <h2>Ready-to-Use Teaching Tools for This Strategy</h2>
+            <div className="article-related-products">
+              {recommendedProducts.map((item) => {
+                const free = Boolean(item.isFree || item.price === 0);
+                return (
+                  <Link
+                    key={item.id}
+                    href={`/shop/${item.id}`}
+                    className="product-mini-card"
+                  >
+                    <div className="product-mini-art">
+                      <Image src={item.image} alt="" fill sizes="240px" />
+                    </div>
+                    <div className="product-mini-copy">
+                      <span className="product-category-pill">
+                        {free ? 'FREE' : `$${(item.price / 100).toFixed(2)}`}
+                      </span>
+                      <h3>{item.name}</h3>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {/* Related Blog Posts */}
+        {relatedPosts.length > 0 && (
+          <section className="article-related-block" data-reveal="heading">
+            <span className="section-kicker">Keep Reading</span>
+            <h2>Related Teaching Articles</h2>
+            <div className="article-related-posts">
+              {relatedPosts.map((rel) => (
+                <Link
+                  key={rel.slug}
+                  href={`/blog/${rel.slug}`}
+                  className="spotlight-post-card"
+                >
+                  <span className="spotlight-post-meta">
+                    {getCategoryLabel(rel.category)} · {formatDate(rel.date)}
+                  </span>
+                  <h3>{rel.title}</h3>
+                  <p>{rel.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+            <Link href="/blog" className="product-link article-all-posts-link">
+              <span>Browse all 12 articles</span>
+              <ArrowRight size={15} aria-hidden="true" />
+            </Link>
+          </section>
+        )}
 
         <div className="subscribe-block" data-reveal="panel">
           <EmailSubscribe />

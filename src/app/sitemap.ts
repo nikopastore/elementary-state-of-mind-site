@@ -1,50 +1,61 @@
 import { MetadataRoute } from 'next';
 import { posts } from '@/lib/posts';
+import { products } from '@/lib/products';
+import { SITE_URL } from '@/lib/seo';
+
+const SITE_LAST_UPDATED = new Date('2026-11-19');
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.elementarystateofmind.com';
-
-  // Static routes
   const staticRoutes: MetadataRoute.Sitemap = [
     {
-      url: baseUrl,
-      lastModified: new Date(),
+      url: SITE_URL,
+      lastModified: SITE_LAST_UPDATED,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/shop`,
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'weekly',
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/blog`,
+      lastModified: SITE_LAST_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/shop`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      url: `${SITE_URL}/gallery`,
+      lastModified: SITE_LAST_UPDATED,
+      changeFrequency: 'monthly',
+      priority: 0.85,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
+      url: `${SITE_URL}/about`,
+      lastModified: SITE_LAST_UPDATED,
       changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/gallery`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
+      priority: 0.85,
     },
   ];
 
-  // Dynamic blog post routes
-  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${SITE_URL}/shop/${product.id}`,
+    lastModified: SITE_LAST_UPDATED,
+    changeFrequency: 'monthly',
+    priority: product.featured ? 0.9 : 0.8,
+    images: [`${SITE_URL}${product.image}`],
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly',
+    priority: 0.8,
+    ...(post.images && post.images.length > 0
+      ? { images: post.images.map((img) => `${SITE_URL}${img}`) }
+      : {}),
+  }));
+
+  return [...staticRoutes, ...productRoutes, ...blogRoutes];
 }

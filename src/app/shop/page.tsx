@@ -1,190 +1,90 @@
 import { Metadata } from 'next';
 import { products } from '@/lib/products';
 import ShopCatalog from '@/components/ShopCatalog';
+import { ORG_ID, SITE_URL, WEBSITE_ID, buildProductSchema } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: "The Shop | Elementary State of Mind",
-  description: "Beautiful, engaging digital resources for your classroom. Shop lesson plans, novel studies, anchor charts, and classroom decor for elementary teachers.",
-  keywords: ["teacher resources", "digital downloads", "lesson plans", "novel studies", "anchor charts", "classroom decor", "teacherspayteachers", "elementary teaching materials"],
+  title: 'The Shop — Elementary ELA, Writing & PBL Resources',
+  description:
+    'Browse 26 classroom-tested digital teaching resources by Dr. Zoe Pastore, Ed.D. Mock trial PBL units, OREO & CER writing packets, anchor charts, classroom decor, and free graphic organizers.',
+  keywords: [
+    'teacher resources',
+    'digital downloads',
+    'elementary lesson plans',
+    'Space Case Mock Trial',
+    'OREO opinion writing',
+    'ELA graphic organizers',
+    'anchor charts',
+    'Teachers Pay Teachers',
+  ],
   openGraph: {
-    title: "The Shop | Elementary State of Mind",
-    description: "Beautiful, engaging digital resources for your classroom.",
-    type: "website",
-    url: "https://www.elementarystateofmind.com/shop",
+    title: 'The Shop — Elementary ELA, Writing & PBL Resources',
+    description:
+      'Shop 26 classroom-tested digital resources for grades 3–8 educators, including free graphic organizers and novel study PBL units.',
+    type: 'website',
+    url: `${SITE_URL}/shop`,
     images: [
       {
-        url: "https://www.elementarystateofmind.com/logo.png",
+        url: `${SITE_URL}/logo.png`,
         width: 1200,
         height: 1200,
-        alt: "Elementary State of Mind",
+        alt: 'Elementary State of Mind Shop',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "The Shop | Elementary State of Mind",
-    description: "Beautiful, engaging digital resources for your classroom.",
-    images: ["https://www.elementarystateofmind.com/logo.png"],
+    card: 'summary_large_image',
+    title: 'The Shop — Elementary ELA, Writing & PBL Resources',
+    description:
+      'Classroom-tested digital lesson plans, writing organizers, and decor for grades 3–8 educators.',
+    images: [`${SITE_URL}/logo.png`],
   },
   alternates: {
-    canonical: "https://www.elementarystateofmind.com/shop",
+    canonical: `${SITE_URL}/shop`,
   },
 };
 
-// Generate Product schema for each product with enhanced digital product info
-function generateProductSchema(product: typeof products[0]) {
-  const categoryName = product.category === 'lesson-plan' ? 'Lesson Plans' :
-                       product.category === 'worksheet' ? 'Worksheets' :
-                       product.category === 'decor' ? 'Classroom Decor' :
-                       product.category === 'bundle' ? 'Resource Bundles' : product.category;
-
-  return {
-    "@type": "Product",
-    name: product.name,
-    description: product.description,
-    image: `https://www.elementarystateofmind.com${product.image}`,
-    url: product.tptUrl,
-    brand: {
-      "@type": "Brand",
-      name: "Elementary State of Mind",
-    },
-    offers: {
-      "@type": "Offer",
-      price: product.isFree ? "0.00" : (product.price / 100).toFixed(2),
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      url: product.tptUrl,
-      seller: {
-        "@type": "Organization",
-        name: "Elementary State of Mind",
-      },
-      itemCondition: "https://schema.org/NewCondition",
-      priceValidUntil: "2025-12-31",
-    },
-    category: categoryName,
-    isAccessoryOrSparePartFor: {
-      "@type": "EducationalOccupationalProgram",
-      name: "Elementary Education",
-    },
-    audience: {
-      "@type": "EducationalAudience",
-      educationalRole: "Teacher",
-      audienceType: "Elementary Educators",
-    },
-    additionalProperty: [
+export default function ShopPage() {
+  const collectionSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [
       {
-        "@type": "PropertyValue",
-        name: "File Format",
-        value: "PDF, Google Slides",
+        '@type': 'CollectionPage',
+        '@id': `${SITE_URL}/shop#collection`,
+        url: `${SITE_URL}/shop`,
+        name: 'The Shop — Elementary State of Mind Teaching Resources',
+        description:
+          'Complete catalog of 26 digital teaching resources for grades 3–8 elementary educators.',
+        isPartOf: { '@id': WEBSITE_ID },
+        about: { '@id': ORG_ID },
+        mainEntity: { '@id': `${SITE_URL}/shop#itemlist` },
       },
       {
-        "@type": "PropertyValue",
-        name: "Delivery Method",
-        value: "Instant Digital Download",
+        '@type': 'ItemList',
+        '@id': `${SITE_URL}/shop#itemlist`,
+        name: 'Elementary State of Mind Teaching Resources',
+        numberOfItems: products.length,
+        itemListElement: products.map((product, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          url: `${SITE_URL}/shop/${product.id}`,
+          item: buildProductSchema(product),
+        })),
       },
     ],
-  };
-}
-
-// Generate OfferCatalog schema for the entire store
-function generateOfferCatalogSchema() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "OfferCatalog",
-    name: "Elementary State of Mind Teaching Resources",
-    description: "Complete catalog of digital teaching resources for elementary educators",
-    url: "https://www.elementarystateofmind.com/shop",
-    publisher: {
-      "@type": "Organization",
-      name: "Elementary State of Mind",
-      url: "https://www.elementarystateofmind.com",
-    },
-    numberOfItems: products.length,
-    itemListOrder: "https://schema.org/ItemListOrderDescending",
-  };
-}
-
-export default function ShopPage() {
-  const featuredProducts = products.filter((p) => p.featured);
-
-  // Generate ItemList schema for all products
-  const itemListSchema = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "Elementary State of Mind Teaching Resources",
-    description: "Digital teaching resources for elementary educators including lesson plans, worksheets, and classroom decor.",
-    url: "https://www.elementarystateofmind.com/shop",
-    numberOfItems: products.length,
-    itemListElement: products.map((product, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: generateProductSchema(product),
-    })),
-  };
-
-  // Generate individual Product schemas for featured products (for rich snippets)
-  const featuredProductSchemas = featuredProducts.map(product => ({
-    "@context": "https://schema.org",
-    ...generateProductSchema(product),
-  }));
-
-  // Generate OfferCatalog schema
-  const offerCatalogSchema = generateOfferCatalogSchema();
-
-  // Store aggregate rating schema
-  const storeRatingSchema = {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    name: "Elementary State of Mind Shop",
-    description: "Digital teaching resources for elementary educators",
-    url: "https://www.elementarystateofmind.com/shop",
-    image: "https://www.elementarystateofmind.com/logo.png",
-    priceRange: "$0 - $15",
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.95",
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: "43",
-      reviewCount: "43",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Teaching Resources",
-      itemListElement: [
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Lesson Plans" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Worksheets" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Novel Studies" } },
-        { "@type": "Offer", itemOffered: { "@type": "Product", name: "Classroom Decor" } },
-      ],
-    },
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(offerCatalogSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(storeRatingSchema) }}
-      />
-      {featuredProductSchemas.map((schema, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-      ))}
 
       <div className="content-page">
         <div className="site-width">
           <div className="page-title">
+            <span className="section-kicker">26 Digital Downloads · Grades 3–8</span>
             <h1>The Shop</h1>
             <p>Beautiful, engaging digital resources for your classroom</p>
           </div>
