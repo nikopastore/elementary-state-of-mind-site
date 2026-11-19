@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { posts } from '@/lib/posts';
-import { Calendar, Tag, ArrowLeft } from 'lucide-react';
+import { Calendar, ArrowLeft } from 'lucide-react';
 import EmailSubscribe from '@/components/EmailSubscribe';
 
 type Props = {
@@ -34,9 +34,23 @@ const formatDate = (dateString: string) => {
   });
 };
 
-// Parse inline formatting (bold, italic, links)
+// Render inline **bold** and *italic* formatting cleanly
+function renderStyledText(text: string, keyPrefix: string): React.ReactNode {
+  const tokenRegex = /(\*\*[^*]+\*\*|\*[^*]+\*)/g;
+  const segments = text.split(tokenRegex);
+  return segments.map((segment, idx) => {
+    if (segment.startsWith('**') && segment.endsWith('**')) {
+      return <strong key={`${keyPrefix}-b-${idx}`}>{segment.slice(2, -2)}</strong>;
+    }
+    if (segment.startsWith('*') && segment.endsWith('*')) {
+      return <em key={`${keyPrefix}-i-${idx}`}>{segment.slice(1, -1)}</em>;
+    }
+    return segment;
+  });
+}
+
+// Parse inline links [text](url) alongside bold/italic formatting
 function parseInline(text: string): React.ReactNode {
-  // Handle links [text](url)
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
   const parts: React.ReactNode[] = [];
   let lastIndex = 0;
@@ -44,57 +58,50 @@ function parseInline(text: string): React.ReactNode {
 
   while ((match = linkRegex.exec(text)) !== null) {
     if (match.index > lastIndex) {
-      parts.push(formatText(text.slice(lastIndex, match.index)));
+      parts.push(renderStyledText(text.slice(lastIndex, match.index), `t-${lastIndex}`));
     }
     parts.push(
-      <Link key={match.index} href={match[2]} className="text-purple hover:text-dustyRose underline transition-colors">
+      <Link key={match.index} href={match[2]} className="product-link">
         {match[1]}
-      </Link>
+      </Link>,
     );
     lastIndex = match.index + match[0].length;
   }
 
   if (lastIndex < text.length) {
-    parts.push(formatText(text.slice(lastIndex)));
+    parts.push(renderStyledText(text.slice(lastIndex), `e-${lastIndex}`));
   }
 
   return parts.length === 1 ? parts[0] : parts;
 }
 
-// Format bold and italic text
-function formatText(text: string): string {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '$1')
-    .replace(/\*(.*?)\*/g, '$1');
-}
-
-// Simple markdown-like content renderer
-function renderContent(content: string) {
+function renderContent(content: string, postTitle: string) {
   const lines = content.split('\n');
   const elements: React.ReactNode[] = [];
   let inList = false;
   let inNumberedList = false;
   let listItems: string[] = [];
   let numberedItems: string[] = [];
+  let skippedDuplicateTitle = false;
 
   const flushList = () => {
     if (listItems.length > 0) {
       elements.push(
-        <ul key={`list-${elements.length}`} className="list-disc list-inside space-y-2 mb-6 text-gray">
+        <ul key={`list-${elements.length}`} className="article-list">
           {listItems.map((item, i) => (
             <li key={i}>{parseInline(item)}</li>
           ))}
-        </ul>
+        </ul>,
       );
       listItems = [];
     }
     if (numberedItems.length > 0) {
       elements.push(
-        <ol key={`olist-${elements.length}`} className="list-decimal list-inside space-y-2 mb-6 text-gray">
+        <ol key={`olist-${elements.length}`} className="article-list article-list-ordered">
           {numberedItems.map((item, i) => (
             <li key={i}>{parseInline(item)}</li>
           ))}
-        </ol>
+        </ol>,
       );
       numberedItems = [];
     }
@@ -107,27 +114,19 @@ function renderContent(content: string) {
 
     if (trimmed.startsWith('# ')) {
       flushList();
-      elements.push(
-        <h1 key={index} className="text-3xl md:text-4xl font-heading font-bold text-black mb-6">
-          {trimmed.slice(2)}
-        </h1>
-      );
+      const headingText = trimmed.slice(2).trim();
+      if (!skippedDuplicateTitle && headingText.toLowerCase() === postTitle.trim().toLowerCase()) {
+        skippedDuplicateTitle = true;
+        return;
+      }
+      elements.push(<h2 key={index}>{headingText}</h2>);
     } else if (trimmed.startsWith('## ')) {
       flushList();
-      elements.push(
-        <h2 key={index} className="text-2xl md:text-3xl font-heading font-bold text-black mt-8 mb-4">
-          {trimmed.slice(3)}
-        </h2>
-      );
+      elements.push(<h2 key={index}>{trimmed.slice(3)}</h2>);
     } else if (trimmed.startsWith('### ')) {
       flushList();
-      elements.push(
-        <h3 key={index} className="text-xl md:text-2xl font-heading font-semibold text-black mt-6 mb-3">
-          {trimmed.slice(4)}
-        </h3>
-      );
+      elements.push(<h3 key={index}>{trimmed.slice(4)}</h3>);
     } else if (/^\d+\.\s/.test(trimmed)) {
-      // Numbered list item
       if (inList) flushList();
       inNumberedList = true;
       numberedItems.push(trimmed.replace(/^\d+\.\s/, ''));
@@ -138,19 +137,15 @@ function renderContent(content: string) {
     } else if (trimmed.startsWith('*') && trimmed.endsWith('*') && !trimmed.startsWith('**')) {
       flushList();
       elements.push(
-        <p key={index} className="text-gray italic mb-4">
+        <p key={index} className="article-aside">
           {trimmed.slice(1, -1)}
-        </p>
+        </p>,
       );
     } else if (trimmed === '') {
       flushList();
     } else {
       flushList();
-      elements.push(
-        <p key={index} className="text-gray text-base md:text-lg leading-relaxed mb-4">
-          {parseInline(trimmed)}
-        </p>
-      );
+      elements.push(<p key={index}>{parseInline(trimmed)}</p>);
     }
   });
 
@@ -233,7 +228,6 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
-  // BlogPosting Schema for SEO
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -260,71 +254,56 @@ export default async function BlogPostPage({ params }: Props) {
   };
 
   return (
-    <div className="bg-gradient-to-b from-lavender to-white min-h-screen py-10 md:py-14 lg:py-16">
+    <div className="site-width content-page blog-post-page">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto">
-          {/* Back link */}
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-purple hover:text-dustyRose transition-colors mb-8"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            <span>Back to Blog</span>
-          </Link>
 
-          {/* Post header */}
-          <div className="mb-8 md:mb-10">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              <div className="flex items-center">
-                <Tag className="h-4 w-4 text-purple mr-1.5" />
-                <span className="bg-lightPurple text-purple text-sm font-semibold px-3 py-1 rounded-full">
-                  {getCategoryLabel(post.category)}
-                </span>
-              </div>
-              <div className="flex items-center text-gray text-sm">
-                <Calendar className="h-4 w-4 mr-1.5" />
-                {formatDate(post.date)}
+      <div className="blog-post-shell">
+        <Link href="/blog" className="article-back-link">
+          <ArrowLeft size={16} aria-hidden="true" />
+          <span>Back to Blog</span>
+        </Link>
+
+        <header className="article-header">
+          <div className="blog-card-meta">
+            <span className={`blog-category-pill cat-${post.category}`}>
+              {getCategoryLabel(post.category)}
+            </span>
+            <time className="blog-card-date" dateTime={post.date}>
+              <Calendar size={14} aria-hidden="true" />
+              <span>{formatDate(post.date)}</span>
+            </time>
+          </div>
+          <h1>{post.title}</h1>
+          <p className="article-lead">{post.excerpt}</p>
+        </header>
+
+        <article className="article-canvas" data-reveal="panel">
+          <div className="article-prose">{renderContent(post.content, post.title)}</div>
+
+          {post.images && post.images.length > 0 && (
+            <div className="article-gallery">
+              <h3>From the Classroom</h3>
+              <div className="article-gallery-grid">
+                {post.images.map((img, index) => (
+                  <div key={index} className="article-gallery-item">
+                    <Image
+                      src={img}
+                      alt={`Classroom photo ${index + 1}`}
+                      fill
+                      sizes="(max-width: 700px) 90vw, 380px"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-heading font-bold text-black">
-              {post.title}
-            </h1>
-          </div>
+          )}
+        </article>
 
-          {/* Post content */}
-          <article className="bg-white rounded-2xl md:rounded-3xl shadow-soft p-6 sm:p-8 md:p-10">
-            {renderContent(post.content)}
-
-            {/* Image Gallery */}
-            {post.images && post.images.length > 0 && (
-              <div className="mt-10 pt-8 border-t border-gray/20">
-                <h3 className="text-xl md:text-2xl font-heading font-bold text-black mb-6">
-                  From the Classroom
-                </h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {post.images.map((img, index) => (
-                    <div key={index} className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
-                      <Image
-                        src={img}
-                        alt={`Classroom photo ${index + 1}`}
-                        fill
-                        className="object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </article>
-
-          {/* Email Subscribe */}
-          <div className="mt-8 md:mt-10">
-            <EmailSubscribe />
-          </div>
+        <div className="subscribe-block" data-reveal="panel">
+          <EmailSubscribe />
         </div>
       </div>
     </div>

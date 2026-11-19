@@ -142,7 +142,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://www.teacherspayteachers.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&amp;family=Instrument+Sans:wght@400..700&amp;display=swap" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&amp;family=Instrument+Sans:wght@400..700&amp;family=Newsreader:ital,wght@0,400..600;1,400..600&amp;display=swap" />
         {/* LLM discovery */}
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
         {/* RSS Feed */}
@@ -176,7 +176,7 @@ export default function RootLayout({
         <TestimonialsCarousel />
         <Footer />
         <SmoothScroll />
-        <Script src="/section-motion.js?v=5" strategy="afterInteractive" />
+        <Script src="/section-motion.js?v=6" strategy="afterInteractive" />
       </body>
     </html>
   );

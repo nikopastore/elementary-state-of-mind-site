@@ -1,5 +1,5 @@
 import TeacherBio from '@/components/TeacherBio';
-import { Award } from 'lucide-react';
+import { ArrowUpRight, Award, Plus } from 'lucide-react';
 import { faqs } from '@/lib/faqs';
 
 export const districtTeacherAward = '2026 ASU Prep District Teacher of the Year';
@@ -80,69 +80,156 @@ export default function AboutPageClient() {
   return (
     <div className="site-width content-page">
       <div className="page-title">
+        <span className="section-kicker">About Elementary State of Mind</span>
         <h1>Meet the Teacher</h1>
         <p>Passionate about empowering young learners through innovative teaching</p>
       </div>
+
       <TeacherBio />
-      <section className="award-showcase" id="teacher-of-the-year" aria-labelledby="district-award-title" data-reveal="panel">
+
+      <section
+        className="award-showcase"
+        id="teacher-of-the-year"
+        aria-labelledby="district-award-title"
+        data-reveal="panel"
+      >
         <div className="award-intro">
-          <Award className="award-icon" aria-hidden="true" />
-          <p>ASU Preparatory Academy · 2026</p>
+          <span className="award-badge-row">
+            <Award className="award-icon" aria-hidden="true" />
+            <span>ASU Preparatory Academy · 2026</span>
+          </span>
           <h2 id="district-award-title">District Teacher of the Year</h2>
         </div>
         <div className="award-story">
-          <p>Dr. Zoe Pastore teaches sixth grade and coaches fellow educators at ASU Prep South Phoenix. In its finalist profile, ASU Prep highlighted her <em>New Kid</em> novel study, where students talked about belonging and identity and returned to the text to support their interpretations.</p>
-          <p>As a Transformational Teacher Leader, she works with colleagues to use student work and assessment data to plan lessons, try instructional strategies, and review what helped students learn.</p>
+          <p>
+            Dr. Zoe Pastore teaches sixth grade and coaches fellow educators at
+            ASU Prep South Phoenix. In its finalist profile, ASU Prep
+            highlighted her <em>New Kid</em> novel study, where students talked
+            about belonging and identity and returned to the text to support
+            their interpretations.
+          </p>
+          <p>
+            As a Transformational Teacher Leader, she works with colleagues to
+            use student work and assessment data to plan lessons, try
+            instructional strategies, and review what helped students learn.
+          </p>
           <div className="award-sources">
-            <a className="product-link" href="https://www.asuprepdigital.org/blog/meet-the-asu-prep-2026-teacher-of-the-year-finalists/">ASU Prep finalist profile</a>
-            <a className="product-link" href="https://asuprep.asu.edu/news/asu-prep-south-phoenix-k-6-celebrates-transformational-teacher-leaders/">ASU Prep teacher leadership profile</a>
+            <a
+              className="product-link award-source-link"
+              href="https://www.asuprepdigital.org/blog/meet-the-asu-prep-2026-teacher-of-the-year-finalists/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>ASU Prep finalist profile</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+            <a
+              className="product-link award-source-link"
+              href="https://asuprep.asu.edu/news/asu-prep-south-phoenix-k-6-celebrates-transformational-teacher-leaders/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>ASU Prep teacher leadership profile</span>
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
           </div>
         </div>
       </section>
+
       <div className="about-columns">
         <section className="about-section" data-reveal="heading">
+          <span className="section-kicker">Academic Background</span>
           <h2>Education</h2>
-          {education.map(({ degree, school, year, gpa }) => (
-            <div className="about-record" key={degree}>
-              <h3>{degree}</h3>
-              <p>{school}</p>
-              <p className="record-detail">{year} · GPA: {gpa}</p>
-            </div>
-          ))}
+          <div className="about-timeline">
+            {education.map(({ degree, school, year, gpa }, index) => (
+              <div className="about-record" key={degree} data-reveal="card" data-stagger={index}>
+                <span className="record-pill">{year} · GPA {gpa}</span>
+                <h3>{degree}</h3>
+                <p>{school}</p>
+              </div>
+            ))}
+          </div>
         </section>
+
         <section className="about-section" data-reveal="heading">
+          <span className="section-kicker">Classroom Leadership</span>
           <h2>Experience</h2>
-          {experience.map(({ title, school, location, period, highlights }) => (
-            <div className="about-record" key={school}>
-              <h3>{title}</h3>
-              <p>{school}</p>
-              <p className="record-detail">{location} · {period}</p>
-              <ul>{highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
-            </div>
-          ))}
+          <div className="about-timeline">
+            {experience.map(({ title, school, location, period, highlights }, index) => (
+              <div className="about-record" key={school} data-reveal="card" data-stagger={index}>
+                <span className="record-pill">{period} · {location}</span>
+                <h3>{title}</h3>
+                <p>{school}</p>
+                <ul>
+                  {highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </section>
+
         <section className="about-section" data-reveal="heading">
+          <span className="section-kicker">Licensure &amp; Recognition</span>
           <h2>Credentials &amp; Honors</h2>
-          <ul className="about-list">{credentials.map((credential) => <li key={credential}>{credential}</li>)}</ul>
+          <ul className="about-list">
+            {credentials.map((credential) => (
+              <li key={credential}>{credential}</li>
+            ))}
+          </ul>
         </section>
+
         <section className="about-section" data-reveal="heading">
+          <span className="section-kicker">Continuous Growth</span>
           <h2>Professional Learning</h2>
-          <ul className="about-list">{professionalLearning.map(({ name, year }) => <li key={name}>{name} · {year}</li>)}</ul>
+          <ul className="about-list about-pl-list">
+            {professionalLearning.map(({ name, year }) => (
+              <li key={name}>
+                <span>{name}</span>
+                <span className="pl-year">{year}</span>
+              </li>
+            ))}
+          </ul>
         </section>
       </div>
+
       <section className="about-section teaching-philosophy" data-reveal="panel">
+        <span className="philosophy-quote-mark" aria-hidden="true">&ldquo;</span>
+        <span className="section-kicker">Core Beliefs</span>
         <h2>Teaching Philosophy</h2>
-        <p>My teaching philosophy is rooted in the belief that meaningful learning happens when students feel safe, curious, and genuinely engaged. I design learning experiences that blend structure with creativity, allowing students to explore big ideas through hands-on, inquiry-driven work. Through project-based learning, authentic assessments, and intentional reflection, students build both academic skills and confidence in their own thinking.</p>
-        <p>I believe classrooms should be places where curiosity is honored, mistakes are celebrated as part of growth, and every child is empowered to take ownership of their learning. Each student brings unique strengths and perspectives, and my role as an educator is to design environments where those gifts can emerge, develop, and shine.</p>
+        <p>
+          My teaching philosophy is rooted in the belief that meaningful
+          learning happens when students feel safe, curious, and genuinely
+          engaged. I design learning experiences that blend structure with
+          creativity, allowing students to explore big ideas through hands-on,
+          inquiry-driven work. Through project-based learning, authentic
+          assessments, and intentional reflection, students build both academic
+          skills and confidence in their own thinking.
+        </p>
+        <p>
+          I believe classrooms should be places where curiosity is honored,
+          mistakes are celebrated as part of growth, and every child is
+          empowered to take ownership of their learning. Each student brings
+          unique strengths and perspectives, and my role as an educator is to
+          design environments where those gifts can emerge, develop, and shine.
+        </p>
       </section>
-      <section className="about-section" data-reveal="heading">
+
+      <section className="about-section faq-section" data-reveal="heading">
+        <span className="section-kicker">Common Questions</span>
         <h2>Frequently Asked Questions</h2>
-        {faqs.map(({ question, answer }) => (
-          <details key={question}>
-            <summary>{question}</summary>
-            <p>{answer}</p>
-          </details>
-        ))}
+        <div className="faq-list">
+          {faqs.map(({ question, answer }) => (
+            <details key={question} className="faq-item">
+              <summary>
+                <span>{question}</span>
+                <Plus className="faq-plus" size={18} aria-hidden="true" />
+              </summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
       </section>
     </div>
   );
