@@ -3,13 +3,14 @@
 
   const selector = '[data-reveal]';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const revealInset = Math.min(104, Math.round(document.documentElement.clientHeight * 0.14));
   const seen = new WeakSet();
   const pending = new Set();
   const observer = new IntersectionObserver((entries) => {
     for (const { target, isIntersecting } of entries) {
       if (isIntersecting) show(target, true);
     }
-  }, { rootMargin: '0px 0px -16px 0px' });
+  }, { rootMargin: `0px 0px -${revealInset}px 0px` });
 
   function show(element, animate) {
     if (!pending.delete(element)) return;
@@ -30,14 +31,14 @@
 
     if (reducedMotion.matches) return;
 
-    const height = document.documentElement.clientHeight;
+    const activationEdge = document.documentElement.clientHeight - revealInset;
     const belowViewport = [];
     for (const element of document.querySelectorAll(selector)) {
       if (seen.has(element) || !element.getClientRects().length) continue;
 
       seen.add(element);
-      // Leave content already on screen visible on load and after navigation.
-      if (element.getBoundingClientRect().top >= height && !element.matches(':focus-within, :target')) {
+      // Leave content that already reached the reading area visible.
+      if (element.getBoundingClientRect().top >= activationEdge && !element.matches(':focus-within, :target')) {
         belowViewport.push(element);
       }
     }

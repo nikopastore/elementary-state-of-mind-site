@@ -226,24 +226,24 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
 /* Motion is added after load and only to content below the visible area. */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal] {
-    --reveal-y: 18px;
+    --reveal-y: 26px;
     --reveal-x: 0px;
     --reveal-scale: 1;
     --reveal-delay: 0ms;
     --reveal-duration: 560ms;
   }
   [data-reveal="card"] {
-    --reveal-y: 20px;
+    --reveal-y: 30px;
     --reveal-scale: .985;
     --reveal-duration: 640ms;
   }
   [data-reveal="photo"] {
-    --reveal-y: 14px;
+    --reveal-y: 22px;
     --reveal-scale: .975;
     --reveal-duration: 660ms;
   }
   [data-reveal="panel"] {
-    --reveal-x: 14px;
+    --reveal-x: 20px;
     --reveal-y: 8px;
   }
   .reveal-waiting:not(:focus-within, :target) {
@@ -282,12 +282,12 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
   }
   @media (max-width: 570px) {
     [data-reveal] {
-      --reveal-y: 12px;
+      --reveal-y: 17px;
       --reveal-x: 0px;
       --reveal-duration: 430ms;
     }
     [data-reveal="card"], [data-reveal="photo"], [data-reveal="panel"] {
-      --reveal-y: 12px;
+      --reveal-y: 17px;
       --reveal-x: 0px;
       --reveal-duration: 480ms;
     }
@@ -302,4 +302,28 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font-quic
     border-color: #c6bdd7;
     box-shadow: 0 10px 24px #25263a0d;
   }
+}
+
+/* The photo and workbook follow the opening scroll at different speeds. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: scroll()) {
+    .hero-photo, .hero-resource {
+      animation-name: hero-paper-drift;
+      animation-duration: auto;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: scroll(root block);
+      animation-range: 0px 340px;
+    }
+    .hero-photo { --paper-drift: 36px; }
+    .hero-resource { --paper-drift: -24px; }
+    @media (max-width: 570px) {
+      .hero-photo { --paper-drift: 24px; }
+      .hero-resource { --paper-drift: -16px; }
+    }
+  }
+}
+@keyframes hero-paper-drift {
+  from { translate: 0 0; }
+  to { translate: 0 var(--paper-drift); }
 }

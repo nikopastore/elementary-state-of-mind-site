@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Elementary State of Mind | Teacher Resources",
     template: "%s | Elementary State of Mind",
   },
-  description: "Engaging digital resources for elementary teachers — lesson plans, novel studies, anchor charts & classroom decor. Shop standards-aligned ELA materials on Teachers Pay Teachers.",
+  description: "Engaging digital resources for elementary teachers - lesson plans, novel studies, anchor charts & classroom decor. Shop standards-aligned ELA materials on Teachers Pay Teachers.",
   keywords: ["teacher resources", "elementary education", "digital downloads", "lesson plans", "classroom decor"],
   openGraph: {
     type: "website",
@@ -173,7 +173,7 @@ export default function RootLayout({
         </main>
         <TestimonialsCarousel />
         <Footer />
-        <Script src="/section-motion.js" strategy="afterInteractive" />
+        <Script src="/section-motion.js?v=2" strategy="afterInteractive" />
       </body>
     </html>
   );

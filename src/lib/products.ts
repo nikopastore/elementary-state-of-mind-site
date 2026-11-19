@@ -17,10 +17,10 @@ export const products: Product[] = [
   {
     id: 'space-case-complete',
     name: 'Space Case Complete Novel Study & PBL',
-    description: 'Everything you need to teach Space Case from engagement to evaluation — in ONE bundle. This ultimate Space Case bundle combines a high-engagement Mock Trial PBL with a ready-to-use novel assessment.',
+    description: 'Everything you need to teach Space Case from engagement to evaluation - in ONE bundle. This ultimate Space Case bundle combines a high-engagement Mock Trial PBL with a ready-to-use novel assessment.',
     price: 1120,
     category: 'bundle',
-    image: '/products/space-case-complete.jpg',
+    image: '/products/space-case-complete-cover.webp',
     tptUrl: 'https://www.teacherspayteachers.com/Product/Space-Case-Complete-Novel-Study-PBL-15118510',
     featured: true,
   },
@@ -36,7 +36,7 @@ export const products: Product[] = [
   {
     id: 'any-text-debate',
     name: 'Any Text Debate Prep Tool',
-    description: 'Develop evidence-based reasoning skills through structured debate preparation. Supports CER, OREO, and RACES frameworks with teacher guide, prep pages, and both printable and digital formats. Perfect for grades 3–8.',
+    description: 'Develop evidence-based reasoning skills through structured debate preparation. Supports CER, OREO, and RACES frameworks with teacher guide, prep pages, and both printable and digital formats. Perfect for grades 3-8.',
     price: 400,
     category: 'lesson-plan',
     image: '/products/any-text-debate.jpg',
@@ -45,7 +45,7 @@ export const products: Product[] = [
   {
     id: 'ela-anchor-charts',
     name: 'ELA Anchor Chart Printables (Hand-Drawn)',
-    description: 'Brighten up your ELA block with engaging, hand-drawn anchor charts that make essential skills stick! This set includes 9 beautifully illustrated, student-friendly charts—perfect for interactive notebooks.',
+    description: 'Brighten up your ELA block with engaging, hand-drawn anchor charts that make essential skills stick! This set includes 9 beautifully illustrated, student-friendly charts-perfect for interactive notebooks.',
     price: 500,
     category: 'worksheet',
     image: '/products/ela-anchor-charts.jpg',
@@ -54,7 +54,7 @@ export const products: Product[] = [
   {
     id: 'oreo-opinion-writing',
     name: 'OREO Opinion Writing',
-    description: 'Make teaching opinion writing simple, structured, and engaging with this complete OREO (Opinion, Reason, Example/Explanation, Opinion restated) writing resource. Differentiated graphic organizers for Grades 3–6.',
+    description: 'Make teaching opinion writing simple, structured, and engaging with this complete OREO (Opinion, Reason, Example/Explanation, Opinion restated) writing resource. Differentiated graphic organizers for Grades 3-6.',
     price: 500,
     category: 'worksheet',
     image: '/products/oreo-opinion-writing.jpg',
@@ -64,7 +64,7 @@ export const products: Product[] = [
   {
     id: 'kpop-demonhunters',
     name: 'Behind the Beat: KPop DemonHunters',
-    description: 'Turn your classroom into a high-energy music, film, and critical thinking hub with this engaging, standards-aligned resource designed for elementary learners (Grades 2–6).',
+    description: 'Turn your classroom into a high-energy music, film, and critical thinking hub with this engaging, standards-aligned resource designed for elementary learners (Grades 2-6).',
     price: 500,
     category: 'lesson-plan',
     image: '/products/kpop-demonhunters.jpg',
@@ -127,7 +127,7 @@ export const products: Product[] = [
   {
     id: 'friendsgiving',
     name: 'Friendsgiving Potluck & Gratitude Toasts',
-    description: 'Bring warmth, gratitude, and community into your classroom with this meaningful activity—a meaningful way to celebrate friendship, reflection, and togetherness. Perfect for grades 3–8.',
+    description: 'Bring warmth, gratitude, and community into your classroom with this meaningful activity-a meaningful way to celebrate friendship, reflection, and togetherness. Perfect for grades 3-8.',
     price: 200,
     category: 'lesson-plan',
     image: '/products/friendsgiving.jpg',
@@ -136,7 +136,7 @@ export const products: Product[] = [
   {
     id: 'space-case-test',
     name: 'Space Case End of Book Test',
-    description: 'Check comprehension and critical thinking with this ready-to-print, standards-aligned assessment for Space Case by Stuart Gibbs. Perfect for Grades 5–6.',
+    description: 'Check comprehension and critical thinking with this ready-to-print, standards-aligned assessment for Space Case by Stuart Gibbs. Perfect for Grades 5-6.',
     price: 200,
     category: 'worksheet',
     image: '/products/space-case-test.jpg',
@@ -145,7 +145,7 @@ export const products: Product[] = [
   {
     id: '67th-day',
     name: '67th Day of School Activities',
-    description: '67 Word Stories + 6–7 Minute Math + Certificates. Make the 67th day of school a day your students won\'t forget with this fun, low-prep, high-engagement mini-bundle! Perfect for grades 5–7.',
+    description: '67 Word Stories + 6-7 Minute Math + Certificates. Make the 67th day of school a day your students won\'t forget with this fun, low-prep, high-engagement mini-bundle! Perfect for grades 5-7.',
     price: 67,
     category: 'bundle',
     image: '/products/67th-day.jpg',
