@@ -115,7 +115,8 @@ def imported_report(name, data):
         if not dimension or not {"Clicks", "Impressions", "CTR", "Position"}.issubset(names):
             continue
         def number(value):
-            return float(value.replace(",", "").replace("%", "").strip())
+            value = (value or "").replace(",", "").replace("%", "").strip()
+            return float(value) if value else None
         tables[dimension] = [{dimension: row[names[0]], "Clicks": int(number(row["Clicks"])),
             "Impressions": int(number(row["Impressions"])), "CTR %": number(row["CTR"]),
             "Position": number(row["Position"])} for row in reader]
@@ -125,7 +126,10 @@ def imported_report(name, data):
     if dates:
         clicks = sum(r["Clicks"] for r in dates)
         impressions = sum(r["Impressions"] for r in dates)
-        if impressions:
-            tables["summary"] = [{"Clicks": clicks, "Impressions": impressions, "CTR %": 100 * clicks / impressions,
-                "Position": sum(r["Position"] * r["Impressions"] for r in dates) / impressions}]
+        ranked = [r for r in dates if r["Position"] is not None and r["Impressions"]]
+        ranked_impressions = sum(r["Impressions"] for r in ranked)
+        tables["summary"] = [{"Clicks": clicks, "Impressions": impressions,
+            "CTR %": 100 * clicks / impressions if impressions else None,
+            "Position": (sum(r["Position"] * r["Impressions"] for r in ranked) / ranked_impressions
+                         if ranked_impressions else None)}]
     return tables

@@ -1,6 +1,7 @@
 import json
 import zipfile
 from datetime import date, timedelta
+from pathlib import Path
 from urllib.parse import quote
 
 import pandas as pd
@@ -19,6 +20,21 @@ st.caption("Search Console · Private workspace")
 search_tab, audit_tab, ai_tab = st.tabs(["Search performance", "Site health", "AI referrals"])
 state = st.session_state
 errors = (KeyringError, ValueError, KeyError, TypeError, OSError, GoogleAuthError, OAuth2Error, requests.RequestException, zipfile.BadZipFile)
+
+
+def show_import(name, data):
+    report = imported_report(name, data)
+    dates = sorted(r["date"] for r in report.get("date", []))
+    period = f"{dates[0]} to {dates[-1]}" if dates else "Date range not included in this CSV"
+    state.update(report=report, source=f"Imported {name} · {period}")
+
+
+local_export = Path(__file__).with_name("local-import.zip")
+if "report" not in state and not state.get("skip_local_export") and local_export.is_file():
+    try:
+        show_import(local_export.name, local_export.read_bytes())
+    except errors as exc:
+        st.warning(f"Could not open the local export: {exc}")
 
 with st.sidebar:
     st.header("Data connection")
@@ -57,6 +73,7 @@ with st.sidebar:
                 st.error(str(exc))
         if st.button("Disconnect and clear reports"):
             state.clear()
+            state.skip_local_export = True
             st.rerun()
     with st.expander("Saved assistant access"):
         if st.button("Remove saved assistant access"):
@@ -85,11 +102,7 @@ with search_tab:
         upload = st.file_uploader("Performance ZIP or CSV", type=["zip", "csv"])
         if st.button("Analyze export", disabled=upload is None):
             try:
-                report = imported_report(upload.name, upload.getvalue())
-                state.report = report
-                dates = sorted(r["date"] for r in report.get("date", []))
-                period = f"{dates[0]} to {dates[-1]}" if dates else "Date range not included in this CSV"
-                state.source = f"Imported {upload.name} · {period}"
+                show_import(upload.name, upload.getvalue())
             except errors as exc:
                 st.error(str(exc))
     if "report" in state:
@@ -101,18 +114,21 @@ with search_tab:
             prior = (report.get("previous") or [{}])[0]
             for col, (label, value) in zip(st.columns(4), total.items()):
                 precision = 0 if label in ("Clicks", "Impressions") else 2
-                delta = round(value - prior[label], precision) if label in prior else None
-                col.metric(label, f"{value:,.{precision}f}", delta=delta,
+                delta = round(value - prior[label], precision) if value is not None and prior.get(label) is not None else None
+                col.metric(label, f"{value:,.{precision}f}" if value is not None else "—", delta=delta,
                            delta_color="inverse" if label == "Position" else "normal")
         if report.get("date"):
             daily = pd.DataFrame(report["date"]).sort_values("date").set_index("date")
-            st.line_chart(daily[["Clicks"]], y_label="Google Search clicks")
+            st.line_chart(daily[["Clicks", "Impressions"]], y_label="Google Search activity")
         for dimension, label in [("query", "Queries"), ("page", "Landing pages")]:
             if dimension in report:
                 st.subheader(label)
-                st.dataframe(report[dimension], hide_index=True)
+                if report[dimension]:
+                    st.dataframe(report[dimension], hide_index=True)
+                else:
+                    st.caption("Google returned no visible rows for this breakdown.")
         sample = report.get("pairs", report.get("query", []))
-        opportunities = sorted((r for r in sample if 4 <= r["Position"] <= 20),
+        opportunities = sorted((r for r in sample if r["Position"] is not None and 4 <= r["Position"] <= 20),
                                key=lambda r: (-r["Impressions"], r["CTR %"]))
         st.subheader("Queries within reach")
         st.caption("Average position 4–20, ordered by impressions. API reports include matching pages and up to 25,000 top rows per dimension. Google can withhold rare queries.")
