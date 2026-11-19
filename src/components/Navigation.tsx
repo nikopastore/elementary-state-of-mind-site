@@ -3,11 +3,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import StringLights from './StringLights';
 
-const navLinks = [
+const links = [
   { href: '/', label: 'Home' },
   { href: '/shop', label: 'The Shop' },
   { href: '/blog', label: 'Blog' },
@@ -15,148 +14,38 @@ const navLinks = [
   { href: '/gallery', label: 'Gallery' },
 ];
 
-const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const menuVariants: Variants = {
-    hidden: {
-      x: '100%',
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 300,
-        damping: 30,
-      },
-    },
-    exit: {
-      x: '100%',
-      opacity: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
+export default function Navigation() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full">
-      <nav className="bg-white/90 backdrop-blur-md shadow-soft">
-        <div className="container mx-auto flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              alt="Elementary State of Mind"
-              width={50}
-              height={50}
-              className="rounded-full"
-            />
-            <span className="font-heading text-lg font-bold text-black hidden sm:block">
-              Elementary State of Mind
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <ul className="hidden items-center gap-4 lg:gap-6 xl:gap-8 md:flex">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="font-body text-black transition-colors duration-300 hover:text-purple relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-purple after:transition-all hover:after:w-full"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              aria-label="Open menu"
-              className="rounded-full p-2 text-black transition-colors hover:bg-purple/20"
-            >
-              <Menu size={28} />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* String Lights hanging from nav */}
-      <div className="w-full">
-        <StringLights />
+    <header className="site-header">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <div className="site-width site-header-inner" onKeyDown={(event) => {
+        if (event.key === 'Escape' && open) {
+          setOpen(false);
+          document.getElementById('menu-toggle')?.focus();
+        }
+      }}>
+        <Link href="/" className="wordmark" onClick={() => setOpen(false)}>
+          <Image src="/logo.png" alt="" width={43} height={43} />
+          <span>Elementary<br />State of Mind</span>
+        </Link>
+        <button id="menu-toggle" type="button" className="menu-toggle" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="primary-nav" onClick={() => setOpen(!open)}>
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <nav id="primary-nav" className={open ? 'primary-nav is-open' : 'primary-nav'} aria-label="Main navigation">
+          {links.map(({ href, label }) => {
+            const active = pathname === href || (href !== '/' && pathname.startsWith(href + '/'));
+            return (
+              <Link key={href} href={href} aria-current={active ? 'page' : undefined} onClick={() => setOpen(false)}>
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+        <Link className="button header-shop" href="/shop">Shop resources</Link>
       </div>
-
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/50 md:hidden"
-            onClick={toggleMenu}
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu Panel */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            variants={menuVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="fixed right-0 top-0 z-50 h-full w-4/5 max-w-sm bg-white p-6 shadow-lg md:hidden"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Image
-                  src="/logo.png"
-                  alt="Elementary State of Mind"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-                <span className="font-heading text-lg font-bold text-black">
-                  ESM
-                </span>
-              </div>
-              <button
-                onClick={toggleMenu}
-                aria-label="Close menu"
-                className="rounded-full p-2 text-black transition-colors hover:bg-purple/20"
-              >
-                <X size={28} />
-              </button>
-            </div>
-            <ul className="mt-12 flex flex-col items-center gap-8">
-              {navLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="font-body text-2xl text-black transition-colors duration-300 hover:text-purple"
-                    onClick={toggleMenu}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
-};
-
-export default Navigation;
+}

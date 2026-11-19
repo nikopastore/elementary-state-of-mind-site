@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GalleryPhoto as GalleryPhotoType } from '@/lib/galleryPhotos';
@@ -10,19 +10,25 @@ import { X } from 'lucide-react';
 
 interface GalleryPhotoProps {
   photo: GalleryPhotoType;
-  index: number;
 }
 
-export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
+export default function GalleryPhoto({ photo }: GalleryPhotoProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const thumbnail = useRef<HTMLButtonElement>(null);
+  const reducedMotion = useReducedMotion();
   const product = products.find((p) => p.id === photo.productId);
+
+  const closePhoto = useCallback(() => {
+    setIsOpen(false);
+    thumbnail.current?.focus();
+  }, []);
 
   // Close modal on Escape key
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      setIsOpen(false);
+      closePhoto();
     }
-  }, []);
+  }, [closePhoto]);
 
   useEffect(() => {
     if (isOpen) {
@@ -42,14 +48,16 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
   return (
     <>
       {/* Thumbnail in gallery grid */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: index * 0.05 }}
-        className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer"
+      <button
+        ref={thumbnail}
+        type="button"
+        data-reveal="photo"
+        aria-haspopup="dialog"
+        aria-label={`Open photo: ${photo.alt}`}
+        className="group relative block w-full overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 text-left cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
-        <div className="relative aspect-[3/4] w-full overflow-hidden bg-gray-100">
+        <span className="relative block aspect-[3/4] w-full overflow-hidden bg-gray-100">
           <Image
             src={photo.image}
             alt={photo.alt}
@@ -59,34 +67,38 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
           />
 
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-300" />
 
           {/* Caption and product info - shown on hover */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 text-white translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <span className="absolute bottom-0 left-0 right-0 p-4 text-white translate-y-full group-hover:translate-y-0 group-focus-visible:translate-y-0 transition-transform duration-300">
             {photo.caption && (
-              <p className="text-sm font-medium mb-1">{photo.caption}</p>
+              <span className="block text-sm font-medium mb-1">{photo.caption}</span>
             )}
-            <p className="text-xs opacity-90 line-clamp-2">{product.name}</p>
-          </div>
-        </div>
-      </motion.div>
+            <span className="text-xs opacity-90 line-clamp-2">{product.name}</span>
+          </span>
+        </span>
+      </button>
 
       {/* Lightbox Modal */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            role="dialog"
+            aria-modal="true"
+            aria-label={photo.alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: reducedMotion ? 0 : 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 sm:p-8"
-            onClick={() => setIsOpen(false)}
+            onClick={closePhoto}
           >
             {/* Close button */}
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={closePhoto}
               className="absolute top-4 right-4 z-50 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Close"
+              autoFocus
             >
               <X className="w-6 h-6 text-white" />
             </button>
@@ -96,7 +108,7 @@ export default function GalleryPhoto({ photo, index }: GalleryPhotoProps) {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: reducedMotion ? 0 : 0.2 }}
               className="relative max-w-4xl w-full max-h-[90vh] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >

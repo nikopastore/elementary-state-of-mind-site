@@ -10,34 +10,34 @@ const config: Config = {
     extend: {
       colors: {
         // Primary brand colors
-        purple: '#a07cc3',        // Primary accent, nav highlights
-        coral: '#f59f80',         // CTA buttons (Buy Now, Shop Now)
-        dustyRose: '#e1889f',     // Secondary accent, tags
+        purple: '#624e83',        // Primary accent, nav highlights
+        coral: '#8a4a36',         // CTA buttons (Buy Now, Shop Now)
+        dustyRose: '#62476d',     // Secondary accent, tags
 
         // Background colors
-        lavender: '#fdd5ff',      // Main page background
-        lightPurple: '#dccbeb',   // Card/section backgrounds
-        peach: '#fcccba',         // Alternative warm background
-        lavenderGray: '#c8cadc',  // Borders, dividers
+        lavender: '#fff9f1',      // Main page background
+        lightPurple: '#ece8fa',   // Card/section backgrounds
+        peach: '#f8cebf',         // Alternative warm background
+        lavenderGray: '#dcd5cd',  // Borders, dividers
 
         // Accent colors
-        softPink: '#eeb6c1',      // Hover states, subtle accents
+        softPink: '#f8cebf',      // Hover states, subtle accents
 
         // Neutrals
-        black: '#000000',         // Primary text
-        gray: '#838383',          // Secondary text
+        black: '#25263a',         // Primary text
+        gray: '#555467',          // Secondary text
         white: '#ffffff',         // Card backgrounds, light text
       },
       fontFamily: {
-        heading: ['var(--font-heading)', 'serif'],
+        heading: ['var(--font-heading)'],
         body: ['var(--font-quicksand)', 'sans-serif'],
       },
       borderRadius: {
         '4xl': '2rem',
       },
       boxShadow: {
-        soft: '0 4px 15px rgba(160, 124, 195, 0.15), 0 2px 6px rgba(0, 0, 0, 0.08)',
-        glow: '0 0 20px rgba(160, 124, 195, 0.3)',
+        soft: '0 0 0 1px #dcd5cd',
+        glow: '0 0 0 1px #a699bb',
       },
     },
   },

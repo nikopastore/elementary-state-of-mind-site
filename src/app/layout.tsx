@@ -1,24 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Serif_Display, Quicksand } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { testimonials } from "@/lib/testimonials";
-
-const dmSerifDisplay = DM_Serif_Display({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  display: "swap",
-  weight: "400",
-});
-
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.elementarystateofmind.com"),
@@ -146,20 +133,21 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${dmSerifDisplay.variable} ${quicksand.variable}`}>
+    <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         {/* Preconnect hints for performance */}
         <link rel="preconnect" href="https://www.teacherspayteachers.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&amp;family=Instrument+Sans:wght@400..700&amp;display=swap" />
         {/* LLM discovery */}
         <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Information" />
         {/* RSS Feed */}
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" title="Elementary State of Mind Blog RSS Feed" />
         {/* PWA Manifest */}
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#9B7EBD" />
+        <meta name="theme-color" content="#fff9f1" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -177,14 +165,15 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableSchema) }}
         />
       </head>
-      <body className="antialiased bg-lavender font-body text-black min-h-screen flex flex-col">
+      <body className="antialiased min-h-screen flex flex-col">
         <Navigation />
         <Breadcrumbs />
-        <main className="flex-grow">
+        <main id="main-content" className="flex-grow">
           {children}
         </main>
         <TestimonialsCarousel />
         <Footer />
+        <Script src="/section-motion.js" strategy="afterInteractive" />
       </body>
     </html>
   );
